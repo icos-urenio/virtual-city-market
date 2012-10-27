@@ -34,7 +34,7 @@
 			'<html>' .
 			'    <head>' .
 			'        <title>Fatal error</title>' .
-			'        <link href="' . MARKET_WEB_DIR . '/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">' .
+			'        <link href="' . MARKET_WEB_DIR . '/redist/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">' .
 			'    </head>' .
 			'    <body style="background-color: #888;">' .
 			'        <div style="position: relative; top: 40px; left: auto; margin: 0 auto; z-index: 1; max-width: 100%;" class="modal">' .
