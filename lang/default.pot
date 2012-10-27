@@ -1,0 +1,56 @@
+msgid "Authentication"
+msgstr ""
+
+msgid "Debug"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Errors"
+msgstr ""
+
+msgid "Log In"
+msgstr ""
+
+msgid "Login incorrect."
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Please enter your credentials."
+msgstr ""
+
+msgid "Profiler"
+msgstr ""
+
+msgid "Remember me"
+msgstr ""
+
+msgid "Resources"
+msgstr ""
+
+msgid "SQL Queries"
+msgstr ""
+
+msgid "This page requires authentication."
+msgstr ""
+
+msgid "Variables"
+msgstr ""
+
+msgid "forgot your password?"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "First"
+msgstr ""
+
+msgid "Last"
+msgstr ""

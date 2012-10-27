@@ -1,0 +1,316 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: virtualCityMarket 1.0a\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Lambros Makris <lmak@iti.gr>\n"
+"Language-Team: \n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.3\n"
+
+msgid "All Rights Reserved"
+msgstr "Με επιφύλαξη κάθε δικαιώματος"
+
+msgid "All reviews"
+msgstr "Όλες οι αξιολογήσεις"
+
+msgid "Back to top"
+msgstr "Επιστροφή στην αρχή"
+
+msgid "Browse the marketplace"
+msgstr "Περιηγηθείτε στην αγορά"
+
+msgid "Business Directory"
+msgstr "Κατάλογος Επιχειρήσεων"
+
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+msgid "Cities"
+msgstr "Οικισμοί"
+
+msgid "City Marketplace"
+msgstr "Η Αγορά της Πόλης"
+
+msgid "Did you"
+msgstr "Εσείς"
+
+msgid "Did you found this review helpful"
+msgstr "Βρήκατε την αξιολόγηση χρήσιμη"
+
+msgid "Directory"
+msgstr "Κατάλογος"
+
+msgid "Discount"
+msgstr "Έκπτωση"
+
+msgid "Featured Listings"
+msgstr "Προτεινόμενα"
+
+msgid "Find offers"
+msgstr "Βρείτε προσφορές"
+
+msgid "Follow us"
+msgstr "Ακολουθήστε μας"
+
+msgid "Found"
+msgstr "Βρέθηκαν"
+
+msgid "Geolocate"
+msgstr "Η θέση μου"
+
+msgid "Geolocation failed"
+msgstr "Ο εντοπισμός απέτυχε"
+
+msgid "Go"
+msgstr "Βρες"
+
+msgid "Go to the store"
+msgstr "Πηγαίνετε στο κατάστημα"
+
+msgid "Home"
+msgstr "Αρχική"
+
+msgid "Is this your business"
+msgstr "Είναι αυτή η επιχείρησή σας"
+
+msgid "Keywords"
+msgstr "Λέξεις κλειδιά"
+
+msgid "Learn more"
+msgstr "Μάθετε περισσότερα"
+
+msgid ""
+"Load this offer on your mobile and show it at the store to get the discount"
+msgstr ""
+"Φορτώστε αυτό το κουπόνι στο κινητό σας και δείξτε το στο κατάστημα για να "
+"λάβετε την έκπτωση"
+
+msgid "Logout"
+msgstr "Αποσύνδεση"
+
+msgid "Manage page"
+msgstr "Διαχείριση σελίδας"
+
+msgid "Marketplace"
+msgstr "Αγορά"
+
+msgid "Me"
+msgstr "Εγώ"
+
+msgid "More info"
+msgstr "Περισσότερες πληροφορίες"
+
+msgid "More offers"
+msgstr "Περισσότερες προσφορές"
+
+msgid "Near me"
+msgstr "Κοντά μου"
+
+msgid "No"
+msgstr "Όχι"
+
+msgid "No results"
+msgstr "Δεν βρέθηκαν αποτελέσματα"
+
+msgid "Not implemented"
+msgstr "Μη διαθέσιμο"
+
+msgid "ORGANIZATION"
+msgstr "ΟΡΓΑΝΙΣΜΟΣ"
+
+msgid "Offer valid"
+msgstr "Η προσφορά ισχύει"
+
+msgid "Offers"
+msgstr "Προσφορές"
+
+msgid "Offers and Coupons"
+msgstr "Προσφορές και Κουπόνια"
+
+msgid "Organization"
+msgstr "Οργανισμός"
+
+msgid "Our offers"
+msgstr "Οι προσφορές μας"
+
+msgid "Price"
+msgstr "Τιμή"
+
+msgid "Prices"
+msgstr "Τιμές"
+
+msgid "Read reviews"
+msgstr "Δείτε αξιολογήσεις"
+
+msgid "Reviews"
+msgstr "Αξιολογήσεις"
+
+msgid "SMART CITY SERVICES"
+msgstr "ΥΠΗΡΕΣΙΕΣ ΕΞΥΠΝΗΣ ΠΟΛΗΣ"
+
+msgid "Save successful"
+msgstr "Αποθήκευση επιτυχής"
+
+msgid "Search"
+msgstr "Αναζήτηση"
+
+msgid "Search the directory"
+msgstr "Αναζητήστε στον κατάλογο"
+
+msgid "Select"
+msgstr "Επιλογή"
+
+msgid "Show on map"
+msgstr "Εμφάνιση στο χάρτη"
+
+msgid "The requested action is not implemented"
+msgstr "Η ενέργεια που ζητήσατε δεν έχει υλοποιηθεί ακόμα"
+
+msgid "This offer on your mobile"
+msgstr "Η προσφορά στο κινητό σας"
+
+msgid "This page on your mobile"
+msgstr "Η σελίδα στο κινητό σας"
+
+msgid "User Reviews"
+msgstr "Αξιολογήσεις Χρηστών"
+
+msgid "User reviews"
+msgstr "Αξιολογήσεις χρηστών"
+
+msgid "Virtual City Market"
+msgstr "Ψηφιακό Εμπορικό Κέντρο"
+
+msgid "Write a review"
+msgstr "Γράψτε μια αξιολόγηση"
+
+msgid "Yes"
+msgstr "Ναι"
+
+msgid "Your browser does not support geolocation"
+msgstr "Ο περιηγητής σας δεν υποστηρίζει εντοπισμό γεωγραφικής θέσης"
+
+msgid "ago"
+msgstr "πριν"
+
+msgid "business"
+msgstr "επιχείρηση"
+
+msgid "business with reviews"
+msgstr "επιχειρήσεις με αξιολογήσεις"
+
+msgid "businesses"
+msgstr "επιχειρήσεις"
+
+msgid "businesses with reviews"
+msgstr "επιχειρήσεις με αξιολογήσεις"
+
+msgid "day"
+msgstr "ημέρα"
+
+msgid "days"
+msgstr "ημέρες"
+
+msgid "found this review helpful"
+msgstr "βρήκαν αυτή την αξιολόγηση χρήσιμη"
+
+msgid "hour"
+msgstr "ώρα"
+
+msgid "hours"
+msgstr "ώρες"
+
+msgid "minute"
+msgstr "λεπτό"
+
+msgid "minutes"
+msgstr "λεπτά"
+
+msgid "month"
+msgstr "μήνας"
+
+msgid "months"
+msgstr "μήνες"
+
+msgid "more"
+msgstr "περισσότερα"
+
+msgid "more than a decade ago"
+msgstr "περισσότερο από μια δεκαετία πριν"
+
+msgid "now"
+msgstr "τώρα"
+
+msgid "of"
+msgstr "από"
+
+msgid "offer"
+msgstr "προσφορά"
+
+msgid "offers"
+msgstr "προσφορές"
+
+msgid "people"
+msgstr "άτομα"
+
+msgid "qmark"
+msgstr ";"
+
+msgid "reviews"
+msgstr "αξιολογήσεις"
+
+msgid "second"
+msgstr "δευτερόλεπτο"
+
+msgid "seconds"
+msgstr "δευτερόλεπτα"
+
+msgid "tel"
+msgstr "τηλ"
+
+msgid "until"
+msgstr "έως"
+
+msgid "week"
+msgstr "εβδομάδα"
+
+msgid "weeks"
+msgstr "εβδομάδες"
+
+msgid "year"
+msgstr "χρόνο"
+
+msgid "years"
+msgstr "χρόνια"
+
+#~ msgid "Click here for more"
+#~ msgstr "Κάνετε κλικ για περισσότερα"
+
+#~ msgid "Compare prices"
+#~ msgstr "Συγκρίνετε τιμές"
+
+#~ msgid "Coupons"
+#~ msgstr "Κουπόνια"
+
+#~ msgid "Expand Map"
+#~ msgstr "Εμφάνιση Χάρτη"
+
+#~ msgid "Hide Map"
+#~ msgstr "Απόκρυψη Χάρτη"
+
+#, fuzzy
+#~ msgid "Market Place"
+#~ msgstr "Αγορά"
+
+#~ msgid "Municipality of Thermi"
+#~ msgstr "Δήμος Θέρμης"
+
+#~ msgid "Smart City Services"
+#~ msgstr "Υπηρεσίες Έξυπνης Πόλης"
+
+#~ msgid "Supermarket Prices"
+#~ msgstr "Τιμές Supermarkets"

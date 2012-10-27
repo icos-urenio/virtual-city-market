@@ -1,0 +1,102 @@
+/* rough form styles for when JS is disabled */
+#lang-select select {
+	height: 24px;
+	margin-right: 5px;
+	font-size:11px
+}
+#lang-select input {
+	font-size:11px
+}
+
+/* JS-created definition list */
+
+.langdrop em { font-weight: 400; }
+
+.langdrop { margin: 0; margin-bottom: 60px;}
+
+.langdrop dd { position: relative; margin-left: 0;}
+
+.langdrop a {
+	text-decoration: none;
+	outline: 0;
+	font-size: 11px;
+	display: block;
+	width: 130px;
+	overflow: hidden;
+	}
+
+.langdrop dt a {
+	border: 1px solid #ccc;
+	padding: 3px 10px 4px 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	}
+
+	.langdrop dt a.active {
+		-webkit-border-bottom-left-radius: 0;
+		-webkit-border-bottom-right-radius: 0;
+		-moz-border-radius-bottomleft: 0;
+		-moz-border-radius-bottomright: 0;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		border-bottom: 1px dotted #676768;
+		-moz-box-shadow: 0 3px 7px rgba(0,0,0,.5);
+		-webkit-box-shadow: 0 3px 7px rgba(0,0,0,.5);
+		box-shadow: 0 3px 7px rgba(0,0,0,.5);
+		}
+
+.langdrop dd ul {
+	background: #fff;
+	display: none;
+	position: absolute;
+	z-index: 999;
+	top: 0;
+	left: 0;
+	padding: 2px 0 5px 0;
+	list-style: none;
+	border-top: none;
+	margin: 0;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	-moz-box-shadow: 0 3px 7px rgba(0,0,0,.5);
+	-webkit-box-shadow: 0 3px 7px rgba(0,0,0,.5);
+	box-shadow: 0 3px 7px rgba(0,0,0,.5);
+	}
+
+	.langdrop dd ul li a {
+		padding: 2px 10px;
+		}
+
+	.langdrop dd ul li a span,
+	.langdrop dt a span {
+		float: left;
+		width: 16px;
+		height: 12px;
+		margin: 2px 6px 0 0;
+		background-image: url("../img/flags.png");
+		background-repeat: no-repeat;
+		cursor: pointer;
+		}
+
+		.en a span { background-position: 0 0 }
+		.el a span { background-position: -16px 0 }
+
+	.langdrop dd ul li a em,
+	.langdrop dt a em {
+		font-style: normal;
+		float: left;
+		width: 100px;
+		cursor: pointer;
+		}
+
+	.langdrop dd ul li a em {
+		color: #333;
+		}
+		
+		.langdrop dd ul li a:hover { background: #999; }
+		.langdrop dd ul li a:hover em { color: #fff; }

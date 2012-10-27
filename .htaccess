@@ -1,0 +1,10 @@
+# BEGIN MARKET
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /virtual-city-market/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /virtual-city-market/index.php [L]
+</IfModule>
+# END MARKET

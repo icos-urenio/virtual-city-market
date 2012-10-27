@@ -1,0 +1,41 @@
+100	Continue
+101	Switching Protocols
+200	OK
+201	Created
+202	Accepted
+203	Non-Authoritative Information
+204	No Content
+205	Reset Content
+206	Partial Content
+300	Multiple Choices
+301	Moved Permanently
+302	Found
+303	See Other
+304	Not Modified
+305	Use Proxy
+306	Unused
+307	Temporary Redirect
+400	Bad Request						Your browser (or proxy) sent a request that this server could not understand.
+401	Unauthorized					This server could not verify that you are authorized to access the URL "{URL}". You either supplied the wrong credentials (e.g., bad password), or your browser doesn't understand how to supply the credentials required.
+402	Payment Required
+403	Forbidden						You don't have permission to access the requested object.
+404	Not Found						The requested URL {URL} was not found on this server.
+405	Method Not Allowed				The {REQUEST_METHOD} method is not allowed for the requested URL.
+406	Not Acceptable
+407	Proxy Authentication Required
+408	Request Timeout					The server closed the network connection because the browser didn't finish the request within the specified time.
+409	Conflict
+410	Gone							The requested URL is no longer available on this server and there is no forwarding address.
+411	Length Required					A request with the {REQUEST_METHOD} method requires a valid <code>Content-Length</code> header.
+412	Precondition Failed				The precondition on the request for the URL failed positive evaluation.
+413	Request Entity Too Large		The {REQUEST_METHOD} method does not allow the data transmitted, or the data volume exceeds the capacity limit.
+414	Request-URI Too Long			The length of the requested URL exceeds the capacity limit for	this server. The request cannot be processed.
+415	Unsupported Media Type			The server does not support the media type transmitted in the request.
+416	Requested Range Not Satisfiable
+417	Expectation Failed
+500	Internal Server Error			The server encountered an internal error and was unable to complete your request.
+501	Not Implemented					The server does not support the action requested by the browser.
+502	Bad Gateway						The proxy server received an invalid response from an upstream server.
+503	Service Unavailable				The server is temporarily unable to service your request due to maintenance downtime or capacity problems. Please try again later. 
+504	Gateway Timeout
+505	HTTP Version Not Supported

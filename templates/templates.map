@@ -1,0 +1,4 @@
+// Marketplace
+marketplace/.+\.tpl	marketplace/show.tpl
+offers/.+\.tpl	offers/show.tpl
+reviews/.+\.tpl	reviews/show.tpl

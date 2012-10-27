@@ -1,0 +1,273 @@
+msgid "All Rights Reserved"
+msgstr ""
+
+msgid "All reviews"
+msgstr ""
+
+msgid "Back to top"
+msgstr ""
+
+msgid "Browse the marketplace"
+msgstr ""
+
+msgid "Business Directory"
+msgstr ""
+
+msgid "Categories"
+msgstr ""
+
+msgid "Cities"
+msgstr ""
+
+msgid "City Marketplace"
+msgstr ""
+
+msgid "Did you"
+msgstr ""
+
+msgid "Did you found this review helpful"
+msgstr ""
+
+msgid "Directory"
+msgstr ""
+
+msgid "Discount"
+msgstr ""
+
+msgid "Featured Listings"
+msgstr ""
+
+msgid "Find offers"
+msgstr ""
+
+msgid "Follow us"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "Geolocate"
+msgstr ""
+
+msgid "Geolocation failed"
+msgstr ""
+
+msgid "Go"
+msgstr ""
+
+msgid "Go to the store"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Is this your business"
+msgstr ""
+
+msgid "Keywords"
+msgstr ""
+
+msgid "Learn more"
+msgstr ""
+
+msgid "Load this offer on your mobile and show it at the store to get the discount"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Manage page"
+msgstr ""
+
+msgid "Marketplace"
+msgstr ""
+
+msgid "Me"
+msgstr ""
+
+msgid "More info"
+msgstr ""
+
+msgid "More offers"
+msgstr ""
+
+msgid "Near me"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "No results"
+msgstr ""
+
+msgid "Not implemented"
+msgstr ""
+
+msgid "ORGANIZATION"
+msgstr ""
+
+msgid "Offer valid"
+msgstr ""
+
+msgid "Offers"
+msgstr ""
+
+msgid "Offers and Coupons"
+msgstr ""
+
+msgid "Organization"
+msgstr ""
+
+msgid "Our offers"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Prices"
+msgstr ""
+
+msgid "Read reviews"
+msgstr ""
+
+msgid "Reviews"
+msgstr ""
+
+msgid "SMART CITY SERVICES"
+msgstr ""
+
+msgid "Save successful"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search the directory"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Show on map"
+msgstr ""
+
+msgid "The requested action is not implemented"
+msgstr ""
+
+msgid "This offer on your mobile"
+msgstr ""
+
+msgid "This page on your mobile"
+msgstr ""
+
+msgid "User Reviews"
+msgstr ""
+
+msgid "User reviews"
+msgstr ""
+
+msgid "Virtual City Market"
+msgstr ""
+
+msgid "Write a review"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "Your browser does not support geolocation"
+msgstr ""
+
+msgid "ago"
+msgstr ""
+
+msgid "business"
+msgstr ""
+
+msgid "business with reviews"
+msgstr ""
+
+msgid "businesses"
+msgstr ""
+
+msgid "businesses with reviews"
+msgstr ""
+
+msgid "day"
+msgstr ""
+
+msgid "days"
+msgstr ""
+
+msgid "found this review helpful"
+msgstr ""
+
+msgid "hour"
+msgstr ""
+
+msgid "hours"
+msgstr ""
+
+msgid "minute"
+msgstr ""
+
+msgid "minutes"
+msgstr ""
+
+msgid "month"
+msgstr ""
+
+msgid "months"
+msgstr ""
+
+msgid "more"
+msgstr ""
+
+msgid "more than a decade ago"
+msgstr ""
+
+msgid "now"
+msgstr ""
+
+msgid "of"
+msgstr ""
+
+msgid "offer"
+msgstr ""
+
+msgid "offers"
+msgstr ""
+
+msgid "people"
+msgstr ""
+
+msgid "qmark"
+msgstr ""
+
+msgid "reviews"
+msgstr ""
+
+msgid "second"
+msgstr ""
+
+msgid "seconds"
+msgstr ""
+
+msgid "tel"
+msgstr ""
+
+msgid "until"
+msgstr ""
+
+msgid "week"
+msgstr ""
+
+msgid "weeks"
+msgstr ""
+
+msgid "year"
+msgstr ""
+
+msgid "years"
+msgstr ""
+
