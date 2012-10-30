@@ -16,7 +16,7 @@ VirtualCityMarket's source code is licensed under the [GNU Affero General Public
 * Make sure that mod_rewrite is enabled.
 * If you install the application in a directory different than "virtual-city-market" change the directory name in the following line of the .htaccess file:
 
-  RewriteRule . /virtual-city-market/index.php [L]
+    RewriteRule . /virtual-city-market/index.php [L]
 
 ## Changelog
 
