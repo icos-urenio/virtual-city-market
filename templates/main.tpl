@@ -6,7 +6,7 @@
 		$this->assignGlobal('CURRENT.' . $req->params[0], 'active');
 		
 		// Gravatar
-		if ($_SESSION['User']['is_logedin']) {
+		if ($_SESSION['User']['is_loggedin']) {
 			$this->assignGlobal('USER.gravatar', md5(strtolower(trim($_SESSION['User']['user_email']))));
 		}
 		
@@ -46,10 +46,9 @@
 		}
 		
 		function getPeriodtoDate($date) {
-			if (preg_match('@(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2}):(\d{2})@', $date, $matches)) {
-				$period = mktime() - mktime($matches[4], $matches[5], $matches[6], $matches[2], $matches[3], $matches[1]);
-				$period = formatPeriod($period) . ' {LANG.ago}';
-			}
+			$period = time() - strtotime($date.'+02:00');
+			$period = formatPeriod($period);
+			if ($period <> __('now')) $period .= ' {LANG.ago}';
 			return $period;
 		}
 		
@@ -68,7 +67,7 @@
 			// {LANG.weeks}
 			// {LANG.months}
 			// {LANG.years}
-			if ($secs <= 0) { $output = '{LANG.now}';
+			if ($secs <= 0) { $output = __('now');
 			} else if ($secs > $second && $secs < $minute)   { $output = round($secs / $second) . ' {LANG.second}';
 			} else if ($secs >= $minute && $secs < $hour)    { $output = round($secs / $minute) . ' {LANG.minute}';
 			} else if ($secs >= $hour && $secs < $day)       { $output = round($secs / $hour) . ' {LANG.hour}';
@@ -78,10 +77,89 @@
 			} else if ($secs >= $year && $secs < $year * 10) { $output = round($secs / $year) . ' {LANG.year}';
 			} else { $output = '{LANG.more than a decade ago}'; }
 			 
-			if ($output <> '{LANG.now}') {
+			if ($output <> __('now')) {
 				$output = (substr($output, 0, 2) <> '1 ') ? substr($output, 0, -1) . 's}' : $output;
 			}
 			return $output;
+		}
+		
+		function getStoreDataByName($store_name) {
+			return getStoreData($store_name, 'name');
+		}
+		
+		function getStoreDataById($store_id) {
+			return getStoreData($store_id, 'id');
+		}
+		
+		function getStoreData($store, $type = 'name') {
+			
+			$SELECT = "*, IF (business_name = '', name, business_name) AS title";
+			$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps";
+			$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory_ml.lang='" . MARKET_LANG . "' AND directory_ps.publish='1'";
+			
+			if ($type == 'id') {
+				$WHERE .= " AND directory.id='" . sqlEscape($store) . "'";
+			}
+			else {
+				$WHERE .= " AND directory.path='" . sqlEscape($store) . "'";
+			}
+			
+			$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE";
+			
+			if (sqlQuery($sql, $res)) {
+				$store = sqlFetchAssoc($res);
+				$store['address'] = ($store['address']) ? $store['address'] . ', ' . $store['city'] : $store['city'];
+				// Main page
+				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $store['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='index' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY created DESC";
+				if (sqlQuery($sql, $res1)) {
+					while ($row1 = sqlFetchAssoc($res1)) {
+						if ($store[$row1['type']]) {
+							if (is_array($store[$row1['type']])) {
+								$store[$row1['type']][] = $row1['data'];
+							}
+							else {
+								$foo = $store[$row1['type']];
+								$store[$row1['type']] = array();
+								$store[$row1['type']][] = $foo;
+								$store[$row1['type']][] = $row1['data'];
+							}
+						}
+						else {
+							switch ($row1['type']) {
+								case 'page':
+									$store['text-id'] = $row1['id'];
+									$store['text-title'] = $row1['title'];
+									$store['text'] = $row1['data'];
+								break;
+								case 'comment':
+									$store['comments'][] = array();
+									$index = count($store['comments']) - 1;
+									$store['comments'][$index]['comment-id'] = $row1['id'];
+									$store['comments'][$index]['creator-id'] = $row1['creator'];
+									$store['comments'][$index]['created'] = $row1['created'];
+									$store['comments'][$index]['rating'] = $row1['rating'];
+									$store['comments'][$index]['votes'] = $row1['votes'];
+									$store['comments'][$index]['comment'] = $row1['data'];
+								break;
+								
+								default:
+									$store[$row1['type'] . '-id'] = $row1['id'];
+									$store[$row1['type']] = $row1['data'];
+							}
+						}
+					}
+				}
+				
+				// Image
+				if (is_array($store['image'])) {
+					$store['image'] = MARKET_Filter::createThumbnail($store['image'][0], '100', true, 'class="pull-left" style="margin-right: 10px;"');
+				}
+				else if ($store['image']) {
+					$store['image'] = MARKET_Filter::createThumbnail($store['image'], '100', true, 'class="pull-left" style="margin-right: 10px;"');
+				}
+				return $store;
+			}
+			return false;
 		}
 	}
 </php>
@@ -113,6 +191,18 @@
 		<link href="{MARKET.WebDir}/css/style.css" rel="stylesheet" type="text/css" />
 		<link href="{MARKET.WebDir}/css/lang.css" rel="stylesheet" type="text/css" />
 		
+		<script type="text/javascript">
+		 var _gaq = _gaq || [];
+		 _gaq.push(['_setAccount', 'UA-35951847-1']);
+		_gaq.push(['_trackPageview']);
+							
+		 (function() {
+		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		 })();
+		</script>
+		
 	</head>
 	<body class="{PAGE.Class}">
 		
@@ -135,17 +225,31 @@
 						<li class="{CURRENT.marketplace}"><a href="{MARKET.LWebDir}/marketplace/index.html">{LANG.Marketplace}</a></li>
 						<li class="{CURRENT.offers}"><a href="{MARKET.LWebDir}/offers/index.html">{LANG.Offers}</a></li>
 						<li class="{CURRENT.reviews}"><a href="{MARKET.LWebDir}/reviews/index.html">{LANG.Reviews}</a></li>
+						<template name="account_settings">
+							<if expr="'{_SESSION.User.is_loggedin}'">
+								<li class="dropdown {CURRENT.account}"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{LANG.Account} <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li class="user-box">
+											<img class="pull-left" style="margin-right: 5px;" src="http://www.gravatar.com/avatar/{USER.gravatar}.jpg?d=mm&s=20" width="20" height="20" alt="" />
+											{_SESSION.User.name} {_SESSION.User.surname}
+										</li>
+										<li class="divider"></li>
+										<li class="{CURRENT.settings}"><a href="{MARKET.LWebDir}/account/settings/index.html">{LANG.Settings}</a></li>
+							</if>
+							<if expr="'{_SESSION.User.is_admin}'">
+								<li class="{CURRENT.admin}"><a href="{MARKET.LWebDir}/admin/index.html">{LANG.Administration}</a></li-->
+							</if>
+							<if expr="'{_SESSION.User.is_loggedin}'">
+										<li><a href="{MARKET.LWebDir}/login.html?logout=true&redirect=index.html">{LANG.Log Out}</a></li>
+									</ul>
+								</li>
+								<else>
+									<li class="{CURRENT.login}"><a href="{MARKET.LWebDir}/login.html">{LANG.Sign In}</a></li>
+								</else>
+							</if>
+						</template>
 					</ul>
 				</nav>
-				<template name="user">
-					<if expr="'{_SESSION.User.is_logedin}'">
-						<div class="user">
-							<a href="http://www.gravatar.com/" target="new"><img src="http://www.gravatar.com/avatar/{USER.gravatar}.jpg?d=mm&s=28" width="28" height="28" alt="{_SESSION.User.user_email}" /></a>
-							&nbsp;{_SESSION.User.name} {_SESSION.User.surname}&nbsp;
-							<a class="btn" href="{MARKET.WebDir}/login.html?logout=true">{LANG.Logout}</a>
-						</div>
-					</if>
-				</template>
 			</header>
 			
 		</div>
@@ -166,10 +270,15 @@
 			<script src="{MARKET.WebDir}/redist/lang.js"></script>
 			
 			<template name="editor_js" disabled="true">
+				<script>
+					var navigator_language = '{MARKET.Lang}-foo';
+				</script>
 				<script src="{MARKET.WebDir}/redist/mercury/javascripts/mercury_loader.js?src={MARKET.WebDir}/redist/mercury&pack=bundled"></script>
 				<script>
-					jQuery(window).on('mercury:saved', function() {
-						alert('{LANG.Save successful}...')
+					jQuery(window).on('mercury:ready', function() {
+						Mercury.on('saved', function() {
+							alert('{LANG.Save successful}...')
+						});
 					});
 				</script>
 			</template>
@@ -191,7 +300,7 @@
 						</ul>
 					</div>
 				</nav>
-				<p class="right">&copy; 2012 {LANG.Organization}, {LANG.All Rights Reserved}. <a href="#top" id="back-to-top">{LANG.Back to top} ↑</a></p>
+				<p class="right">&copy; 2013 {LANG.Organization}, <a class="blue" href="{MARKET.LWebDir}/terms.html">{LANG.All rights reserved}</a>. <a href="#top" id="back-to-top">{LANG.Back to top} ↑</a></p>
 				
 				<div class="clearfix"></div>
 				

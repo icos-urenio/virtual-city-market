@@ -16,14 +16,15 @@
 			$WHERE .= " AND directory.id='" . sqlEscape($_GET['id']) . "'";
 		}
 		else if ($_GET['path']) {
+			$parts = explode('/', $_GET['path']);
 			if ($parts[3] == 'edit') {
 				if ($parts[5]) {
-					$WHERE .= " AND directory.path='" . sqlEscape($parts[5]) . "'";
+					$WHERE .= " AND (directory.path='" . sqlEscape($parts[5]) . "' OR directory.id='" . sqlEscape($parts[5]) . "')";
 				}
 			}
 			else {
 				if ($parts[4]) {
-					$WHERE .= " AND directory.path='" . sqlEscape($parts[4]) . "'";
+					$WHERE .= " AND (directory.path='" . sqlEscape($parts[4]) . "' OR directory.id='" . sqlEscape($parts[4]) . "')";
 				}
 			}
 		}

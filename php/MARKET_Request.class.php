@@ -21,7 +21,7 @@
 			global $MARKET_mode, $MARKET_mod_rewrite;
 			
 			$url = '';
-			if (in_array('mod_rewrite', apache_get_modules())) {
+			if ((function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_modules())) ||  getenv('HTTP_MOD_REWRITE') == 'On') {
 				$MARKET_mod_rewrite = true;
 				
 				if (array_key_exists('REQUEST_URI', $_SERVER)) {

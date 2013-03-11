@@ -113,7 +113,7 @@
 				}
 				
 				// Rating
-				$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data WHERE name='index' AND type='comment' AND directory_id='" . $row['id'] . "'";
+				$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data WHERE name='index' AND type='comment' AND lang='" . MARKET_LANG . "' AND directory_id='" . $row['id'] . "'";
 				if (sqlQuery($sql, $res1)) {
 					$row1 = sqlFetchAssoc($res1);
 					if ($row1['count']) {
@@ -129,6 +129,9 @@
 				if (sqlQuery($sql, $res1)) {
 					$row1 = sqlFetchAssoc($res1);
 					$row['image'] = MARKET_Filter::createThumbnail($row1['data'], '100', true, 'class="pull-left" style="margin-top: 7px;"');
+				}
+				else {
+					$row['image'] = MARKET_Filter::createThumbnail('img/placeholder.jpg', '100', true, 'class="pull-left" style="margin-top: 7px;"');
 				}
 				
 				$this->assignLocal('result', 'ROW', $row);
@@ -296,9 +299,9 @@
 						<ul class="listing unstyled" style="margin-top: 10px;">
 							<template name="result">
 								<li>
-									{ROW.image}
+									<a href="{MARKET.LWebDir}/marketplace/show.html?id={ROW.id}">{ROW.image}</a>
 									<div class="pull-left span5">
-										<h2 title="{ROW.id}">{ROW.business_title}</h2>
+										<h2 title="{ROW.id}"><a href="{MARKET.LWebDir}/marketplace/show.html?id={ROW.id}">{ROW.business_title}</a></h2>
 										<h3 style="line-height: 18px;">{ROW.byline}</h3>
 										<address>
 											{ROW.address}<br />

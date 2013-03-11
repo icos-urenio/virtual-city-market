@@ -1,6 +1,7 @@
 ﻿<template parent="main" assign="PAGE.Body" global="PAGE.Title: {LANG.Virtual City Market}; PAGE.Class: home">
 	
 	<php>
+		
 		// Featured
 		$SELECT = "directory.*, directory_ml.*, IF (business_name = '', directory_ml.name, business_name) AS business_title, store_data.data AS image";
 		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps STRAIGHT_JOIN store_data";
@@ -18,6 +19,45 @@
 			$this->disableTemplate('featured_cnt');
 		}
 		
+		// Coupons
+		$SELECT = "store_data.*, directory.path";
+		$FROM = "store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml";
+		$WHERE = "store_data.id=store_data_ps.id AND store_data.directory_id=directory.id AND store_data.directory_id=directory_ml.id AND store_data_ps.publish='1' AND (store_data.lang='' OR store_data.lang='" . MARKET_LANG . "') AND directory_ml.lang='" . MARKET_LANG . "' AND type='coupon' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "')";
+		$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE GROUP BY directory.id ORDER BY RAND() LIMIT 0,4";
+		if (sqlQuery($sql, $res)) {
+			while ($row = sqlFetchAssoc($res)) {
+				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['directory_id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND type <> 'coupon' AND name='" . sqlEscape($row['name']) . "' ORDER BY ord";
+				if (sqlQuery($sql, $res1)) {
+					while ($row1 = sqlFetchAssoc($res1)) {
+						if ($row[$row1['type']]) {
+							if (is_array($row[$row1['type']])) {
+								$row[$row1['type']][] = $row1['data'];
+							}
+							else {
+								$foo = $row[$row1['type']];
+								$row[$row1['type']] = array();
+								$row[$row1['type']][] = $foo;
+								$row[$row1['type']][] = $row1['data'];
+							}
+						}
+						else {
+							$row[$row1['type']] = $row1['data'];
+						}
+					}
+				}
+				$image = (is_array($row['image'])) ? $row['image'][0] : $row['image'];
+				$row['image'] = MARKET_Filter::createThumbnail($image, '270x230', true, 'class="photo"');
+				
+				if (!$row['path']) $row['path'] = $row['directory_id'];
+				
+				$this->assignLocal('coupon', 'ROW', $row);
+				$this->lightParseTemplate('COUPON', 'coupon');
+			}
+		}
+		else {
+			$this->disableTemplate('coupon_cnt');
+		}
+		
 		// Google maps
 		$this->assignGlobal('GMAPS', array(
 			'api_key' => GMAP_API_KEY,
@@ -25,6 +65,7 @@
 			'center_lng' => GMAP_CENTER_LNG,
 			'center_zoom' => GMAP_CENTER_ZOOM
 		));
+		
 	</php>
 	
 	<template name="css" assign="PAGE.Style">
@@ -57,7 +98,7 @@
 				});
 				
 			});
-
+			
 			jQuery(window).load(function($) {
 				jQuery('.flexslider').flexslider({
 					animation: "fade",
@@ -75,6 +116,7 @@
 					controlNav: false
 				});  
 			});
+			
 		</script>
 	</template>
 	
@@ -90,34 +132,34 @@
 						<div style="padding: 10px 40px 0;">
 							<ul class="slides">
 								<li>
-									<img src="{MARKET.WebDir}/img/placeholder.jpg" width="256" height="256" alt="" />
+									<img src="{MARKET.WebDir}/img/placeholder.jpg" width="256" height="256" alt="">
 									<div class="flex-caption">
 										<h2>{LANG.Business Directory}</h2>
-										<h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
+										<h4>{LANG.Catalog of local businesses and professionals.}</h4>
 									</div>
 									<p class="flex-action"><a class="btn btn-primary btn-large" href="{MARKET.LWebDir}/directory/index.html">{LANG.Search the directory} &raquo;</a></p>
 								</li>
 								<li>
-									<img src="{MARKET.WebDir}/img/placeholder.jpg" width="256" height="256" alt="" />
+									<img src="{MARKET.WebDir}/img/placeholder.jpg" width="256" height="256" alt="">
 									<div class="flex-caption">
 										<h2>{LANG.City Marketplace}</h2>
-										<h4>Fusce purus erat, fermentum ut aliquet in, pharetra commodo lorem.</h4>
+										<h4>{LANG.Visit the virtual city market.}</h4>
 									</div>
 									<p class="flex-action"><a class="btn btn-primary btn-large" href="{MARKET.LWebDir}/marketplace/index.html">{LANG.Browse the marketplace} &raquo;</a></p>
 								</li>
 								<li>
-									<img src="{MARKET.WebDir}/img/placeholder.jpg" width="256" height="256" alt="" />
+									<img src="{MARKET.WebDir}/img/placeholder.jpg" width="256" height="256" alt="">
 									<div class="flex-caption">
 										<h2>{LANG.Offers and Coupons}</h2>
-										<h4>Fusce purus erat, fermentum ut aliquet in, pharetra commodo lorem.</h4>
+										<h4>{LANG.Offers and coupons for all available products.}</h4>
 									</div>
 									<p class="flex-action"><a class="btn btn-primary btn-large" href="{MARKET.LWebDir}/offers/index.html">{LANG.Find offers} &raquo;</a></p>
 								</li>
 								<li>
-									<img src="{MARKET.WebDir}/img/placeholder.jpg" width="256" height="256" alt="" />
+									<img src="{MARKET.WebDir}/img/placeholder.jpg" width="256" height="256" alt="">
 									<div class="flex-caption">
 										<h2>{LANG.User Reviews}</h2>
-										<h4>Donec magna lorem, suscipit non tristique ut, cursus accumsan sapien.</h4>
+										<h4>{LANG.Rate local businesses and help build a strong community.}</h4>
 									</div>
 									<p class="flex-action"><a class="btn btn-primary btn-large" href="{MARKET.LWebDir}/reviews/index.html">{LANG.Read reviews} &raquo;</a></p>
 								</li>
@@ -147,6 +189,32 @@
 				</section>
 			</div>
 		</template>
+		
+		<div class="clearfix"></div>
+		
+		<template name="coupon_cnt">
+			<!--div class="row">
+				<section id="featured-listings">
+					<h3 class="border-bottom span12" style="margin-top: 30px;"><span>{LANG.Offers}</span></h3>
+					<template name="coupon">
+						<article class="span3" style="position: relative;">
+							<div class="img-wrap">
+								<a href="{MARKET.LWebDir}/offers/{ROW.path}/{ROW.name}.html">{ROW.image}</a>
+							</div>
+							<div class="featured-listing-info">
+								<h6>{ROW.title}</h6>
+								<if expr="'{ROW.price}'">
+									<p class="price"><span>{LANG.Price}:</span> {ROW.price}</p>
+								</if>
+							</div>
+							<p class="discount"><span>{LANG.Discount}:</span> {ROW.discount}%</p>
+						</article>
+					</template>
+				</section>
+			</div-->
+		</template>
+		
+		<div class="clearfix"></div>
 		
 	</div>
 </div>

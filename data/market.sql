@@ -2,10 +2,10 @@
 -- version 3.2.5
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Oct 27, 2012 at 10:03 AM
--- Server version: 5.5.27
--- PHP Version: 5.4.3
+-- Σύστημα: localhost
+-- Χρόνος δημιουργίας: 11 Μάρ 2013, στις 11:19 PM
+-- Έκδοση Διακομιστή: 5.5.27
+-- Έκδοση PHP: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -16,13 +16,13 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `virtual-city-market`
+-- Βάση: `virtual-city-market`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `directory`
+-- Δομή Πίνακα για τον Πίνακα `directory`
 --
 
 CREATE TABLE IF NOT EXISTS `directory` (
@@ -31,24 +31,25 @@ CREATE TABLE IF NOT EXISTS `directory` (
   `category_ids` text NOT NULL,
   `lat` float(10,6) NOT NULL,
   `lng` float(10,6) NOT NULL,
+  `pin` varchar(8) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `directory`
+-- 'Αδειασμα δεδομένων του πίνακα `directory`
 --
 
-INSERT INTO `directory` (`id`, `path`, `category_ids`, `lat`, `lng`) VALUES
-(1, 'store01', '', 40.550259, 23.021236),
-(2, 'store02', '', 40.547413, 23.019882),
-(3, '', '', 40.495972, 22.986946),
-(4, '', '', 40.496822, 22.988342),
-(5, '', '', 40.493984, 22.988792);
+INSERT INTO `directory` (`id`, `path`, `category_ids`, `lat`, `lng`, `pin`) VALUES
+(1, 'store01', '', 40.550259, 23.021236, '123456'),
+(2, 'store02', '', 40.547413, 23.019882, ''),
+(3, '', '', 40.495972, 22.986946, ''),
+(4, '', '', 40.496822, 22.988342, ''),
+(5, '', '', 40.493984, 22.988792, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `directory_ml`
+-- Δομή Πίνακα για τον Πίνακα `directory_ml`
 --
 
 CREATE TABLE IF NOT EXISTS `directory_ml` (
@@ -74,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `directory_ml` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `directory_ml`
+-- 'Αδειασμα δεδομένων του πίνακα `directory_ml`
 --
 
 INSERT INTO `directory_ml` (`id`, `lang`, `name`, `business_name`, `category`, `byline`, `prof1`, `prof2`, `prof3`, `address`, `city`, `phone`, `email`, `url`, `facebook`, `twitter`, `google`, `youtube`) VALUES
@@ -92,7 +93,7 @@ INSERT INTO `directory_ml` (`id`, `lang`, `name`, `business_name`, `category`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `directory_ps`
+-- Δομή Πίνακα για τον Πίνακα `directory_ps`
 --
 
 CREATE TABLE IF NOT EXISTS `directory_ps` (
@@ -113,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `directory_ps` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `directory_ps`
+-- 'Αδειασμα δεδομένων του πίνακα `directory_ps`
 --
 
 INSERT INTO `directory_ps` (`id`, `creator`, `created`, `owner`, `role`, `updated`, `ups`, `gps`, `wps`, `forward_ids`, `publish`) VALUES
@@ -126,7 +127,27 @@ INSERT INTO `directory_ps` (`id`, `creator`, `created`, `owner`, `role`, `update
 -- --------------------------------------------------------
 
 --
--- Table structure for table `market_role`
+-- Δομή Πίνακα για τον Πίνακα `log`
+--
+
+CREATE TABLE IF NOT EXISTS `log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `text` text NOT NULL,
+  `tstamp` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 'Αδειασμα δεδομένων του πίνακα `log`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Δομή Πίνακα για τον Πίνακα `market_role`
 --
 
 CREATE TABLE IF NOT EXISTS `market_role` (
@@ -137,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `market_role` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `market_role`
+-- 'Αδειασμα δεδομένων του πίνακα `market_role`
 --
 
 INSERT INTO `market_role` (`id`, `title`) VALUES
@@ -149,7 +170,7 @@ INSERT INTO `market_role` (`id`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `market_session`
+-- Δομή Πίνακα για τον Πίνακα `market_session`
 --
 
 CREATE TABLE IF NOT EXISTS `market_session` (
@@ -163,14 +184,14 @@ CREATE TABLE IF NOT EXISTS `market_session` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `market_session`
+-- 'Αδειασμα δεδομένων του πίνακα `market_session`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `market_user`
+-- Δομή Πίνακα για τον Πίνακα `market_user`
 --
 
 CREATE TABLE IF NOT EXISTS `market_user` (
@@ -189,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `market_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `market_user`
+-- 'Αδειασμα δεδομένων του πίνακα `market_user`
 --
 
 INSERT INTO `market_user` (`user_id`, `market_role_id`, `is_admin`, `user_active`, `username`, `name`, `surname`, `store`, `user_password`, `user_email`, `data`) VALUES
@@ -202,7 +223,102 @@ INSERT INTO `market_user` (`user_id`, `market_role_id`, `is_admin`, `user_active
 -- --------------------------------------------------------
 
 --
--- Table structure for table `store_data`
+-- Δομή Πίνακα για τον Πίνακα `page`
+--
+
+CREATE TABLE IF NOT EXISTS `page` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_template_id` int(11) NOT NULL,
+  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `ord` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `url` (`url`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- 'Αδειασμα δεδομένων του πίνακα `page`
+--
+
+INSERT INTO `page` (`id`, `page_template_id`, `url`, `ord`) VALUES
+(1, 0, 'terms.html', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Δομή Πίνακα για τον Πίνακα `page_ml`
+--
+
+CREATE TABLE IF NOT EXISTS `page_ml` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `lang` char(2) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `stitle` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `summary` text COLLATE utf8_unicode_ci NOT NULL,
+  `title` text COLLATE utf8_unicode_ci,
+  `text` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `is_type` enum('passthrough','template') COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`,`lang`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 'Αδειασμα δεδομένων του πίνακα `page_ml`
+--
+
+INSERT INTO `page_ml` (`id`, `lang`, `stitle`, `summary`, `title`, `text`, `is_type`) VALUES
+(1, 'el', '', '', 'Όροι χρήσης', '', 'passthrough'),
+(1, 'en', '', '', 'Terms of use', '', 'passthrough');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή Πίνακα για τον Πίνακα `page_ps`
+--
+
+CREATE TABLE IF NOT EXISTS `page_ps` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `creator` int(11) NOT NULL DEFAULT '0',
+  `created` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `owner` int(11) NOT NULL DEFAULT '0',
+  `role` tinyint(4) NOT NULL DEFAULT '0',
+  `updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `ups` int(1) NOT NULL DEFAULT '0',
+  `gps` int(1) NOT NULL DEFAULT '0',
+  `wps` int(1) NOT NULL DEFAULT '0',
+  `forward_ids` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `publish` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `owner` (`owner`),
+  KEY `role` (`role`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 'Αδειασμα δεδομένων του πίνακα `page_ps`
+--
+
+INSERT INTO `page_ps` (`id`, `creator`, `created`, `owner`, `role`, `updated`, `ups`, `gps`, `wps`, `forward_ids`, `publish`) VALUES
+(1, 1, '2012-11-14 23:12:30', 1, 1, '2012-11-14 23:12:30', 7, 2, 2, '', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Δομή Πίνακα για τον Πίνακα `page_template`
+--
+
+CREATE TABLE IF NOT EXISTS `page_template` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 'Αδειασμα δεδομένων του πίνακα `page_template`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Δομή Πίνακα για τον Πίνακα `store_data`
 --
 
 CREATE TABLE IF NOT EXISTS `store_data` (
@@ -224,7 +340,7 @@ CREATE TABLE IF NOT EXISTS `store_data` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
--- Dumping data for table `store_data`
+-- 'Αδειασμα δεδομένων του πίνακα `store_data`
 --
 
 INSERT INTO `store_data` (`id`, `directory_id`, `lang`, `date_from`, `date_to`, `type`, `name`, `title`, `price`, `discount`, `rating`, `votes`, `data`, `ord`) VALUES
@@ -249,7 +365,7 @@ INSERT INTO `store_data` (`id`, `directory_id`, `lang`, `date_from`, `date_to`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `store_data_ps`
+-- Δομή Πίνακα για τον Πίνακα `store_data_ps`
 --
 
 CREATE TABLE IF NOT EXISTS `store_data_ps` (
@@ -270,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `store_data_ps` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `store_data_ps`
+-- 'Αδειασμα δεδομένων του πίνακα `store_data_ps`
 --
 
 INSERT INTO `store_data_ps` (`id`, `creator`, `created`, `owner`, `role`, `updated`, `ups`, `gps`, `wps`, `forward_ids`, `publish`) VALUES

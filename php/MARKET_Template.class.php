@@ -31,7 +31,7 @@
 		var $options = array(
 			'remove_empty_tags' => true,
 			'trim_empty' => false,
-			'enable_pages' => false,
+			'enable_pages' => true,
 			'parse_if_statements' => true,
 		);
 		
@@ -86,6 +86,7 @@
 			$this->assignLocal('sglobal', array(
 				'MARKET.Lang' => $lng->lang,
 				'PAGE.Title' => 'untitled',
+				'MARKET.Server' => $_SERVER['HTTP_HOST'],
 				'MARKET.WebDir' => MARKET_WEB_DIR,
 				'MARKET.LWebDir' => MARKET_WEB_DIR . '/' . MARKET_LANG,
 				'MARKET.Request' => $req->request
@@ -95,7 +96,7 @@
 			$this->assignLocal('sglobal', 'MARKET.Params', $req->params);
 			
 			// Locale strings
-			$this->assignLocal('sglobal', 'LANG', $lng->strs);
+			// $this->assignLocal('sglobal', 'LANG', $lng->strs);
 		}
 		
 		
@@ -105,48 +106,31 @@
 			
 			if ($this->options['enable_pages']) {
 				if (preg_match('@^\d+$@', $url)) {
-					$sql = "SELECT page_template.name AS template_name, page.id, title, summary, colL, colR, text, is_type, " . MARKET_USER_TABLE . ".name, " . MARKET_USER_TABLE . ".surname, " . MARKET_USER_TABLE . ".user_email, DATE_FORMAT(updated, '%d/%m/%Y %H:%i') AS date FROM page LEFT JOIN page_ml USING (id) LEFT JOIN page_ps USING (id) LEFT JOIN " . MARKET_USER_TABLE . " ON " . MARKET_USER_TABLE . ".user_id=creator LEFT JOIN page_template ON page_template.id=page_template_id WHERE page.id='" . sqlEscape($url) . "' AND publish='1' AND page_ml.lang='" . MARKET_LANG . "'";
+					$sql = "SELECT page_template.name AS template_name, page.id, title, summary, text, is_type, market_user.name, market_user.surname, market_user.user_email, DATE_FORMAT(updated, '%d/%m/%Y %H:%i') AS date FROM page LEFT JOIN page_ml USING (id) LEFT JOIN page_ps USING (id) LEFT JOIN market_user ON market_user.user_id=creator LEFT JOIN page_template ON page_template.id=page_template_id WHERE page.id='" . sqlEscape($url) . "' AND publish='1' AND page_ml.lang='" . MARKET_LANG . "'";
 				}
 				else {
-					$sql = "SELECT page_template.name AS template_name, page.id, title, summary, colL, colR, text, is_type, " . MARKET_USER_TABLE . ".name, " . MARKET_USER_TABLE . ".surname, " . MARKET_USER_TABLE . ".user_email, DATE_FORMAT(updated, '%d/%m/%Y %H:%i') AS date FROM page LEFT JOIN page_ml USING (id) LEFT JOIN page_ps USING (id) LEFT JOIN " . MARKET_USER_TABLE . " ON " . MARKET_USER_TABLE . ".user_id=creator LEFT JOIN page_template ON page_template.id=page_template_id WHERE url='" . sqlEscape($url) . "' AND publish='1' AND page_ml.lang='" . MARKET_LANG . "'";
+					$sql = "SELECT page_template.name AS template_name, page.id, title, summary, text, is_type, market_user.name, market_user.surname, market_user.user_email, DATE_FORMAT(updated, '%d/%m/%Y %H:%i') AS date FROM page LEFT JOIN page_ml USING (id) LEFT JOIN page_ps USING (id) LEFT JOIN market_user ON market_user.user_id=creator LEFT JOIN page_template ON page_template.id=page_template_id WHERE url='" . sqlEscape($url) . "' AND publish='1' AND page_ml.lang='" . MARKET_LANG . "'";
 				}
 				if (sqlQuery($sql, $res)) {
 					$row = sqlFetchAssoc($res);
 					
-					if ($row['is_type'] == 'passthrough') {
-						$this->parseTitle($row);
-						$this->assignGlobal(array(
-							'PAGE.Id'	=> $row['id'],
-							'PAGE.Summary'	=> MARKET_Filter::marketCode(stripslashes($row['summary'])),
-							'PAGE.colL'	=> MARKET_Filter::marketCode(stripslashes($row['colL'])),
-							'PAGE.colR'	=> MARKET_Filter::marketCode(stripslashes($row['colR'])),
-							'PAGE.Text'	=> MARKET_Filter::marketCode(stripslashes($row['text'])),
-							'PAGE.Author'	=> $row['name'] . ' ' . $row['surname'] . ', <a href="' . MARKET_Filter::noSpam('mailto:' . $row['email']) . '">' . MARKET_Filter::noSpam($row['email']) . '</a>',
-							'PAGE.Mtime'	=> $row['date']
-						));
-						$MARKET_content_source = MARKET_TEMPLATE_CONTENT;
-						return substr($url, 0, strrpos($url, '.'));
-					}
-					
-					$MARKET_content_source = MARKET_DATABASE_CONTENT;
-					$this->parseTitle($row);
 					$this->assignGlobal(array(
-						'PAGE.Id'	=> $row['id'],
-						'PAGE.Summary'	=> MARKET_Filter::marketCode(stripslashes($row['summary'])),
-						'PAGE.colL'	=> MARKET_Filter::marketCode(stripslashes($row['colL'])),
-						'PAGE.colR'	=> MARKET_Filter::marketCode(stripslashes($row['colR'])),
-						'PAGE.Text'	=> MARKET_Filter::marketCode(stripslashes($row['text'])),
-						'PAGE.Author'	=> $row['name'] . ' ' . $row['surname'] . ', <a href="' . MARKET_Filter::noSpam('mailto:' . $row['email']) . '">' . MARKET_Filter::noSpam($row['email']) . '</a>',
+						'PAGE.Id'		=> $row['id'],
+						'PAGE.Summary'	=> $row['summary'],
+						'PAGE.Title'	=> $row['title'],
+						'PAGE.Text'		=> $row['text'],
+						'PAGE.Author'	=> $row['name'] . ' ' . $row['surname'] . ', ' . MARKET_Filter::noSpam($row['email']),
 						'PAGE.Mtime'	=> $row['date']
 					));
 					
-					if ($row['is_type'] == 'template') {
+					if ($row['is_type'] == 'passthrough') {
+						return substr($url, 0, strrpos($url, '.'));
+					}
+					else if ($row['is_type'] == 'template') {
 						$tname = substr($url, 0, strrpos($url, '.'));
 						$this->preParseTemplate($tname, explode("\n", $row['text']));
 						$this->parseTemplate('PAGE.Text', $tname, MARKET_DO_NOT_APPEND);
-						$this->vars['global']['PAGE.Text'] = MARKET_Filter::marketCode($this->vars['global']['PAGE.Text']);
 					}
-					
 					return $row['template_name'];
 				}
 			}
@@ -154,29 +138,6 @@
 		}
 		
 		
-		function parseTitle(&$row)
-		{
-			if (preg_match('@\n@', $row['title'])) {
-				$titles = explode("\n", $row['title']);
-				if (preg_match('@^\[.*\]$@', trim($titles[0]))) {
-					$row['suptitle'] = substr(trim($titles[0]), 1, -1);
-					$row['title']	= trim($titles[1]);
-					$row['subtitle'] = trim($titles[2]);
-				}
-				else {
-					$row['title']	= trim($titles[0]);
-					$row['subtitle'] = trim($titles[1]);
-				}
-			}
-			$this->assignGlobal(array(
-				'PAGE.SupTitle' => htmlspecialchars(stripslashes($row['suptitle'])),
-				'PAGE.Title'    => htmlspecialchars(stripslashes($row['title'])),
-				'PAGE.PlainTitle' => strip_tags(stripslashes($row['title'])),
-				'PAGE.SubTitle' => htmlspecialchars(stripslashes($row['subtitle']))
-			));
-		}
-		
-				
 		function loadTemplate($tname, $direct = true)
 		{
 			if (!isset($this->is_loaded[$tname])) {
@@ -643,7 +604,16 @@
 			
 			$str = $this->replaceVars('global', $this->vars['global'][$var]);
 			$str = $this->replaceVars('sglobal', $str);
-			$str = preg_replace('@{LANG\.(.+?)}@', "$1", $str);
+			// Translation
+			if (preg_match_all('@{LANG\.(.+?)}@', $str, $matches)) {
+				$lng = $this->getRef('Lang');
+				foreach ($matches[0] as $key => $val) {
+					if ($lng->strs[$matches[1][$key]]) {
+						$str = preg_replace('@{LANG\.' . $this->pregEscape($matches[1][$key]) . '}@', $lng->strs[$matches[1][$key]], $str);
+					}
+				}
+				$str = preg_replace('@{LANG\.(.+?)}@', "$1", $str);
+			}
 			$str = $this->removeEmptyTags($str);
 			$str = $this->trimEmpty($str);
 			$str = $this->parseIfStatements($str);
@@ -766,7 +736,7 @@
 		{
 			if (!strstr($ttext, '{')) return $ttext;
 			
-			$str = preg_split('@\{(?=(([A-Za-z0-9\_]+:)?[A-Za-z0-9_\.\,\ \/\:\-\\\']+)\})@', $ttext);
+			$str = preg_split('@\{(?=(([A-Za-z0-9\_]+:)?[A-Za-z0-9_\.\,\ \/\:\-\\\'\(\)]+)\})@', $ttext);
 			
 			$res = '';
 			$counti = count($str);

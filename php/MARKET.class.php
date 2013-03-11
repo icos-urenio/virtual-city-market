@@ -75,6 +75,11 @@
 		}
 	}
 	
+	function __($str) {
+		$lng = MARKET_Base::getRef('Lang');
+		return $lng->translate($str);
+	}
+	
 	class MARKET extends MARKET_Base {
 		
 		function MARKET()
@@ -124,6 +129,7 @@
 		{
 			global $MARKET_mode;
 			
+			$auth =& $this->getRef('Auth');
 			$tpl =& $this->getRef('Template');
 			
 			$TEMPLATE = $tpl->main_template;
@@ -132,15 +138,17 @@
 			switch ($MARKET_mode) {
 				
 				case 'admin':
-					$auth =& $this->getRef('Auth');
 					$auth->checkPermissions('admin');
 					
 				case 'edit':
-					$auth =& $this->getRef('Auth');
 					$auth->checkPermissions('registered');
 				
 				case 'public':
 					$req =& $this->getRef('Request');
+					// noSpam
+					if ($req->params[0] == 'nospam') {
+						$tpl->getNoSpamImage($_GET['a'], $_GET['b']); // This function will exit
+					}
 					if ($tname = $tpl->loadPage($req->url)) {
 						if ($tpl->loadTemplate($tname)) {
 							// Check Permissions and redirect to login screen if necessary

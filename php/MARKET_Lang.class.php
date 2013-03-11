@@ -21,6 +21,10 @@
 			$this->languages = $this->getAvailable();
 		}
 		
+		function translate($str) {
+			if (isset($this->strs[$str])) $str = $this->strs[$str];
+			return $str;
+		}
 		
 		function getAvailable()
 		{

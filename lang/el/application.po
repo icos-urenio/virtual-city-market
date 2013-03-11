@@ -9,16 +9,55 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.3\n"
+"X-Generator: Poedit 1.5.4\n"
 
-msgid "All Rights Reserved"
-msgstr "Με επιφύλαξη κάθε δικαιώματος"
+msgid "Account"
+msgstr "Λογαριασμός"
+
+msgid "Account options"
+msgstr "Επιλογές λογαριασμού"
+
+msgid "Account settings"
+msgstr "Ρυθμίσεις λογαριασμού"
+
+msgid "Activate your account"
+msgstr "Ενεργοποίηση λογαριασμού"
+
+msgid "Add image"
+msgstr "Προσθήκη εικόνας"
+
+msgid "Add page"
+msgstr "Προσθήκη σελίδας"
+
+msgid "Address"
+msgstr "Διεύθυνση"
+
+msgid "Administration"
+msgstr "Διαχείριση"
 
 msgid "All reviews"
 msgstr "Όλες οι αξιολογήσεις"
 
+msgid "All rights reserved"
+msgstr "Με επιφύλαξη κάθε δικαιώματος"
+
+msgid "An error occured"
+msgstr "Συνέβη λάθος"
+
+msgid "Are you sure you want to delete this image?"
+msgstr "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτή την εικόνα;"
+
+msgid "Are you sure you want to delete this page?"
+msgstr "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτή την σελίδα;"
+
+msgid "Authentication"
+msgstr "Πιστοποίηση"
+
 msgid "Back to top"
 msgstr "Επιστροφή στην αρχή"
+
+msgid "Best regards"
+msgstr "Με εκτίμηση"
 
 msgid "Browse the marketplace"
 msgstr "Περιηγηθείτε στην αγορά"
@@ -26,20 +65,82 @@ msgstr "Περιηγηθείτε στην αγορά"
 msgid "Business Directory"
 msgstr "Κατάλογος Επιχειρήσεων"
 
+msgid "Business details"
+msgstr "Λεπτομέρειες επιχείρησης"
+
+msgid "Byline"
+msgstr "Υπότιτλος"
+
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+msgid "Catalog of local businesses and professionals."
+msgstr "Κατάλογος των τοπικών επιχειρήσεων και επαγγελματιών."
+
 msgid "Categories"
 msgstr "Κατηγορίες"
+
+msgid "Category"
+msgstr "Κατηγορία"
+
+msgid "Change image"
+msgstr "Αλλαγή εικόνας"
 
 msgid "Cities"
 msgstr "Οικισμοί"
 
+msgid "City"
+msgstr "Οικισμός"
+
 msgid "City Marketplace"
 msgstr "Η Αγορά της Πόλης"
 
-msgid "Did you"
-msgstr "Εσείς"
+msgid "Click this link to request the confirmation email again."
+msgstr ""
+"Κάνετε κλικ σε αυτό το σύνδεσμο για να σας στείλουμε το μήνυμα επιβεβαίωσης "
+"ξανά."
 
-msgid "Did you found this review helpful"
-msgstr "Βρήκατε την αξιολόγηση χρήσιμη"
+msgid "Close"
+msgstr "Κλείσιμο"
+
+msgid "Close editor"
+msgstr "Ολοκλήρωση επεξεργασίας"
+
+msgid "Company name"
+msgstr "Διακριτικός τίτλος"
+
+msgid "Confirm your new email address at"
+msgstr "Επιβεβαιώστε την νέα σας διεύθυνση email στο"
+
+msgid "Confirm your registration at"
+msgstr "Επιβεβαιώστε την εγγραφή σας στο"
+
+msgid "Create account"
+msgstr "Δημιουργία λογαριασμού"
+
+msgid "Create marketplace store"
+msgstr "Κατάστημα στην αγορά"
+
+msgid "Create offer"
+msgstr "Δημιουργία προσφοράς"
+
+msgid "Dear"
+msgstr "Αγαπητή/έ"
+
+msgid "Debug"
+msgstr "Εκσφαλμάτωση"
+
+msgid "Delete"
+msgstr "Διαγραφή"
+
+msgid "Description"
+msgstr "Περιγραφή"
+
+msgid "Did you found this review helpful?"
+msgstr "Βρήκατε την αξιολόγηση χρήσιμη;"
+
+msgid "Did you?"
+msgstr "Εσείς;"
 
 msgid "Directory"
 msgstr "Κατάλογος"
@@ -47,11 +148,69 @@ msgstr "Κατάλογος"
 msgid "Discount"
 msgstr "Έκπτωση"
 
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+msgid "Edit links"
+msgstr "Επεξεργασία συνδέσμων"
+
+msgid "Edit page"
+msgstr "Επεξεργασία σελίδας"
+
+msgid "Edit slider"
+msgstr "Επεξεργασία slider"
+
+msgid "Edit your offer"
+msgstr "Επεξεργαστείτε την προσφορά σας"
+
+msgid "Edit your personal details"
+msgstr "Επεξεργαστείτε τα προσωπικά σας στοιχεία"
+
+msgid "Edit your store details"
+msgstr "Επεξεργαστείτε τα στοιχεία της επιχείρησής σας"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Email address"
+msgstr "Διεύθυνση email"
+
+msgid "Email address unconfirmed"
+msgstr "Η διεύθυνση email δεν είναι επιβεβαιωμένη"
+
+msgid "Enter a url for your marketplace store"
+msgstr "Εισάγετε μια διεύθυνση για το κατάστημα"
+
+msgid "Enter a url for your new page"
+msgstr "Εισάγετε μια διεύθυνση για τη νέα σελίδα"
+
+msgid "Enter the discount percent as a single number (i.e. without the %)."
+msgstr "Εισάγετε το ποσοστό της έκτπωσης ως απλό αριθμό (χωρίς το %)"
+
+msgid "Enter the price of the discounted item. This is a free text field."
+msgstr ""
+"Εισάγετε την τιμή της προσφοράς. Αυτό είναι ένα πεδίο ελεύθερου κειμένου."
+
+msgid "Enter your PIN code"
+msgstr "Εισάγετε τον κωδικό PIN"
+
+msgid "Errors"
+msgstr "Λάθη"
+
+msgid "Expired"
+msgstr "Έληξε"
+
+msgid "Facebook"
+msgstr "Facebook"
+
 msgid "Featured Listings"
 msgstr "Προτεινόμενα"
 
 msgid "Find offers"
 msgstr "Βρείτε προσφορές"
+
+msgid "First"
+msgstr "Πρώτο"
 
 msgid "Follow us"
 msgstr "Ακολουθήστε μας"
@@ -68,20 +227,66 @@ msgstr "Ο εντοπισμός απέτυχε"
 msgid "Go"
 msgstr "Βρες"
 
+msgid "Go to"
+msgstr "Πηγαίνετε στο"
+
 msgid "Go to the store"
 msgstr "Πηγαίνετε στο κατάστημα"
+
+msgid "Google"
+msgstr "Google"
 
 msgid "Home"
 msgstr "Αρχική"
 
-msgid "Is this your business"
-msgstr "Είναι αυτή η επιχείρησή σας"
+msgid "I agree with the"
+msgstr "Συμφωνώ με τους"
+
+msgid ""
+"If the below link does not work, you can paste the following url into your "
+"browser"
+msgstr ""
+"Αν ο σύνδεσμος δεν λειτουργεί, μπορείτε να αντιγράψετε την διεύθυνση στον "
+"φυλλομετρητή σας"
+
+msgid ""
+"If you are encountering any technical or other problems, please contact us at"
+msgstr ""
+"Αν αντιμετωπίζετε οποιδήποτε τεχνικό ή άλλο πρόβλημα, παρακαλούμε "
+"επικοινωνήστε με"
+
+msgid "Image upload"
+msgstr "Μεταφόρτωση εικόνας"
+
+msgid ""
+"Information in this email including any attachments may be privileged, "
+"confidential and is intended exclusively for the addressee. If you are not "
+"the intended recipient please notify the sender by return email and delete "
+"all copies from your system. You should not reproduce, distribute, store, "
+"retransmit, use or disclose its contents to anyone."
+msgstr ""
+"Οι πληροφορίες σε αυτό το ηλεκτρονικό μήνυμα, συμπεριλαμβανομένων "
+"οποιονδήποτε συνημμένων, μπορεί να είναι προσωπικές, εμπιστευτικές και  "
+"προορίζονται αποκλειστικά για τον παραλήπτη. Εάν δεν είστε ο παραλήπτης "
+"παρακαλούμε να ειδοποιήσετε τον αποστολέα του e-mail και να διαγράψετε όλα "
+"τα αντίγραφα από το σύστημά σας. Δεν θα πρέπει να αναπαράγετε, διανείμετε, "
+"αποθηκεύσετε, αναμεταδόσετε, χρησιμοποιήσετε ή αποκαλύψετε το περιεχόμενό "
+"τους σε κανέναν."
+
+msgid "Is this your business?"
+msgstr "Είναι αυτή η επιχείρησή σας;"
 
 msgid "Keywords"
 msgstr "Λέξεις κλειδιά"
 
+msgid "Last"
+msgstr "Τελευταίο"
+
 msgid "Learn more"
 msgstr "Μάθετε περισσότερα"
+
+msgid "Leave the field blank, if you do not want to change your password."
+msgstr "Αφήστε το πεδίο κενό, αν δεν θέλετε να αλλάξετε τον κωδικό σας."
 
 msgid ""
 "Load this offer on your mobile and show it at the store to get the discount"
@@ -89,11 +294,34 @@ msgstr ""
 "Φορτώστε αυτό το κουπόνι στο κινητό σας και δείξτε το στο κατάστημα για να "
 "λάβετε την έκπτωση"
 
-msgid "Logout"
+msgid "Local business"
+msgstr "Τοπική επιχείρηση"
+
+msgid ""
+"Local businesses should acquire a PIN code from their professional "
+"association to access their business information."
+msgstr ""
+"Οι τοπικές επιχειρήσεις θα πρέπει να λάβουν έναν κωδικό PIN από την Ένωση "
+"Επαγγελματιών Εμπόρων Δήμου Θέρμης για να έχουν πρόσβαση στις πληροφορίες "
+"τους."
+
+msgid "Log In"
+msgstr "Σύνδεση"
+
+msgid "Log Out"
 msgstr "Αποσύνδεση"
+
+msgid "Login details"
+msgstr "Λεπτομέρειες σύνδεσης"
+
+msgid "Login incorrect."
+msgstr "Λανθασμένος κωδικός."
 
 msgid "Manage page"
 msgstr "Διαχείριση σελίδας"
+
+msgid "Manage your offers"
+msgstr "Διαχειριστείτε τις προσφορές σας"
 
 msgid "Marketplace"
 msgstr "Αγορά"
@@ -107,8 +335,23 @@ msgstr "Περισσότερες πληροφορίες"
 msgid "More offers"
 msgstr "Περισσότερες προσφορές"
 
+msgid "Name"
+msgstr "Όνομα"
+
 msgid "Near me"
 msgstr "Κοντά μου"
+
+msgid "New offer"
+msgstr "Νέα προσφορά"
+
+msgid "New page"
+msgstr "Νέα σελίδα"
+
+msgid "New user registration"
+msgstr "Εγγραφή νέου χρήστη"
+
+msgid "Next"
+msgstr "Επόμενο"
 
 msgid "No"
 msgstr "Όχι"
@@ -118,6 +361,9 @@ msgstr "Δεν βρέθηκαν αποτελέσματα"
 
 msgid "Not implemented"
 msgstr "Μη διαθέσιμο"
+
+msgid "OK"
+msgstr "OK"
 
 msgid "ORGANIZATION"
 msgstr "ΟΡΓΑΝΙΣΜΟΣ"
@@ -131,26 +377,147 @@ msgstr "Προσφορές"
 msgid "Offers and Coupons"
 msgstr "Προσφορές και Κουπόνια"
 
+msgid "Offers and coupons for all available products."
+msgstr "Προσφορές και κουπόνια για όλα τα διαθέσιμα προϊόντα."
+
+msgid "Offers management"
+msgstr "Διαχείριση προσφορών"
+
+msgid "Old email address"
+msgstr "Παλιά διεύθυνση email"
+
 msgid "Organization"
 msgstr "Οργανισμός"
 
 msgid "Our offers"
 msgstr "Οι προσφορές μας"
 
+msgid "PIN Code"
+msgstr "Κωδικός PIN"
+
+msgid "Password"
+msgstr "Κωδικός"
+
+msgid "Password reset"
+msgstr "Δημιουργία νέου κωδικού"
+
+msgid "Passwords do not match."
+msgstr "Οι κωδικοί δεν ταιριάζουν."
+
+msgid "Personal details"
+msgstr "Λεπτομέρειες χρήστη"
+
+msgid "Phone"
+msgstr "Τηλέφωνο"
+
+msgid "Please click on the provided link to confirm your new email address."
+msgstr ""
+"Παρακαλούμε κάντε κλικ στον παρακάτω σύνδεσμο για να επιβεβαιώσετε την νέα "
+"σας διεύθυνση email."
+
+msgid "Please click on the provided link to confirm your registration."
+msgstr ""
+"Παρακαλούμε κάντε κλικ στον παρακάτω σύνδεσμο για να επιβεβαιώσετε την "
+"εγγραφή σας."
+
+msgid "Please click on the provided link to reset your password."
+msgstr ""
+"Παρακαλούμε κάντε κλικ στον παρακάτω σύνδεσμο για να δημιουργήσετε νέο "
+"κωδικό."
+
+msgid "Please enter your credentials."
+msgstr "Παρακαλώ εισάγετε τους κωδικούς σας."
+
+msgid "Please enter your new password in the form below."
+msgstr "Παρακαλώ εισάγετε τον νέο σας κωδικό στην ακόλουθη φόρμα."
+
+msgid ""
+"Please enter your registered email address in the form below. We will send "
+"you instructions to activate your account."
+msgstr ""
+"Εισάγετε την καταχωρημένη διεύθυνση email σας στην ακόλουθη φόρμα. Θα σας "
+"στείλουμε οδηγίες για να ενεργοποιήσετε τον λογαριασμό σας."
+
+msgid ""
+"Please enter your registered email address in the form below. We will send "
+"you instructions to reset your password."
+msgstr ""
+"Εισάγετε την καταχωρημένη διεύθυνση email σας στην ακόλουθη φόρμα. Θα σας "
+"στείλουμε οδηγίες για την δημιουργία νέου κωδικού."
+
+msgid ""
+"Please make sure that you followed the correct link from the activation "
+"email."
+msgstr ""
+"Παρακαλώ βεβαιωθείτε ότι ακολουθήσατε τον σωστό σύνδεσμο από το μήνυμα "
+"ενεργοποίησης."
+
+msgid ""
+"Please make sure that you followed the correct link from the password reset "
+"email."
+msgstr ""
+"Παρακαλώ βεβαιωθείτε ότι ακολουθήσατε τον σωστό σύνδεσμο από το μήνυμα "
+"δημιουργίας νέου κωδικού."
+
+msgid "Please select"
+msgstr "Παρακαλώ επιλέξτε"
+
+msgid "Please select your user type."
+msgstr "Παρακαλώ επιλέξτε τον τύπο χρήστη."
+
+msgid "Please try again later."
+msgstr "Παρακαλώ δοκιμάστε αργότερα."
+
+msgid ""
+"Please use the following form to create your user account. All fields are "
+"required."
+msgstr ""
+"Παρακαλώ χρησιμοποιήστε την ακόλουθη φόρμα για να δημιουργήσετε ένα νέο "
+"λογαριασμό. Όλα τα πεδία είναι απαραίτητα."
+
+msgid "Previous"
+msgstr "Προηγούμενο"
+
 msgid "Price"
 msgstr "Τιμή"
 
-msgid "Prices"
-msgstr "Τιμές"
+msgid "Profiler"
+msgstr "Προφίλ Εφαρμογής"
+
+msgid "Rate local businesses and help build a strong community."
+msgstr ""
+"Αξιολογήστε τις τοπικές επιχειρήσεις και βοηθήστε να χτιστεί μια δυνατή "
+"κοινότητα."
 
 msgid "Read reviews"
 msgstr "Δείτε αξιολογήσεις"
+
+msgid "Recover your account"
+msgstr "Ανάκτηση λογαριασμού"
+
+msgid "Register"
+msgstr "Εγγραφή"
+
+msgid "Remember me"
+msgstr "Να με θυμάσαι"
+
+msgid "Repeat password"
+msgstr "Επανάληψη κωδικού"
+
+msgid "Reset your password at"
+msgstr "Δημιουργήστε νέο κωδικό στο"
+
+msgid "Resources"
+msgstr "Πόροι"
 
 msgid "Reviews"
 msgstr "Αξιολογήσεις"
 
 msgid "SMART CITY SERVICES"
 msgstr "ΥΠΗΡΕΣΙΕΣ ΕΞΥΠΝΗΣ ΠΟΛΗΣ"
+
+msgid "SQL Queries"
+msgstr "Ερωτήματα SQL"
 
 msgid "Save successful"
 msgstr "Αποθήκευση επιτυχής"
@@ -164,26 +531,254 @@ msgstr "Αναζητήστε στον κατάλογο"
 msgid "Select"
 msgstr "Επιλογή"
 
+msgid "Send me the confirmation message again."
+msgstr "Στείλτε μου το μήνυμα επιβεβαίωσης ξανά."
+
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
 msgid "Show on map"
 msgstr "Εμφάνιση στο χάρτη"
+
+msgid "Sign In"
+msgstr "Σύνδεση"
+
+msgid "Site visitor"
+msgstr "Επισκέπτης"
+
+msgid "Social networks"
+msgstr "Κοινωνικά δίκτυα"
+
+msgid "Subcategory"
+msgstr "Υποκατηγορία"
+
+msgid "Submit"
+msgstr "Αποστολή"
+
+msgid "Submit PIN"
+msgstr "Αποστολή PIN"
+
+msgid "Subtitle"
+msgstr "Υπότιτλος"
+
+msgid "Surname"
+msgstr "Επίθετο"
+
+msgid "Terms"
+msgstr "Όροι χρήσης"
+
+msgid "Terms of use"
+msgstr "Όρους χρήσης"
+
+msgid "The Administration Team"
+msgstr "Η Ομάδα Διαχείρισης"
+
+msgid "The PIN code is incorrect."
+msgstr "Ο κωδικός PIN είναι λανθασμένος"
+
+msgid "The byline is required."
+msgstr "Ο υπότιτλος είναι απαραίτητος."
+
+msgid "The category is required."
+msgstr "Η κατηγορία είναι απαραίτητη."
+
+msgid "The city is required."
+msgstr "Ο οικισμός είναι απαραίτητος."
+
+msgid "The description is required."
+msgstr "Η περιγραφή είναι απαραίτητη."
+
+msgid "The discount is required."
+msgstr "Η έκπτωση είναι απαραίτητη."
+
+msgid "The email address is already registered."
+msgstr "Η διεύθυνση email είναι ήδη εγγεγραμμένη"
+
+msgid "The email address is not valid."
+msgstr "Η διεύθυνση email δεν είναι έγκυρη."
+
+msgid "The expiration date is required."
+msgstr "Η ημερομηνία λήξης είναι απαραίτητη."
+
+msgid "The link is valid for two hours and one time use only."
+msgstr "Ο σύνδεσμος είναι έγκυρος για δύο ώρες και για μία χρήση μόνο."
+
+msgid "The password is required."
+msgstr "Ο κωδικός είναι απαραίτητος."
+
+msgid "The reCAPTCHA was not correct. Please try again..."
+msgstr "Το reCAPTCHA δεν ήταν σωστό. Παρακαλώ δοκιμάστε ξανά..."
 
 msgid "The requested action is not implemented"
 msgstr "Η ενέργεια που ζητήσατε δεν έχει υλοποιηθεί ακόμα"
 
+msgid "The title is required."
+msgstr "Ο τίτλος είναι απαραίτητος."
+
+msgid "The url cannot be blank."
+msgstr "Η διεύθυνση δεν μπορεί να είναι κενή."
+
+msgid ""
+"The url may contain english characters (a-z), numbers (0-9) and the "
+"underscore (_)."
+msgstr ""
+"Η διεύθυνση μπορεί να περιέχει αγγλικούς χαρακτήρες (a-z), αριθμούς (0-9) "
+"και την υπογράμμιση (_)."
+
+msgid "The user type is required."
+msgstr "Ο τύπος χρήστη είναι απαραίτητος."
+
+msgid ""
+"There are errors. Please review the form and correct the fields marked in "
+"red."
+msgstr ""
+"Υπάρχουν λάθη. Παρακαλώ ελέγξτε την φόρμα και διορθώστε τα πεδία που είναι "
+"σημειωμένα με κόκκινο."
+
+msgid "There are no offers. Click \"New offer\" to add an offer."
+msgstr ""
+"Δεν υπάρχουν προσφορές. Κάνετε κλίκ στο  \"Νέα προσφορά\" για να προσθέσετε "
+"μια προσφορά."
+
+msgid ""
+"This PIN code is already used. Please contact your professional association."
+msgstr ""
+"Αυτός ο κωδικός PIN έχει ήδη χρησιμοποιηθεί. Παρακαλώ επικοινωνήστε με την "
+"Ένωση Επαγγελματιών Εμπόρων Δήμου Θέρμης."
+
 msgid "This offer on your mobile"
 msgstr "Η προσφορά στο κινητό σας"
+
+msgid "This page already exists."
+msgstr "Αυτή η σελίδα υπάρχει ήδη."
 
 msgid "This page on your mobile"
 msgstr "Η σελίδα στο κινητό σας"
 
+msgid "This page requires authentication."
+msgstr "Αυτή η σελίδα χρειάζεται πιστοποίηση."
+
+msgid "Title"
+msgstr "Τίτλος"
+
+msgid "Twitter"
+msgstr "Twitter"
+
+msgid "Unconfirmed"
+msgstr "Μη επιβεβαιωμένη"
+
+msgid ""
+"Until you confirm your new email address, we will still use your old address "
+"to contact you."
+msgstr ""
+"Μέχρι να επιβεβαιώσετε τη νέα διεύθυνση email σας, θα συνεχίσουμε να "
+"χρησιμοποιούμε την παλιά σας διεύθυνση."
+
+msgid "Update account"
+msgstr "Ενημέρωση λογαριασμού"
+
+msgid "Update offer"
+msgstr "Ενημέρωση προσφοράς"
+
+msgid "Update store"
+msgstr "Ενημέρωση επιχείρησης"
+
+msgid "Url"
+msgstr "Url"
+
 msgid "User Reviews"
 msgstr "Αξιολογήσεις Χρηστών"
+
+msgid "User activation"
+msgstr "Ενεργοποίηση χρήστη"
+
+msgid "User activation failed"
+msgstr "Η ενεργοποίηση χρήστη απέτυχε"
+
+msgid "User activation mail"
+msgstr "Αποστολή μηνύματος ενεργοποίησης"
+
+msgid "User activation mail failed"
+msgstr "Η αποστολή μηνύματος ενεργοποίησης απέτυχε"
+
+msgid "User details"
+msgstr "Λεπτομέρειες χρήστη"
+
+msgid "User log in"
+msgstr "Σύνδεση χρήστη"
+
+msgid "User log out"
+msgstr "Αποσύνδεση χρήστη"
+
+msgid "User password change"
+msgstr "Αλλαγή κωδικού χρήστη"
+
+msgid "User password change failed"
+msgstr "Η αλλαγή κωδικού χρήστη απέτυχε"
+
+msgid "User registration"
+msgstr "Εγγραφή χρήστη"
+
+msgid "User registration failed"
+msgstr "Η εγγραφή χρήστη απέτυχε"
+
+msgid "User reset password mail"
+msgstr "Αποστολή μηνύματος δημιουργίας νέου κωδικού"
+
+msgid "User reset password mail failed"
+msgstr "Η αποστολή μηνύματος δημιουργίας νέου κωδικού απέτυχε"
 
 msgid "User reviews"
 msgstr "Αξιολογήσεις χρηστών"
 
+msgid "User type"
+msgstr "Τύπος χρήστη"
+
+msgid "Valid from"
+msgstr "Ισχύει από"
+
+msgid "Valid to"
+msgstr "Ισχύει έως"
+
+msgid "Variables"
+msgstr "Μεταβλητές"
+
 msgid "Virtual City Market"
 msgstr "Ψηφιακό Εμπορικό Κέντρο"
+
+msgid "Visit the virtual city market."
+msgstr "Επισκεφθείτε το ψηφιακό εμπορικό κέντρο."
+
+msgid "Visual confirmation"
+msgstr "Οπτική επιβεβαίωση"
+
+msgid "We failed to send you the confirmation message. Please try again later."
+msgstr ""
+"Δεν μπορέσαμε να σας στείλουμε το μήνυμα επιβεβαίωσης. Παρακαλώ δοκιμάστε "
+"αργότερα."
+
+msgid ""
+"We have send a confirmation message to your email address. Please read it "
+"and follow the instructions to activate your account."
+msgstr ""
+"Σας στείλαμε ένα μήνυμα επιβεβαίωσης στην διεύθυνση email σας. Παρακαλώ "
+"διαβάστε το και ακολουθήστε τις οδηγίες για να ενεργοποιήσετε τον λογαριασμό "
+"σας."
+
+msgid ""
+"We have send a confirmation message to your email address. Please read it "
+"and follow the instructions to reset your password."
+msgstr ""
+"Σας στείλαμε ένα μήνυμα επιβεβαίωσης στην διεύθυνση email σας. Παρακαλώ "
+"διαβάστε το και ακολουθήστε τις οδηγίες για να δημιουργήσετε νέο κωδικό."
+
+msgid ""
+"We have send a confirmation message to your new email address. Please read "
+"it and follow the instructions to confirm your new email address."
+msgstr ""
+"Σας στείλαμε ένα μήνυμα επιβεβαίωσης στη νέα διεύθυνση email σας. Παρακαλώ "
+"διαβάστε το και ακολουθήστε τις οδηγίες για να επιβεβαιώσετε την νέα "
+"διεύθυνση email."
 
 msgid "Write a review"
 msgstr "Γράψτε μια αξιολόγηση"
@@ -191,8 +786,150 @@ msgstr "Γράψτε μια αξιολόγηση"
 msgid "Yes"
 msgstr "Ναι"
 
+msgid "You can enter the PIN code later, in your account settings."
+msgstr ""
+"Μπορείτε να εισάγετε τον κωδικό PIN αργότερα, στις ρυθμίσεις του λογαριασμού "
+"σας."
+
+msgid "You can now use your email and password to"
+msgstr ""
+"Μπορείτε τώρα να χρησιμοποιήσετε την διεύθυνση email και τον κωδικό σας για"
+
+msgid "You have something to say?"
+msgstr "Έχετε κάτι να πείτε;"
+
+msgid "You may select up to three subcategories."
+msgstr "Μπορείτε να επιλέξετε μέχρι τρεις υποκατηγορίες"
+
+msgid "You must agree whith the terms of use to create an account."
+msgstr ""
+"Πρέπει να συμφωνήσετε με τους όρους χρήσης για να δημιουργήσετε λογαριασμό."
+
+msgid ""
+"You received this message because you have changed your email address at"
+msgstr "Λάβατε αυτό το μήνυμα επειδή αλλάξατε την διεύθυνση email σας στο"
+
+msgid "You received this message because you have just created an account at"
+msgstr ""
+"Λάβατε αυτό το μήνυμα επειδή μόλις έχετε δημιουργήσει ένα λογαριασμό στο"
+
+msgid ""
+"You received this message because you requested instructions to activate "
+"your account at"
+msgstr ""
+"Λάβατε αυτό το μήνυμα επειδή ζητήσατε οδηγίες για την ενεργοποίηση του "
+"λογαριασμού σας στο"
+
+msgid ""
+"You received this message because you requested instructions to reset your "
+"password at"
+msgstr ""
+"Λάβατε αυτό το μήνυμα επειδή ζητήσατε οδηγίες για τη δημιουργία νέου κωδικού "
+"στο"
+
+msgid "You will have to confirm your new email address before you can use it."
+msgstr ""
+"Θα πρέπει να επιβεβαιώσετε την νέα διεύθυνση email προτού μπορέσετε να την "
+"χρησιμοποιήσετε."
+
+msgid "Your account cannot be activated."
+msgstr "Ο λογαριασμός σας δεν μπορεί να ενεργοποιηθεί."
+
+msgid "Your account has been deactivated by the administrator."
+msgstr "Ο λαγαριασμός σας έχει απενεργοποιηθεί από τον διαχειριστή."
+
+msgid "Your account is already activated."
+msgstr "Ο λογαριασμός σας είναι ήδη ενεργοποιημένος."
+
+msgid "Your account is linked to a business. You cannot change your user type."
+msgstr ""
+"Ο λογαριασμός σας είναι συνδεδεμένος με μια επιχείρηση. Δεν μπορείτε να "
+"αλλάξετε το τύπο χρήστη σας."
+
+msgid ""
+"Your account is linked to a marketplace store. You cannot change your user "
+"type."
+msgstr ""
+"Ο λογαριασμός σας είναι συνδεδεμένος με μια επιχείρηση της Αγοράς. Δεν "
+"μπορείτε να αλλάξετε το τύπο χρήστη σας."
+
+msgid ""
+"Your account is not activated yet. Please follow the instructions we have "
+"send you to activate your account."
+msgstr ""
+"Ο λογαριασμός σας δεν έχει ενεργοποιηθεί ακόμη. Παρακαλώ ακολουθήστε τις "
+"οδηγίες που σας στείλαμε για να τον ενεργοποιήσετε."
+
+msgid "Your account was activated successfully."
+msgstr "Ο λογαριασμός σας ενεργοποιήθηκε επιτυχώς."
+
+msgid "Your account was created successfully but is not activated yet."
+msgstr ""
+"Ο λογαριασμός σας δημιουργήθηκε επιτυχώς αλλά δεν είναι ενεργοποιημένος "
+"ακόμη."
+
 msgid "Your browser does not support geolocation"
 msgstr "Ο περιηγητής σας δεν υποστηρίζει εντοπισμό γεωγραφικής θέσης"
+
+msgid "Your business address is required."
+msgstr "Η διεύθυνση της επιχείρησης σας είναι απαραίτητη."
+
+msgid "Your business details were updated successfully."
+msgstr "Οι λεπτομέρειες της επιχείρησής σας ενημερώθηκαν επιτυχώς."
+
+msgid "Your business name is required."
+msgstr "Ο διακριτικός τίτλος είναι απαραίτητος"
+
+msgid "Your comment"
+msgstr "Το σχόλιο σας"
+
+msgid "Your email address is required."
+msgstr "Η διεύθυνση email είναι απαραίτητη."
+
+msgid "Your email address will be used to activate your account."
+msgstr ""
+"Η διεύθυνση email θα χρησιμοποιηθεί για την ενεργοποίηση του λογαριασμού σας."
+
+msgid "Your name is required."
+msgstr "Το όνομά είναι απαραίτητο"
+
+msgid "Your offer was updated successfully."
+msgstr "Η προσφορά σας ενημερώθηκε επιτυχώς."
+
+msgid ""
+"Your password should be at least eight (8) characters long and include at "
+"least one (1) number."
+msgstr ""
+"Ο κωδικός πρέπει να είναι τουλάχιστον οχτώ (8) χαρακτήρες και να περιέχει "
+"τουλάχιστον ένα (1) αριθμό."
+
+msgid "Your password should be at least eight (8) characters long."
+msgstr "Ο κωδικός πρέπει να είναι τουλάχιστον οχτώ (8) χαρακτήρες."
+
+msgid "Your password should include at least one (1) number."
+msgstr "Ο κωδικός θα πρέπει να περιέχει τουλάχιστον έναν (1) αριθμό."
+
+msgid "Your password was changed successfully."
+msgstr "Ο κωδικός σας άλλαξε επιτυχώς."
+
+msgid ""
+"Your personal details were updated successfully but we failed to send you "
+"the confirmation message. Please check your new email address."
+msgstr ""
+"Ο λογαριασμός σας ενημερώθηκε επιτυχώς όμως δεν μπορέσαμε να σας στείλουμε "
+"το μήνυμα επιβεβαίωσης. Παρακαλώ ελέγξτε τη νέα διεύθυνση email σας."
+
+msgid "Your personal details were updated successfully."
+msgstr "Ο λογαριασμός σας ενημερώθηκε επιτυχώς."
+
+msgid "Your rating"
+msgstr "Η βαθμολογία σας"
+
+msgid "Your surname is required."
+msgstr "Το επώνυμο είναι απαραίτητο."
+
+msgid "Youtube"
+msgstr "Youtube"
 
 msgid "ago"
 msgstr "πριν"
@@ -214,6 +951,9 @@ msgstr "ημέρα"
 
 msgid "days"
 msgstr "ημέρες"
+
+msgid "forgot your password?"
+msgstr "ξεχάσατε τον κωδικό;"
 
 msgid "found this review helpful"
 msgstr "βρήκαν αυτή την αξιολόγηση χρήσιμη"
@@ -254,11 +994,11 @@ msgstr "προσφορά"
 msgid "offers"
 msgstr "προσφορές"
 
+msgid "or"
+msgstr "ή"
+
 msgid "people"
 msgstr "άτομα"
-
-msgid "qmark"
-msgstr ";"
 
 msgid "reviews"
 msgstr "αξιολογήσεις"
@@ -271,6 +1011,9 @@ msgstr "δευτερόλεπτα"
 
 msgid "tel"
 msgstr "τηλ"
+
+msgid "to attach an image to your email."
+msgstr "για να προσαρτήσετε μια εικόνα στην διεύθυνση email σας."
 
 msgid "until"
 msgstr "έως"
@@ -290,6 +1033,161 @@ msgstr "χρόνια"
 #~ msgid "Click here for more"
 #~ msgstr "Κάνετε κλικ για περισσότερα"
 
+#~ msgid "Prices"
+#~ msgstr "Τιμές"
+
+#~ msgid "Smart City Services"
+#~ msgstr "Υπηρεσίες Έξυπνης Πόλης"
+
+#~ msgid "Rating"
+#~ msgstr "Βαθμολογία"
+
+#~ msgid "An error occured."
+#~ msgstr "Συνέβη λάθος."
+
+#~ msgid ""
+#~ "The url may contain english characters (a-z), numbers (0-9) and the "
+#~ "underscore (_)"
+#~ msgstr ""
+#~ "Η διεύθυνση μπορεί να περιέχει αγγλικούς χαρακτήρες (a-z), αριθμούς (0-9) "
+#~ "και την υπογράμμιση (_)"
+
+#, fuzzy
+#~ msgid "LANG.An error occured."
+#~ msgstr "Συνέβη λάθος."
+
+#, fuzzy
+#~ msgid "Cancel upload"
+#~ msgstr "Ακύρωση"
+
+#~ msgid "Update Offer"
+#~ msgstr "Ενημέρωση προσφοράς"
+
+#~ msgid ""
+#~ "Your account was updated successfully but we failed to send you the "
+#~ "confirmation message. Please check your new email address."
+#~ msgstr ""
+#~ "Ο λογαριασμός σας ενημερώθηκε επιτυχώς όμως δεν μπορέσαμε να σας "
+#~ "στείλουμε το μήνυμα επιβεβαίωσης. Παρακαλώ ελέγξτε τη νέα διεύθυνση email "
+#~ "σας."
+
+#~ msgid "Your account was updated successfully."
+#~ msgstr "Ο λογαριασμός σας ενημερώθηκε επιτυχώς."
+
+#~ msgid "First select a category"
+#~ msgstr "Πρώτα επιλέξτε κατηγορία"
+
+#~ msgid "Keep typing..."
+#~ msgstr "Συνεχίστε την πληκτρολόγηση..."
+
+#~ msgid "Looking for"
+#~ msgstr "Αναζήτηση για"
+
+#~ msgid "The email address \"%s\" is not registered."
+#~ msgstr "Η διεύθυνση email \"%s\" δεν είναι εγγεγραμμένη"
+
+#~ msgid "The email address \"%s\" is not valid."
+#~ msgstr "Η διεύθυνση email \"%s\" δεν είναι έγκυρη."
+
+#~ msgid "The email address is not registered."
+#~ msgstr "Η διεύθυνση email δεν είναι εγγεγραμμένη"
+
+#~ msgid "qmark"
+#~ msgstr ";"
+
+#~ msgid ""
+#~ "Go to <a class=\"blue\" href=\"http://www.gravatar.com\">gravatar.com</a> "
+#~ "to attach an image to your email."
+#~ msgstr ""
+#~ "Πηγαίνετε στο <a class=\"blue\" href=\"http://www.gravatar.com\">gravatar."
+#~ "com</a> για να προσαρτήσετε μια εικόνα στην διεύθυνση email σας."
+
+#~ msgid "Store name"
+#~ msgstr "Όνομα επιχείρησης"
+
+#~ msgid "The email address \"%s\" is already registered."
+#~ msgstr "Η διεύθυνση email \"%s\" είναι ήδη εγγεγραμμένη"
+
+#~ msgid ""
+#~ "Since you have changed your email address you need to confirm it. We have "
+#~ "send a confirmation message to your new email address. Please read it and "
+#~ "follow the instructions to confirm your new email address."
+#~ msgstr ""
+#~ "Εφόσον αλλάξατε την διεύθυνση email σας θα πρέπει να την επιβεβαιώσετε. "
+#~ "Σας στείλαμε ένα μήνυμα επιβεβαίωσης στην νέα διεύθυνση email σας. "
+#~ "Παρακαλώ διαβάστε το και ακολουθήστε τις οδηγίες για να επιβεβαιώσετε την "
+#~ "νέα διεύθυνση email σας."
+
+#~ msgid ""
+#~ "Your email address is unconfirmed. Until you confirm it, we will still "
+#~ "use your old address to contact you. Click this link to request the "
+#~ "confirmation email again."
+#~ msgstr ""
+#~ "Η διεύθυνση email σας δεν είναι επιβεβεβαιωμένη. Μέχρι να την "
+#~ "επιβεβαιώσετε, θα συνεχίσουμε να χρησιμοποιούμε την παλιά σας διεύθυνση. "
+#~ "Κάνετε κλικ σε αυτό τον σύνδεσμο για να σας στείλουμε το μήνυμα "
+#~ "επιβεβαίωσης ξανά."
+
+#~ msgid "If you change your email you will have to reactivate your account."
+#~ msgstr ""
+#~ "Αν αλλάξετε την διεύθυνση email θα πρέπει να ενεργοποιήσετε τον "
+#~ "λογαριασμό σας ξανά."
+
+#~ msgid ""
+#~ "Please select your user type. Local businesses should acquire a PIN code "
+#~ "from their professional association to access their business information. "
+#~ "You can enter the PIN code later, in your account settings."
+#~ msgstr ""
+#~ "Παρακαλώ επιλέξτε τον τύπο χρήστη. Οι τοπικές επιχειρήσεις θα πρέπει να "
+#~ "λάβουν έναν κωδικό PIN από την Ένωση Επαγγελματιών Εμπόρων Δήμου Θέρμης "
+#~ "για να έχουν πρόσβαση στις πληροφορίες τους. Μπορείτε να εισάγετε τον "
+#~ "κωδικό PIN αργότερα, στις ρυθμίσεις του λογαριασμού σας."
+
+#~ msgid "Activate"
+#~ msgstr "Ενεργοποίηση"
+
+#~ msgid "An error occured. Please try again later."
+#~ msgstr "Συνέβη λάθος. Παρακαλώ δοκιμάστε αργότερα."
+
+#~ msgid "An error occured. No email address provided."
+#~ msgstr "Συνέβη λάθος. Η διεύθυνση email είναι απαραίτητη."
+
+#~ msgid "User register"
+#~ msgstr "Εγγραφή χρήστη"
+
+#~ msgid "Confirm your registration"
+#~ msgstr "Επιβεβαιώστε την εγγραφή σας"
+
+#~ msgid "PIN number"
+#~ msgstr "Κωδικός PIN"
+
+#, fuzzy
+#~ msgid "Errorinput_password"
+#~ msgstr "ξεχάσατε τον κωδικό"
+
+#, fuzzy
+#~ msgid "Erroruseremail"
+#~ msgstr "Λάθη"
+
+#, fuzzy
+#~ msgid "Forgotpassword"
+#~ msgstr "ξεχάσατε τον κωδικό"
+
+#, fuzzy
+#~ msgid "Logintoyouraccount"
+#~ msgstr "Ανάκτηση λογαριασμού"
+
+#, fuzzy
+#~ msgid "Rememberme"
+#~ msgstr "Να με θυμάσαι"
+
+#~ msgid "Logout"
+#~ msgstr "Αποσύνδεση"
+
+#, fuzzy
+#~ msgid "QMARK"
+#~ msgstr ";"
+
 #~ msgid "Compare prices"
 #~ msgstr "Συγκρίνετε τιμές"
 
@@ -308,9 +1206,6 @@ msgstr "χρόνια"
 
 #~ msgid "Municipality of Thermi"
 #~ msgstr "Δήμος Θέρμης"
-
-#~ msgid "Smart City Services"
-#~ msgstr "Υπηρεσίες Έξυπνης Πόλης"
 
 #~ msgid "Supermarket Prices"
 #~ msgstr "Τιμές Supermarkets"

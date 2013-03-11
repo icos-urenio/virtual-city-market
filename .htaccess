@@ -1,5 +1,6 @@
 # BEGIN MARKET
 <IfModule mod_rewrite.c>
+SetEnv HTTP_MOD_REWRITE On
 RewriteEngine On
 RewriteBase /virtual-city-market/
 RewriteRule ^index\.php$ - [L]

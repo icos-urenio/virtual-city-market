@@ -77,8 +77,6 @@
 			}
 		}
 		else if (DEBUG && $log) {
-			$dbg =& MARKET_Base::getRef('Debug');
-			$dbg->add('sql', $sql);
 			$dbg->add('info', 'MySQL Error: ' . sqlError());
 		}
 		return false;

@@ -64,7 +64,7 @@
 		
 		$SELECT = "store_data.*, directory.path";
 		$FROM = "store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml";
-		$WHERE = "store_data.id=store_data_ps.id AND store_data.directory_id=directory.id AND store_data.directory_id=directory_ml.id AND store_data_ps.publish='1' AND (store_data.lang='' OR store_data.lang='" . MARKET_LANG . "') AND directory_ml.lang='" . MARKET_LANG . "' AND type='coupon' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY created DESC";
+		$WHERE = "store_data.id=store_data_ps.id AND store_data.directory_id=directory.id AND store_data.directory_id=directory_ml.id AND store_data_ps.publish='1' AND (store_data.lang='' OR store_data.lang='" . MARKET_LANG . "') AND directory_ml.lang='" . MARKET_LANG . "' AND type='coupon' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "') ORDER BY created DESC";
 		
 		if ($_GET['q']) {
 			$this->assignGlobal('GET.q', htmlspecialchars($_GET['q']));
@@ -86,13 +86,13 @@
 			$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE";
 		}
 		
-		$this->assignNavigationValues($sql, 'default', 0, 16, 48, true);
+		$this->assignNavigationValues($sql, 'default', 0, 9, 30, true);
 		
 		if (sqlQuery($sql, $res)) {
 			$this->disableTemplate('no-coupons');
 			while ($row = sqlFetchAssoc($res)) {
 				// What else is available?
-				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['directory_id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND type <> 'coupon' AND name='" . sqlEscape($row['name']) . "' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY ord";
+				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['directory_id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND type <> 'coupon' AND name='" . sqlEscape($row['name']) . "' ORDER BY ord";
 				if (sqlQuery($sql, $res1)) {
 					while ($row1 = sqlFetchAssoc($res1)) {
 						if ($row[$row1['type']]) {
@@ -113,6 +113,8 @@
 				}
 				$image = (is_array($row['image'])) ? $row['image'][0] : $row['image'];
 				$row['image'] = MARKET_Filter::createThumbnail($image, '240', true);
+				
+				if (!$row['path']) $row['path'] = $row['directory_id'];
 				
 				$this->assignLocal('coupon', 'ROW', $row);
 				$this->lightParseTemplate('COUPON', 'coupon');
@@ -169,11 +171,13 @@
 					<div class="coupons row">
 						<template name="coupon">
 							<a href="{MARKET.LWebDir}/offers/{ROW.path}/{ROW.name}.html">
-							<div class="coupon span3" style="margin-top: 20px; margin-bottom: 40px;">
+							<div class="coupon span3" style="margin-top: 20px;">
 								{ROW.image}
 								<div>
 									<h3>{ROW.title}</h3>
-									<p class="price"><span>Τιμή:</span> {ROW.price}</p>
+									<if expr="'{ROW.price}'">
+										<p class="price"><span>{LANG.Price}:</span> {ROW.price}</p>
+									</if>
 								</div>
 								<p class="discount"><span>Έκπτωση:</span> {ROW.discount}%</p>
 							</div>

@@ -22,6 +22,14 @@
 	define('MARKET_INCLUDE_DIR', MARKET_ROOT_DIR . '/php');
 	define('MARKET_TEMPLATE_DIR', MARKET_ROOT_DIR . '/templates');
 	
+	// Mail
+	define('SUPPORT_EMAIL', 'support@localhost'); // Used in email templates
+	define('MARKET_SMTP_HOST', 'localhost'); // Outgoing server
+	define('MARKET_SMTP_FROM', 'noreply@localhost'); // Return path
+	define('MARKET_SMTP_FROM_NAME', 'Virtual city market');
+	//define('MARKET_SMTP_USER', '');
+	//define('MARKET_SMTP_PASS', '');
+	
 	// Google Maps
 	define('GMAP_API_KEY', ''); // Enter your api key. Get one from https://code.google.com/apis/console
 	// Change these with your own map center
@@ -29,6 +37,10 @@
 	define('GMAP_CENTER_LNG', '23.04345');
 	define('GMAP_CENTER_ZOOM', '13');
 
+	// reCAPTCHA (Get your keys from https://www.google.com/recaptcha/admin/create)
+	define('RECAPTCHA_PRIVATE_KEY', ''); // Enter your reCAPTCHA private key. 
+	define('RECAPTCHA_PUBLIC_KEY', '');  // Enter your reCAPTCHA public key.
+	
 	// Settings with defaults
 	// define('MARKET_TIMEZONE', 'Europe/Athens');
 	// define('MARKET_SESSION_NAME', 'market_sid');

@@ -108,12 +108,12 @@
 				}
 				
 				// Rating
-				$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data WHERE name='index' AND type='comment' AND directory_id='" . $row['id'] . "'";
+				$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data WHERE name='index' AND type='comment' AND rating<>'' AND directory_id='" . $row['id'] . "'";
 				if (sqlQuery($sql, $res1)) {
 					$row1 = sqlFetchAssoc($res1);
 					if ($row1['count']) {
 						$row['rating'] = '<div style="margin-top: 20px; text-align: center;">';
-						$row['rating'] .= '<div id="' . $row1['rating'] . '_' . $row['id'] . '" class="jrating" style="margin: 0 auto 10px auto;"></div>';
+						$row['rating'] .= '<div data-average="' . $row1['rating'] . '" data-id="' . $row['id'] . '" class="jrating" style="margin: 0 auto 10px auto;"></div>';
 						$row['rating'] .= '(' . $row1['count'] . ' {LANG.reviews})';
 						$row['rating'] .= '</div>';
 					}
@@ -164,8 +164,9 @@
 		<script>
 			jQuery(document).ready(function($) {
 				$(".jrating").jRating({
-					step: true,
 					length: 5,
+					rateMax: 5,
+					decimalLength: 1,
 					isDisabled: true,
 					bigStarsPath: '{MARKET.WebDir}/redist/jrating/icons/stars.png'
 				});
@@ -211,9 +212,9 @@
 						<ul class="listing unstyled" style="margin-top: 10px;">
 							<template name="result">
 								<li>
-									{ROW.image}
+									<a href="{MARKET.LWebDir}/reviews/{ROW.path}/show.html">{ROW.image}</a>
 									<div class="pull-left span5">
-										<h2 title="{ROW.id}">{ROW.business_title}</h2>
+										<h2 title="{ROW.id}"><a href="{MARKET.LWebDir}/reviews/{ROW.path}/show.html">{ROW.business_title}</a></h2>
 										<h3 style="line-height: 18px;">{ROW.byline}</h3>
 										<address>
 											{ROW.address}<br />

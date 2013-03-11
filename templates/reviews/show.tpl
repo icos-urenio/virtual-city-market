@@ -7,67 +7,10 @@
 		
 		$req =& $this->getRef('Request');
 		
-		if ($req->params[2]) {
+		if ($req->params[2] == 'show') {
 			
-			$SELECT = "*, IF (business_name = '', name, business_name) AS title";
-			$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps";
-			$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory_ml.lang='" . MARKET_LANG . "' AND directory_ps.publish='1'";
+			if ($row = getStoreDataByName($req->params[1])) {
 			
-			$WHERE .= " AND directory.path='" . sqlEscape($req->params[1]) . "'";
-			
-			$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE";
-			if (sqlQuery($sql, $res)) {
-				$row = sqlFetchAssoc($res);
-				$row['address'] = ($row['address']) ? $row['address'] . ', ' . $row['city'] : $row['city'];
-				// Main page
-				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='index' AND type<>'page' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY ord";
-				if (sqlQuery($sql, $res1)) {
-					while ($row1 = sqlFetchAssoc($res1)) {
-						if ($row[$row1['type']]) {
-							if (is_array($row[$row1['type']])) {
-								$row[$row1['type']][] = $row1['data'];
-							}
-							else {
-								$foo = $row[$row1['type']];
-								$row[$row1['type']] = array();
-								$row[$row1['type']][] = $foo;
-								$row[$row1['type']][] = $row1['data'];
-							}
-						}
-						else {
-							switch ($row1['type']) {
-								case 'page':
-									$row['text-id'] = $row1['id'];
-									$row['text-title'] = $row1['title'];
-									$row['text'] = $row1['data'];
-								break;
-								case 'comment':
-									$row['comments'][] = array();
-									$index = count($row['comments']) - 1;
-									$row['comments'][$index]['comment-id'] = $row1['id'];
-									$row['comments'][$index]['creator-id'] = $row1['creator'];
-									$row['comments'][$index]['created'] = $row1['created'];
-									$row['comments'][$index]['rating'] = $row1['rating'];
-									$row['comments'][$index]['votes'] = $row1['votes'];
-									$row['comments'][$index]['comment'] = $row1['data'];
-								break;
-								
-								default:
-									$row[$row1['type'] . '-id'] = $row1['id'];
-									$row[$row1['type']] = $row1['data'];
-							}
-						}
-					}
-				}
-				
-				// Image
-				if (is_array($row['image'])) {
-					$row['image'] = MARKET_Filter::createThumbnail($row['image'][0], '100', true, 'class="pull-left" style="margin-right: 10px;"');
-				}
-				else if ($row['image']) {
-					$row['image'] = MARKET_Filter::createThumbnail($row['image'], '100', true, 'class="pull-left" style="margin-right: 10px;"');
-				}
-				
 				// Comments
 				if (is_array($row['comments'])) {
 					
@@ -77,14 +20,14 @@
 							$comment['gravatar'] = '<img src="http://www.gravatar.com/avatar/' . $user['gravatar'] . '.jpg?d=mm&s=28" width="28" height="28" alt="' . $comment['creator'] . '" />';
 						}
 						$comment['created'] = getPeriodtoDate($comment['created']);
-						$comment['comment'] = '<a name="comment' . $comment['comment-id'] . '"></a>' . htmlspecialchars($comment['comment']);
+						$comment['comment'] = htmlspecialchars($comment['comment']);
 						$votes = explode("|", $comment['votes']);
 						if ($total = $votes[0] + $votes[1]) {
 							$comment['votes'] = $votes[0] . ' {LANG.of} ' . $total . ' {LANG.people} {LANG.found this review helpful}.';
-							$comment['rate'] = '{LANG.Did you}{LANG.qmark}';
+							$comment['rate'] = '{LANG.Did you?}';
 						}
 						else {
-							$comment['rate'] = '{LANG.Did you found this review helpful}{LANG.qmark}';
+							$comment['rate'] = '{LANG.Did you found this review helpful?}';
 						}
 						$this->assignLocal('comments', 'COMMENT', $comment);
 						$this->parseTemplate('COMMENTS', 'comments');
@@ -95,16 +38,16 @@
 					$this->vars['global']['COMMENTS'] = substr($this->vars['global']['COMMENTS'], 0, -(strlen('<li class="divider"></li>')));
 					
 					// Overall rating
-					$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data WHERE name='index' AND type='comment' AND directory_id='" . $row['id'] . "'";
+					$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data WHERE name='index' AND type='comment' AND rating <> '' AND directory_id='" . $row['id'] . "'";
 					if (sqlQuery($sql, $res1)) {
 						$row1 = sqlFetchAssoc($res1);
 						if ($row1['count']) {
 							$row['rating'] = '<div class="well white">';
 							$row['rating'] .= '<div class="pull-left" style="margin: 0; text-align: center;">';
-							$row['rating'] .= '<div id="' . $row1['rating'] . '_' . $row['id'] . '" class="jrating" style="margin: 0 auto 10px auto;"></div>';
+							$row['rating'] .= '<div data-average="' . $row1['rating'] . '" data-id="' . $row['id'] . '" class="jrating" style="margin: 0 auto 10px auto;"></div>';
 							$row['rating'] .= '(' . $row1['count'] . ' {LANG.reviews})';
 							$row['rating'] .= '</div>';
-							$row['rating'] .= '<div class="pull-right" style="margin: 10px 0;"><a class="btn" href=""><i class="icon-pencil"></i> {LANG.Write a review}</a></div>';
+							$row['rating'] .= '<div class="pull-right" style="margin: 10px 0;"><a class="btn" href="review.html"><i class="icon-pencil"></i> {LANG.Write a review}</a></div>';
 							$row['rating'] .= '<div class="clearfix"></div>';
 							$row['rating'] .= '</div>';
 						}
@@ -148,8 +91,9 @@
 		<script>
 			jQuery(document).ready(function($) {
 				$(".jrating").jRating({
-					step: true,
 					length: 5,
+					rateMax: 5,
+					decimalLength: 1,
 					isDisabled: true,
 					bigStarsPath: '{MARKET.WebDir}/redist/jrating/icons/stars.png'
 				});
@@ -270,16 +214,19 @@
 						<div class="clearfix"></div>
 					</div>
 					
+					<h2 style="margin-bottom: 8px; margin-top: 20px;">{LANG.User reviews}</h2>
+					
+					{STORE.rating}
+					
 					<template name="comments_cnt">
-						<h2 style="margin-bottom: 8px; margin-top: 20px;">{LANG.User reviews}</h2>
-						{STORE.rating}
 						<div class="span6">
 							<ul class="comments unstyled">
 								<template name="comments" divider="<li class='divider'></li>">
 									<li>
+										<a name="comment{COMMENT.comment-id}"></a>
 										<div class="pull-left" style="margin: 6px 5px 5px 0;">{COMMENT.gravatar}</div>
 										<small>{COMMENT.creator}<br><span class="muted">{COMMENT.created}</span></small>
-										<div id="{COMMENT.rating}_{COMMENT.comment-id}" class="jrating"></div>
+										<div data-average="{COMMENT.rating}" data-id="{COMMENT.comment-id}" class="jrating"></div>
 										<p>{nl2br:COMMENT.comment}</p>
 										<small>{COMMENT.votes}</small>
 										<small>{COMMENT.rate} &nbsp; <a class="btn btn-mini" href="#"><i class="icon-thumbs-up"></i> {LANG.Yes}</a> <a class="btn btn-mini" href="#"><i class="icon-thumbs-down"></i> {LANG.No}</a></small>

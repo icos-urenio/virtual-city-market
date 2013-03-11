@@ -313,8 +313,28 @@
 			}
 			return true;
 		}
+		
+		
+		function contentType($content_type, $filename = '', $content_size = 0)
+		{
+			header('Content-Type: ' . $content_type);
+			if ($content_size) header('Content-Length: ' . $content_size);
+			if ($filename) {
+				if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE')) {
+					header('Content-Disposition: inline; filename="' . $filename . '"');
+					header('Expires: 0');
+					header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+					header('Pragma: public');
+				}
+				else {
+					header('Content-Disposition: attachment; filename="' . $filename . '"');
+					header('Expires: 0');
+					header('Pragma: no-cache');
+				}
+			}
+		}
+		
+		
 	}
 	
-	
-
 ?>

@@ -139,7 +139,7 @@
 		
 		private function _defaultThumbnail($image = '', $width = '', $height = '', $complete_tag = false, $alt = 'alt=""')
 		{
-			if (!$image) $image = 'lib/default_image.png';
+			if (!$image) $image = 'img/default_image.png';
 			if (!$width) $width = '120';
 			if (!$height) $height = '120';
 			
@@ -150,7 +150,7 @@
 			}
 			*/
 			if ($complete_tag) {
-				return '<img src="' . MARKET_WEB_DIR . '/' . $image . '" width="' . $width . '" height="' . $height . '" ' . $alt . ' />';
+				return '<div style="background: url(' . MARKET_WEB_DIR . '/' . $image . ') 50% 50% no-repeat; position: relative; background-size:' . $width . 'px ' . $height . 'px; width: ' . $width . 'px; height:' . $height . 'px; overflow: hidden; margin: 0; padding: 0;" ' . $alt . '></div>';
 			}
 			else {
 				return MARKET_WEB_DIR . '/' . $image;
@@ -223,15 +223,47 @@
 		}
 		
 		
-		function noSpamAdvanced($email) {
+		function noSpam($email) {
 			$str = '';
 			if (preg_match_all('@(.{1,2})@', $email, $matches)) {
 				$foo = "'" . implode("'+'", $matches[1]) . "'";
 			}
 			$str =  "<script type=\"text/javascript\">document.write(unescape('%3C')+'a h'+'ref='+'\"'+'ma'+'il'+'to:'+" . $foo . "+'\"'+unescape('%3E')+" . $foo . "+''+unescape('%3C')+'/a'+unescape('%3E'));</script>";
-//			$str .= '<noscript><a href="{MARKET.WebDir}/nospam.html?a=' . urlencode($foo) . '"><img src="{MARKET.WebDir}/nospam.html?a=' . urlencode($foo) . '&b=.png" border="0" alt="{LANG.ClickToSendEmail}" title="{LANG.ClickToSendEmail}" /></a></noscript>';
 			$str .= '<noscript><img src="{MARKET.WebDir}/nospam.html?a=' . urlencode($foo) . '&b=.png" border="0" align="absmiddle" /></noscript>';
 			return $str;
+		}
+		
+		
+		function getNoSpamImage($email) {
+			$email = preg_replace('@[\'\+]@', '', $email);
+			if (preg_match('/^([a-zA-Z0-9_\-])+(\.([a-zA-Z0-9_\-])+)*@((\[(((([0-1])?([0-9])?[0-9])|(2[0-4][0-9])|(2[0-5][0-5])))\.(((([0-1])?([0-9])?[0-9])|(2[0-4][0-9])|(2[0-5][0-5])))\.(((([0-1])?([0-9])?[0-9])|(2[0-4][0-9])|(2[0-5][0-5])))\.(((([0-1])?([0-9])?[0-9])|(2[0-4][0-9])|(2[0-5][0-5]))\]))|((([a-zA-Z0-9])+(([\-])+([a-zA-Z0-9])+)*\.)+([a-zA-Z])+(([\-])+([a-zA-Z0-9])+)*))$/', $email)) {
+				if ($type == '.png') {
+					$this->contentType('image/png');
+					$cache = MARKET_ROOT_DIR . '/cache/emails/' . $email . '.png';
+					if (@is_file($cache) && @is_readable($cache)) {
+						readfile($cache);
+						exit;
+					}
+					else {
+						$width = 6 * strlen($email);
+						$height = 15;
+						
+						$im = imageCreate($width, $height);
+							
+						$color[1] = imagecolorallocate($im,  51,  51,  51);
+						$color[2] = imagecolorallocate($im,  0,  0,  0);
+							
+						imagecolortransparent($im, $color[1]);
+						
+						@imagestring($im, 2, 0, 0, $email, $color[2]);
+						
+						$this->makeDir(dirname($cache));
+						imagePng($im, $cache);
+						readfile($cache);
+					}
+				}
+			}
+			exit;
 		}
 		
 		

@@ -27,7 +27,7 @@
 				// Nothing else is needed
 			}
 			// Not only do we have to make sure that the user is logged in
-			else if (!$_SESSION['User']['is_logedin']) {
+			else if (!$_SESSION['User']['is_loggedin']) {
 				$req =& $this->getRef('Request');
 				$req->redirectTo(MARKET_WEB_DIR . '/login.html?redirect=' . urlencode($req->request));
 			}
@@ -48,7 +48,7 @@
 		{
 			if (sqlQuery($sql, $res, EXT_DEBUG)) {
 				$_SESSION['User'] = sqlFetchAssoc($res);
-				$_SESSION['User']['is_logedin'] = true;
+				$_SESSION['User']['is_loggedin'] = true;
 				return true;
 			}
 			else {

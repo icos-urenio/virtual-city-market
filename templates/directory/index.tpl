@@ -128,13 +128,12 @@
 		));
 		
 		function fix_toolbar($str) {
-			$lng =& MARKET_Base::getRef('Lang');
 			$str = preg_replace('@<a class="@', '<a class="btn ', $str);
 			$str = preg_replace('@<a href="@', '<a class="btn" href="', $str);
-			$str = preg_replace('@<i>' . $lng->strs['First'] . '</i>@', '<i class="icon icon-fast-backward"></i>', $str);
-			$str = preg_replace('@<i>' . $lng->strs['Last'] . '</i>@', '<i class="icon icon-fast-forward"></i>', $str);
-			$str = preg_replace('@<i>' . $lng->strs['Previous'] . '</i>@', '<i class="icon icon-backward"></i>', $str);
-			$str = preg_replace('@<i>' . $lng->strs['Next'] . '</i>@', '<i class="icon icon-forward"></i>', $str);
+			$str = preg_replace('@><i>' . __('First') . '</i>@', ' title="' . __('First') . '" rel="tooltip"><i class="icon-fast-backward"></i>', $str);
+			$str = preg_replace('@><i>' . __('Last') . '</i>@', ' title="' . __('Last') . '" rel="tooltip"><i class="icon-fast-forward"></i>', $str);
+			$str = preg_replace('@><i>' . __('Previous') . '</i>@', ' title="' . __('Previous') . '" rel="tooltip"><i class="icon-backward"></i>', $str);
+			$str = preg_replace('@><i>' . __('Next') . '</i>@', ' title="' . __('Next') . '" rel="tooltip"><i class="icon-forward"></i>', $str);
 			return '<div class="btn-group">' . $str . '</div>';
 		}
 		
@@ -258,7 +257,7 @@
 							<template name="result">
 								<li>
 									<div class="pull-left span5">
-										<h2 title="{ROW.id}">{ROW.title}</h2>
+										<h2 title="{ROW.id}"><a href="{MARKET.LWebDir}/marketplace/show.html?id={ROW.id}">{ROW.title}</a></h2>
 										<h3 style="line-height: 18px;">{ROW.byline}</h3>
 										<address>
 											{ROW.address}<br />

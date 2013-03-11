@@ -22,6 +22,12 @@
 		);
 	}
 	
+	// Error Reporting
+	if (defined('DEBUG') && DEBUG) {
+		error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
+		ini_set('display_errors', '1');
+	}
+	
 	require(MARKET_INCLUDE_DIR . '/MARKET.class.php');
 	
 	$market = new MARKET();

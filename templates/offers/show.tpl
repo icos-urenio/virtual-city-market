@@ -9,15 +9,16 @@
 		
 		$SELECT = "*, IF (business_name = '', name, business_name) AS business_title";
 		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps";
-		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory_ml.lang='" . MARKET_LANG . "' AND directory_ps.publish='1' AND directory.path='" . sqlEscape($req->params[1]) . "'";
+		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory_ml.lang='" . MARKET_LANG . "' AND directory_ps.publish='1' AND (directory.path='" . sqlEscape($req->params[1]) . "' OR directory.id='" . sqlEscape($req->params[1]) . "')";
 		
 		$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE";
 		if (sqlQuery($sql, $res)) {
 			$row = sqlFetchAssoc($res);
+			if (!$row['path']) $row['path'] = $row['id'];
 			$row['address'] = ($row['address']) ? $row['address'] . ', ' . $row['city'] : $row['city'];
 			
 			// Offer
-			$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='" . sqlEscape($req->params[2]) . "' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY ord";
+			$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='" . sqlEscape($req->params[2]) . "' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "') ORDER BY ord";
 			if (sqlQuery($sql, $res1)) {
 				while ($row1 = sqlFetchAssoc($res1)) {
 					if ($row[$row1['type']]) {
@@ -90,12 +91,12 @@
 			}
 			
 			// More Offers
-			$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND name<>'" . sqlEscape($row['name']) . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND type='coupon' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY ord";
+			$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND name<>'" . sqlEscape($row['name']) . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND type='coupon' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "') ORDER BY ord";
 			if (sqlQuery($sql, $res1)) {
 				while ($row1 = sqlFetchAssoc($res1)) {
 					$row1['path'] = $req->params[1];
 					// What else is available?
-					$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND type <> 'coupon' AND name='" . sqlEscape($row1['name']) . "' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY ord";
+					$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND type <> 'coupon' AND name='" . sqlEscape($row1['name']) . "' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "') ORDER BY ord";
 					if (sqlQuery($sql, $res2)) {
 						while ($row2 = sqlFetchAssoc($res2)) {
 							if ($row1[$row2['type']]) {
@@ -117,6 +118,8 @@
 					
 					$image = (is_array($row1['image'])) ? $row1['image'][0] : $row1['image'];
 					$row1['image'] = MARKET_Filter::createThumbnail($image, '240', true);
+					
+					if (!$row1['path']) $row1['path'] = $row1['directory_id'];
 					
 					$this->assignLocal('coupon', 'ROW', $row1);
 					$this->lightParseTemplate('COUPON', 'coupon');
@@ -141,10 +144,6 @@
 		<link href="{MARKET.WebDir}/redist/flexslider/flexslider.css" rel="stylesheet" type="text/css" />
 	</template>
 	
-	<template name="jrating_css" assign="PAGE.Style" disabled="true">
-		<link href="{MARKET.WebDir}/redist/jrating/jRating.jquery.css" rel="stylesheet" type="text/css" />
-	</template>
-	
 	<template name="flexslider_js" assign="PAGE.Javascript" disabled="true">
 		<script type="text/javascript" src="{MARKET.WebDir}/redist/flexslider/jquery.flexslider-min.js"></script>
 		<script>
@@ -152,6 +151,10 @@
 				$('.flexslider').flexslider();
 			});
 		</script>
+	</template>
+	
+	<template name="jrating_css" assign="PAGE.Style" disabled="true">
+		<link href="{MARKET.WebDir}/redist/jrating/jRating.jquery.css" rel="stylesheet" type="text/css" />
 	</template>
 	
 	<template name="jrating_js" assign="PAGE.Javascript" disabled="true">
@@ -163,16 +166,6 @@
 					length: 5,
 					isDisabled: true,
 					bigStarsPath: '{MARKET.WebDir}/redist/jrating/icons/stars.png'
-				});
-			});
-		</script>
-	</template>
-	
-	<template name="snippets" assign="PAGE.Javascript" disabled="true">
-		<script>
-			jQuery(window).on('mercury:ready', function() {
-				Mercury.Snippet.load({
-					snippet_1: {name: 'example', options: {'options[favorite_beer]': "Bells Hopslam", 'options[first_name]': "Jeremy"}}
 				});
 			});
 		</script>
@@ -258,7 +251,7 @@
 		<div class="row">
 			<div class="span12">
 				<header id="archive-header">
-					<h1><a href="{MARKET.LWebDir}/marketplace/{MARKET.Params.1}">{PAGE.Title}</a></h1>
+					<h1><a href="{MARKET.LWebDir}/marketplace/show.html?id={ROW.directory_id}">{PAGE.Title}</a></h1>
 				</header>
 			</div>
 		</div>
@@ -304,7 +297,7 @@
 				</div>
 				
 				<div class="well white">
-					<h2><a href="{MARKET.LWebDir}/marketplace/{ROW.path}/index.html">{ROW.business_name}</a></h2>
+					<h2><a href="{MARKET.LWebDir}/marketplace/show.html?id={ROW.directory_id}">{ROW.business_name}</a></h2>
 					<h3 style="line-height: 18px;">{ROW.byline}</h3>
 					<address>
 						{ROW.address}<br />
@@ -313,7 +306,7 @@
 					
 					<div id="map-wrap"><div id="map"></div></div>
 					
-					<p class="pull-right"><a class="btn" href="{MARKET.LWebDir}/marketplace/{ROW.path}/index.html">{LANG.Go to the store} &raquo;</a></p>
+					<p class="pull-right"><a class="btn" href="{MARKET.LWebDir}/marketplace/show.html?id={ROW.directory_id}">{LANG.Go to the store} &raquo;</a></p>
 					
 					<div class="clearfix"></div>
 				</div>

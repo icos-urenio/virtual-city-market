@@ -8,35 +8,26 @@
 		require($config);
 	}
 	
-	// Load default.pot
-	$default = array();
-	$lines = file(MARKET_ROOT_DIR . '/lang/default.pot');
-	foreach ($lines as $line) {
-		if (preg_match('@msgid \"(.+)\"@', $line, $matches)) {
-			$default[] = $matches[1];
-		}
-	}
+	/* ----- STEP 1 ----- */
 	
-	$files = array_merge(getFiles(MARKET_ROOT_DIR . '/templates'), getFiles(MARKET_ROOT_DIR . '/js'));
-	
+	// Find all application strings and create the application.pot
 	$strings = array();
+	$files = array_merge(getFiles(MARKET_ROOT_DIR . '/templates'), getFiles(MARKET_ROOT_DIR . '/js'));
 	foreach ($files as $file) {
-		if (preg_match_all('@\{LANG.([^\}]+)\}@', implode("\n", file($file)), $matches)) {
+		$contents = implode('', file($file));
+		// Templates and PHP
+		if (preg_match_all('@\{LANG.([^\}]+)\}@', $contents, $matches)) {
 			foreach ($matches[0] as $key => $val) {
-				if (!in_array($matches[1][$key], $default)) {
-					$strings[$matches[1][$key]] = $matches[1][$key];
-				}
+				$strings[$matches[1][$key]] = $matches[1][$key];
 			}
 		}
-		if (preg_match_all('@\_\(\'([^\']+)\'\)@', implode("\n", file($file)), $matches)) {
+		// Javascript and PHP
+		if (preg_match_all('@\_\(\'([^\']+)\'\)@', $contents, $matches)) {
 			foreach ($matches[0] as $key => $val) {
-				if (!in_array($matches[1][$key], $default)) {
-					$strings[$matches[1][$key]] = $matches[1][$key];
-				}
+				$strings[$matches[1][$key]] = $matches[1][$key];
 			}
 		}
 	}
-	
 	asort($strings);
 	
 	$str = '';
@@ -50,6 +41,10 @@
 		fclose($fp);
 	}
 	
+	/* ----- STEP 2 ----- */
+	
+	// Read the application.po and create the Strings.inc.php and Strings.inc.js files
+	// Do it for each directory found in lang directory
 	$exclude_array = explode('|', '.|..');
 	$dir = MARKET_ROOT_DIR . '/lang/';
 	if ($dirh = opendir($dir)) {
@@ -60,39 +55,17 @@
 					$php .= '// DO NOT EDIT' . "\n";
 					$js = '// DO NOT EDIT' . "\n";
 					$js .= 'lang = new Array()' . "\n";
-					$fname = $dir . $file . '/default.po';
-					if (@is_file($fname) && @is_readable($fname)) {
-						$lines = file($fname);
-						$counti = count($lines);
-						for ($i = 0; $i < $counti; $i++) {
-							if (preg_match('@^msgid "(.+)"$@', $lines[$i], $matches)) {
-								$key = $matches[1];
-								$i++;
-								$val = '';
-								if (preg_match('@^msgstr "(.+)"$@', $lines[$i], $matches)) {
-									$val = $matches[1];
-								}
-								if (!$val) $val = $key;
-								$php .= '$this->strs[\'' . $key . '\'] = \'' . $val . '\';' . "\n";
-								$js .= 'lang[\'' . $key . '\'] = \'' . $val . '\';' . "\n";
-							}
-						}
-					}
 					$fname = $dir . $file . '/application.po';
 					if (@is_file($fname) && @is_readable($fname)) {
-						$lines = file($fname);
-						$counti = count($lines);
-						for ($i = 0; $i < $counti; $i++) {
-							if (preg_match('@^msgid "(.+)"$@', $lines[$i], $matches)) {
-								$key = $matches[1];
-								$i++;
-								$val = '';
-								if (preg_match('@^msgstr "(.+)"$@', $lines[$i], $matches)) {
-									$val = $matches[1];
+						$contents = implode('', file($fname));
+						if ($counti = preg_match_all('@msgid\s+((?:".*(?<!\\\\)"\s*)+)\s+msgstr\s+((?:".*(?<!\\\\)"\s*)+)@', $contents, $matches)) {
+							for ($i = 0; $i < $counti; $i++) {
+								list ($key, $val) = sanitize($matches[1][$i], $matches[2][$i]);
+								if ($key) { // Skip meta
+									if (!$val) $val = $key; // Default string
+									$php .= '$this->strs[\'' . $key . '\'] = \'' . $val . '\';' . "\n";
+									$js .= 'lang[\'' . $key . '\'] = \'' . $val . '\';' . "\n";
 								}
-								if (!$val) $val = $key;
-								$php .= '$this->strs[\'' . $key . '\'] = \'' . $val . '\';' . "\n";
-								$js .= 'lang[\'' . $key . '\'] = \'' . $val . '\';' . "\n";
 							}
 						}
 					}
@@ -109,6 +82,8 @@
 			}
 		}
 	}
+	
+	/* ----- DONE ----- */
 	
 	function getFiles($dir, $exclude = ".|..", $recursive = true) {
 		$dir = rtrim($dir, '/') . '/';
@@ -127,5 +102,14 @@
 			closedir($dirh);
 		}
 		return $result;
-	}	
+	}
+	
+	function sanitize($key, $val) {
+		$key = substr(trim(preg_replace('@"\n"@', '', $key)), 1, -1);
+		$key = preg_replace('@\\\"@', '"', $key);
+		$val = substr(trim(preg_replace('@"\n"@', '', $val)), 1, -1);
+		$val = preg_replace('@\\\"@', '"', $val);
+		return array($key, $val);
+	}
+	
 ?>
