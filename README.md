@@ -12,13 +12,16 @@ VirtualCityMarket's source code is licensed under the [GNU Affero General Public
 * Create a database in your mysql server.
 * Import data/market.sql to the database.
 * Copy the application directory to your web server.
-* Edit config.inc.php. Add your mysql credentials and your Google maps api key.
+* Edit config.inc.php. Add your mysql credentials and your api keys for google maps and reCaptcha. Edit mail server settings.
 * Make sure that mod_rewrite is enabled.
 * If you install the application in a directory different than "virtual-city-market" change the directory name in the following line of the .htaccess file:
 
     RewriteRule . /virtual-city-market/index.php [L]
 
 ## Changelog
+
+### Version 1.0b
+* Beta release
 
 ### Version 1.0a
 * Initial public release
