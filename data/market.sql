@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Σύστημα: localhost
--- Χρόνος δημιουργίας: 11 Μάρ 2013, στις 11:19 PM
+-- Χρόνος δημιουργίας: 11 Ιαν 2014, στις 10:46 AM
 -- Έκδοση Διακομιστή: 5.5.27
 -- Έκδοση PHP: 5.4.3
 
@@ -205,6 +205,10 @@ CREATE TABLE IF NOT EXISTS `market_user` (
   `store` int(11) NOT NULL DEFAULT '0',
   `user_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `user_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `reset_password` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `reset_password_tstamp` datetime NOT NULL,
+  `activate_account` varchar(16) COLLATE utf8_unicode_ci NOT NULL,
+  `activate_account_tstamp` datetime NOT NULL,
   `data` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -213,12 +217,12 @@ CREATE TABLE IF NOT EXISTS `market_user` (
 -- 'Αδειασμα δεδομένων του πίνακα `market_user`
 --
 
-INSERT INTO `market_user` (`user_id`, `market_role_id`, `is_admin`, `user_active`, `username`, `name`, `surname`, `store`, `user_password`, `user_email`, `data`) VALUES
-(-1, 0, '0', '0', 'Anonymous', '', '', 0, '', '', ''),
-(0, 0, '0', '0', '', 'NoUser', '', 0, '', '', ''),
-(1, 1, '1', '1', 'root', 'Administrator', '', 0, '63a9f0ea7bb98050796b649e85481845', 'admin@marketplace', ''),
-(2, 2, '0', '1', 'business', 'Business', '', 1, 'f5d7e2532cc9ad16bc2a41222d76f269', 'business1@marketplace', ''),
-(3, 3, '0', '1', 'user', 'User', '', 0, 'ee11cbb19052e40b07aac0ca060c23ee', 'user@marketplace', '');
+INSERT INTO `market_user` (`user_id`, `market_role_id`, `is_admin`, `user_active`, `username`, `name`, `surname`, `store`, `user_password`, `user_email`, `reset_password`, `reset_password_tstamp`, `activate_account`, `activate_account_tstamp`, `data`) VALUES
+(-1, 0, '0', '0', 'Anonymous', '', '', 0, '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+(0, 0, '0', '0', '', 'NoUser', '', 0, '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+(1, 1, '1', '1', 'root', 'Administrator', '', 0, '63a9f0ea7bb98050796b649e85481845', 'admin@marketplace', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+(2, 2, '0', '1', 'business', 'Business', '', 1, 'f5d7e2532cc9ad16bc2a41222d76f269', 'business1@marketplace', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', ''),
+(3, 3, '0', '1', 'user', 'User', '', 0, 'ee11cbb19052e40b07aac0ca060c23ee', 'user@marketplace', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
