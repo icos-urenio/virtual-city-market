@@ -101,19 +101,21 @@
 				}
 				
 				// check reCAPTCHA
-				if ($_POST['recaptcha_challenge_field'] && $_POST['recaptcha_response_field']) {
-					$resp = recaptcha_check_answer(
-						RECAPTCHA_PRIVATE_KEY,
-						$_SERVER['REMOTE_ADDR'],
-						$_POST['recaptcha_challenge_field'],
-						$_POST['recaptcha_response_field']
-					);
-					if (!$resp->is_valid) {
+				if (defined('RECAPTCHA_PRIVATE_KEY') && RECAPTCHA_PRIVATE_KEY) {
+					if ($_POST['recaptcha_challenge_field'] && $_POST['recaptcha_response_field']) {
+						$resp = recaptcha_check_answer(
+							RECAPTCHA_PRIVATE_KEY,
+							$_SERVER['REMOTE_ADDR'],
+							$_POST['recaptcha_challenge_field'],
+							$_POST['recaptcha_response_field']
+						);
+						if (!$resp->is_valid) {
+							$errors['recaptcha'] = __('The reCAPTCHA was not correct. Please try again...');
+						}
+					}
+					else {
 						$errors['recaptcha'] = __('The reCAPTCHA was not correct. Please try again...');
 					}
-				}
-				else {
-					$errors['recaptcha'] = __('The reCAPTCHA was not correct. Please try again...');
 				}
 				
 				$code = '';
@@ -144,7 +146,12 @@
 						$this->assignGlobal('ERROR.C' . $key, ' error');
 					}
 					// reCAPTCHA
-					$this->assignGlobal('RECAPTCHA', recaptcha_get_html(RECAPTCHA_PUBLIC_KEY));
+					if (defined('RECAPTCHA_PUBLIC_KEY') && RECAPTCHA_PUBLIC_KEY) {
+						$this->assignGlobal('RECAPTCHA', recaptcha_get_html(RECAPTCHA_PUBLIC_KEY));
+					}
+					else {
+						$this->disableTemplate('recaptcha');
+					}
 				}
 				else {
 					
@@ -218,7 +225,12 @@
 			}
 			else {
 				// reCAPTCHA
-				$this->assignGlobal('RECAPTCHA', recaptcha_get_html(RECAPTCHA_PUBLIC_KEY));
+				if (defined('RECAPTCHA_PUBLIC_KEY') && RECAPTCHA_PUBLIC_KEY) {
+					$this->assignGlobal('RECAPTCHA', recaptcha_get_html(RECAPTCHA_PUBLIC_KEY));
+				}
+				else {
+					$this->disableTemplate('recaptcha');
+				}
 				$this->assignGlobal('PIN.show', ' display: none;');
 				$this->assignGlobal('REGISTER.Message', '<div class="alert alert-info">' . __('Please use the following form to create your user account. All fields are required.') . '</div>');
 			}
@@ -332,13 +344,15 @@
 									</div>
 								</div>
 							</fieldset>
-							<fieldset>
-								<legend>{LANG.Visual confirmation}</legend>
-								<div class="control-group{ERROR.Crecaptcha}" style="min-height: 129px; text-align: center;">
-									{ERROR.recaptcha}
-									{RECAPTCHA}
-								</div>
-							</fieldset>
+							<template name="recaptcha">
+								<fieldset>
+									<legend>{LANG.Visual confirmation}</legend>
+									<div class="control-group{ERROR.Crecaptcha}" style="min-height: 129px; text-align: center;">
+										{ERROR.recaptcha}
+										{RECAPTCHA}
+									</div>
+								</fieldset>
+							</template>
 							<fieldset>
 								<legend></legend>
 								<div class="control-group{ERROR.Cagree}">

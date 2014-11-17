@@ -1,6 +1,7 @@
 <template name="main" hidden="true">
 <php>
 	if (defined('IN_MARKET')) {
+		
 		// Navigation current item
 		$req =& $this->getRef('Request');
 		$this->assignGlobal('CURRENT.' . $req->params[0], 'active');
@@ -35,6 +36,16 @@
 			}
 		}
 		
+		// Google analytics tracking code
+		if (defined('ANALYTICS_TRACKING_CODE') && ANALYTICS_TRACKING_CODE) {
+			$this->assignGlobal('ANALYTICS_TRACKING_CODE', ANALYTICS_TRACKING_CODE);
+		}
+		
+		// Preview
+		if ($_SESSION['User']['market_role_id'] == 1 && $_GET['action'] == 'preview') {
+			$this->assignGlobal('PAGE.Class', 'preview_mode');
+		}
+		
 		function getUser($user_id) {
 			$sql = "SELECT * FROM market_user WHERE user_id='" . sqlEscape($user_id) . "'";
 			if (sqlQuery($sql, $res)) {
@@ -46,7 +57,7 @@
 		}
 		
 		function getPeriodtoDate($date) {
-			$period = time() - strtotime($date.'+02:00');
+			$period = time() - strtotime($date);
 			$period = formatPeriod($period);
 			if ($period <> __('now')) $period .= ' {LANG.ago}';
 			return $period;
@@ -68,7 +79,7 @@
 			// {LANG.months}
 			// {LANG.years}
 			if ($secs <= 0) { $output = __('now');
-			} else if ($secs > $second && $secs < $minute)   { $output = round($secs / $second) . ' {LANG.second}';
+			} else if ($secs >= $second && $secs < $minute)   { $output = round($secs / $second) . ' {LANG.second}';
 			} else if ($secs >= $minute && $secs < $hour)    { $output = round($secs / $minute) . ' {LANG.minute}';
 			} else if ($secs >= $hour && $secs < $day)       { $output = round($secs / $hour) . ' {LANG.hour}';
 			} else if ($secs >= $day && $secs < $week)       { $output = round($secs / $day) . ' {LANG.day}';
@@ -162,6 +173,24 @@
 			return false;
 		}
 	}
+	
+	function unserialize_session($session_data) {
+		$return_data = array();
+		$offset = 0;
+		while ($offset < strlen($session_data)) {
+			if (!strstr(substr($session_data, $offset), "|")) {
+				throw new Exception("invalid data, remaining: " . substr($session_data, $offset));
+			}
+			$pos = strpos($session_data, "|", $offset);
+			$num = $pos - $offset;
+			$varname = substr($session_data, $offset, $num);
+			$offset += $num + 1;
+			$data = unserialize(substr($session_data, $offset));
+			$return_data[$varname] = $data;
+			$offset += strlen(serialize($data));
+		}
+		return $return_data;
+	}
 </php>
 <!DOCTYPE html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
@@ -191,17 +220,20 @@
 		<link href="{MARKET.WebDir}/css/style.css" rel="stylesheet" type="text/css" />
 		<link href="{MARKET.WebDir}/css/lang.css" rel="stylesheet" type="text/css" />
 		
-		<script type="text/javascript">
-		 var _gaq = _gaq || [];
-		 _gaq.push(['_setAccount', 'UA-35951847-1']);
-		_gaq.push(['_trackPageview']);
-							
-		 (function() {
-		  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		 })();
-		</script>
+		<template name="google-analytics">
+			<if expr="'{ANALYTICS_TRACKING_CODE}'">
+				<script type="text/javascript">
+					var _gaq = _gaq || [];
+					_gaq.push(['_setAccount', '{ANALYTICS_TRACKING_CODE}']);
+					_gaq.push(['_trackPageview']);
+					(function() {
+						var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+						ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+						var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+					 })();
+				</script>
+			</if>
+		</template>
 		
 	</head>
 	<body class="{PAGE.Class}">
@@ -285,6 +317,12 @@
 			
 			{PAGE.Javascript}
 			
+			<script>
+				jQuery(document).ready(function() {
+					$('body.preview_mode').append('<div style="z-index: 1000; position: fixed; top:0; left:0; width: 100%; height: 100%; background: url({MARKET.WebDir}/img/preview.png) 170px 100px;"></div>');
+				});
+			</script>
+			
 		<!-- end scripts-->
 		
 		<div class="container" role="footer">
@@ -300,7 +338,7 @@
 						</ul>
 					</div>
 				</nav>
-				<p class="right">&copy; 2013 {LANG.Organization}, <a class="blue" href="{MARKET.LWebDir}/terms.html">{LANG.All rights reserved}</a>. <a href="#top" id="back-to-top">{LANG.Back to top} ↑</a></p>
+				<p class="right">&copy; 2014 {LANG.Organization}, <a class="blue" href="{MARKET.LWebDir}/terms.html">{LANG.All rights reserved}</a>. <a href="#top" id="back-to-top">{LANG.Back to top} ↑</a></p>
 				
 				<div class="clearfix"></div>
 				

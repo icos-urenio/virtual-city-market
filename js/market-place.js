@@ -116,9 +116,10 @@ function rIU(param, val){
 		}
 		query = query.substring(1, query.length - 1);
 	}
-	query = (query) ? '?' + query : '';
+	query = (query && query != '&') ? '?' + query : '';
+	fragment = (url.attr('fragment')) ? '#' + url.attr('fragment') : '';
 	
-	document.location =  url.attr('base') + url.attr('path') + query + '#' + url.attr('fragment');
+	document.location =  url.attr('base') + url.attr('path') + query + fragment;
 	
 	return false;
 }

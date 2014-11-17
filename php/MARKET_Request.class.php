@@ -64,8 +64,8 @@
 			switch ($params[0]) {
 				case 'admin':
 					$MARKET_mode = 'admin';
-					$this->stripParams($params, $url);
-					$lng->loadStrings($lng->lang, false);
+					// $this->stripParams($params, $url);
+					$lng->loadStrings($lng->lang, true);
 				break;
 				case 'edit':
 					$MARKET_mode = 'edit';

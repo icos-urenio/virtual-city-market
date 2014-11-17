@@ -62,7 +62,6 @@
 							exit;
 						}
 						else {
-
 							
 							// Required fields
 							$required_fields = array(

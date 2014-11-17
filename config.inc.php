@@ -30,19 +30,25 @@
 	//define('MARKET_SMTP_USER', '');
 	//define('MARKET_SMTP_PASS', '');
 	
+	// Google Analytics
+	define('ANALYTICS_TRACKING_CODE', ''); // Enter your Google Analytics tracking code (UA-XXXXXXXX-X)
+	
 	// Google Maps
 	define('GMAP_API_KEY', ''); // Enter your api key. Get one from https://code.google.com/apis/console
 	// Change these with your own map center
 	define('GMAP_CENTER_LAT', '40.54469');
 	define('GMAP_CENTER_LNG', '23.04345');
 	define('GMAP_CENTER_ZOOM', '13');
-
+	
+	// Google Fusion Table Layer
+	define('FUSION_TABLE_LAYER', ''); // Enter the tableId of a public shared google fusion table. Read the tutorial at https://support.google.com/fusiontables/answer/2527132
+	
 	// reCAPTCHA (Get your keys from https://www.google.com/recaptcha/admin/create)
-	define('RECAPTCHA_PRIVATE_KEY', ''); // Enter your reCAPTCHA private key. 
+	define('RECAPTCHA_PRIVATE_KEY', ''); // Enter your reCAPTCHA private key.
 	define('RECAPTCHA_PUBLIC_KEY', '');  // Enter your reCAPTCHA public key.
 	
 	// Settings with defaults
-	// define('MARKET_TIMEZONE', 'Europe/Athens');
-	// define('MARKET_SESSION_NAME', 'market_sid');
-	
+	//define('MARKET_TIMEZONE', 'Europe/Athens');
+	//define('MARKET_SESSION_NAME', 'market_sid');
+
 ?>

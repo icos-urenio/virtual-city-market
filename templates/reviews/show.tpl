@@ -38,14 +38,14 @@
 					$this->vars['global']['COMMENTS'] = substr($this->vars['global']['COMMENTS'], 0, -(strlen('<li class="divider"></li>')));
 					
 					// Overall rating
-					$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data WHERE name='index' AND type='comment' AND rating <> '' AND directory_id='" . $row['id'] . "'";
+					$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND store_data.lang='" . MARKET_LANG . "' AND name='index' AND type='comment' AND rating <> '' AND directory_id='" . $row['id'] . "'";
 					if (sqlQuery($sql, $res1)) {
 						$row1 = sqlFetchAssoc($res1);
 						if ($row1['count']) {
 							$row['rating'] = '<div class="well white">';
 							$row['rating'] .= '<div class="pull-left" style="margin: 0; text-align: center;">';
 							$row['rating'] .= '<div data-average="' . $row1['rating'] . '" data-id="' . $row['id'] . '" class="jrating" style="margin: 0 auto 10px auto;"></div>';
-							$row['rating'] .= '(' . $row1['count'] . ' {LANG.reviews})';
+							$row['rating'] .= '(' . $row1['count'] . (($row1['count'] == 1) ? ' {LANG.review}' : ' {LANG.reviews}') . ')';
 							$row['rating'] .= '</div>';
 							$row['rating'] .= '<div class="pull-right" style="margin: 10px 0;"><a class="btn" href="review.html"><i class="icon-pencil"></i> {LANG.Write a review}</a></div>';
 							$row['rating'] .= '<div class="clearfix"></div>';

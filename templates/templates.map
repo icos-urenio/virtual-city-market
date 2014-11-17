@@ -1,4 +1,5 @@
 // Marketplace
+admin/.+\.tpl	admin/index.tpl
 marketplace/.+\.tpl	marketplace/show.tpl
 offers/.+\.tpl	offers/show.tpl
 reviews/.+/review\.tpl	reviews/review.tpl

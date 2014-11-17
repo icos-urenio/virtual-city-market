@@ -9,7 +9,10 @@
 		
 		$SELECT = "*, IF (business_name = '', name, business_name) AS business_title";
 		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps";
-		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory_ml.lang='" . MARKET_LANG . "' AND directory_ps.publish='1' AND (directory.path='" . sqlEscape($req->params[1]) . "' OR directory.id='" . sqlEscape($req->params[1]) . "')";
+		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory_ml.lang='" . MARKET_LANG . "' AND (directory.path='" . sqlEscape($req->params[1]) . "' OR directory.id='" . sqlEscape($req->params[1]) . "')";
+		if (!($_SESSION['User']['market_role_id'] == 1 && $_GET['action'] == 'preview')) {
+			$WHERE .= " AND directory_ps.publish='1'";
+		}
 		
 		$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE";
 		if (sqlQuery($sql, $res)) {
@@ -18,7 +21,11 @@
 			$row['address'] = ($row['address']) ? $row['address'] . ', ' . $row['city'] : $row['city'];
 			
 			// Offer
-			$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='" . sqlEscape($req->params[2]) . "' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "') ORDER BY ord";
+			$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='" . sqlEscape($req->params[2]) . "'";
+			if (!($_SESSION['User']['market_role_id'] == 1 && $_GET['action'] == 'preview')) {
+				$sql .= " AND store_data_ps.publish='1' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "')";
+			}
+			$sql .= " ORDER BY ord";
 			if (sqlQuery($sql, $res1)) {
 				while ($row1 = sqlFetchAssoc($res1)) {
 					if ($row[$row1['type']]) {
@@ -46,6 +53,8 @@
 					}
 				}
 			}
+			
+			if (!isset($row['data'])) $req->httpError(404);
 			
 			if ($_GET['device'] == 'mobile') {
 				$this->disableTemplate('coupons_cnt');

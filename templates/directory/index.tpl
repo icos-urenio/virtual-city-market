@@ -15,7 +15,7 @@
 			$i = 1;
 			while ($row = sqlFetchAssoc($res)) {
 				$str = '';
-				$sql = "SELECT prof1, prof2, prof3 FROM directory_ml WHERE category='" . sqlEscape($row['category']) . "'";
+				$sql = "SELECT prof1, prof2, prof3 FROM directory_ml WHERE lang='" . MARKET_LANG . "' AND category='" . sqlEscape($row['category']) . "'";
 				if (sqlQuery($sql, $res1)) {
 					$tags = array();
 					while ($row1 = sqlFetchAssoc($res1)) {
@@ -48,7 +48,7 @@
 		}
 		
 		// Cities
-		$sql = "SELECT city FROM directory_ml GROUP BY city ORDER BY city";
+		$sql = "SELECT city FROM directory_ml WHERE lang='" . MARKET_LANG . "' GROUP BY city ORDER BY city";
 		if (sqlQuery($sql, $res)) {
 			$cities = array();
 			while ($row = sqlFetchAssoc($res)) {

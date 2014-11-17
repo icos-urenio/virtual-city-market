@@ -63,7 +63,8 @@
 			'api_key' => GMAP_API_KEY,
 			'center_lat' => GMAP_CENTER_LAT,
 			'center_lng' => GMAP_CENTER_LNG,
-			'center_zoom' => GMAP_CENTER_ZOOM
+			'center_zoom' => GMAP_CENTER_ZOOM,
+			'fusion_table' => FUSION_TABLE_LAYER
 		));
 		
 	</php>
@@ -97,6 +98,15 @@
 					overviewMapControl: false
 				});
 				
+				if ('{GMAPS.fusion_table}') {
+					map.loadFromFusionTables({
+						query: {
+							select: '\'location\'',
+							from: '{GMAPS.fusion_table}'
+						},
+						clickable: false
+					});
+				}
 			});
 			
 			jQuery(window).load(function($) {

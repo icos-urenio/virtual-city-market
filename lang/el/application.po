@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.6.10\n"
 
 msgid "Account"
 msgstr "Λογαριασμός"
@@ -22,6 +22,9 @@ msgstr "Ρυθμίσεις λογαριασμού"
 
 msgid "Activate your account"
 msgstr "Ενεργοποίηση λογαριασμού"
+
+msgid "Active"
+msgstr "Ενεργό"
 
 msgid "Add image"
 msgstr "Προσθήκη εικόνας"
@@ -50,11 +53,24 @@ msgstr "Είστε σίγουρος ότι θέλετε να διαγράψετ�
 msgid "Are you sure you want to delete this page?"
 msgstr "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτή την σελίδα;"
 
+msgid "Are you sure you want to delete this record?"
+msgstr "Είστε σίγουρος ότι θέλετε να διαγράψετε αυτή την εγγραφή;"
+
+msgid "Attention! You may be altering multiple directory records."
+msgstr "Προσοχή! Μπορεί να τροποποιείτε πολλαπλές εγγραφές καταλόγου."
+
 msgid "Authentication"
 msgstr "Πιστοποίηση"
 
 msgid "Back to top"
 msgstr "Επιστροφή στην αρχή"
+
+msgid ""
+"Be warned that deleting the Store home page is the same as deleting the "
+"corresponding marketplace record."
+msgstr ""
+"Προσοχή, η διαγραφή της αρχικής σελίδας καταστήματος είναι το ίδιο σαν την "
+"διαγραφή της αντίστοιχης εγγραφής από την αγορά."
 
 msgid "Best regards"
 msgstr "Με εκτίμηση"
@@ -67,6 +83,9 @@ msgstr "Κατάλογος Επιχειρήσεων"
 
 msgid "Business details"
 msgstr "Λεπτομέρειες επιχείρησης"
+
+msgid "Business name"
+msgstr "Όνομα επιχείρησης"
 
 msgid "Byline"
 msgstr "Υπότιτλος"
@@ -95,6 +114,9 @@ msgstr "Οικισμός"
 msgid "City Marketplace"
 msgstr "Η Αγορά της Πόλης"
 
+msgid "Click here"
+msgstr "Κάνετε κλικ εδώ"
+
 msgid "Click this link to request the confirmation email again."
 msgstr ""
 "Κάνετε κλικ σε αυτό το σύνδεσμο για να σας στείλουμε το μήνυμα επιβεβαίωσης "
@@ -106,8 +128,14 @@ msgstr "Κλείσιμο"
 msgid "Close editor"
 msgstr "Ολοκλήρωση επεξεργασίας"
 
+msgid "Comment"
+msgstr "Σχόλιο"
+
 msgid "Company name"
 msgstr "Διακριτικός τίτλος"
+
+msgid "Configuration file"
+msgstr "Αρχείο ρυθμίσεων"
 
 msgid "Confirm your new email address at"
 msgstr "Επιβεβαιώστε την νέα σας διεύθυνση email στο"
@@ -115,8 +143,17 @@ msgstr "Επιβεβαιώστε την νέα σας διεύθυνση email �
 msgid "Confirm your registration at"
 msgstr "Επιβεβαιώστε την εγγραφή σας στο"
 
+msgid "Connection settings"
+msgstr "Ρυθμίσεις σύνδεσης"
+
+msgid "Could not generate PIN. Please try again."
+msgstr "Δεν μπόρεσα να δημιουργήσω τον κωδικό PIN. Προσπαθήστε ξανά."
+
 msgid "Create account"
 msgstr "Δημιουργία λογαριασμού"
+
+msgid "Create directory"
+msgstr "Δημιουργία καταλόγου"
 
 msgid "Create marketplace store"
 msgstr "Κατάστημα στην αγορά"
@@ -124,14 +161,63 @@ msgstr "Κατάστημα στην αγορά"
 msgid "Create offer"
 msgstr "Δημιουργία προσφοράς"
 
+msgid "Create page"
+msgstr "Δημιουργία σελίδας"
+
+msgid "Create page template"
+msgstr "Δημιουργία προτύπου"
+
+msgid "Create role"
+msgstr "Δημιουργία ρόλου"
+
+msgid "Create store data"
+msgstr "Δημιουργία δεδομένων αγοράς"
+
+msgid "Create user"
+msgstr "Δημιουργία χρήστη"
+
+msgid "Data"
+msgstr "Δεδομένα"
+
+msgid "Date from"
+msgstr "Ημερομηνία από"
+
+msgid "Date to"
+msgstr "Ημερομηνία έως"
+
 msgid "Dear"
 msgstr "Αγαπητή/έ"
 
 msgid "Debug"
 msgstr "Εκσφαλμάτωση"
 
+msgid "Default map center"
+msgstr "Προεπιλεγμένο κέντρο χάρτη"
+
+msgid "Default zoom level"
+msgstr "Προεπιλεγμένο επίπεδο ζουμ"
+
 msgid "Delete"
 msgstr "Διαγραφή"
+
+msgid "Delete record"
+msgstr "Διαγραφή εγγραφής"
+
+msgid "Deleting a category will affect the corresponding directory records."
+msgstr ""
+"Η διαγραφή μιας κατηγορίας θα επηρεάσει τις αντίστοιχες εγγραφές καταλόγου."
+
+msgid "Deleting a city will affect the corresponding directory records."
+msgstr ""
+"Η διαγραφή ενός οικισμού θα επηρεάσει τις αντίστοιχες εγγραφές καταλόγου."
+
+msgid "Deleting a session will logout the corresponding user!"
+msgstr "Η διαγραφή μιας συνόδου θα αποσυνδέσει τον αντίστοιχο χρήστη!"
+
+msgid "Deleting a subcategory will affect the corresponding directory records."
+msgstr ""
+"Η διαγραφή μιας υποκατηγορίας θα επηρεάσει τις αντίστοιχες εγγραφές "
+"καταλόγου."
 
 msgid "Description"
 msgstr "Περιγραφή"
@@ -145,11 +231,23 @@ msgstr "Εσείς;"
 msgid "Directory"
 msgstr "Κατάλογος"
 
+msgid "Directory ID"
+msgstr "ID καταλόγου"
+
+msgid "Directory administration"
+msgstr "Διαχείριση καταλόγου"
+
+msgid "Disable"
+msgstr "Απενεργοποίηση"
+
 msgid "Discount"
 msgstr "Έκπτωση"
 
 msgid "Edit"
 msgstr "Επεξεργασία"
+
+msgid "Edit directory"
+msgstr "Επεξεργασία καταλόγου"
 
 msgid "Edit links"
 msgstr "Επεξεργασία συνδέσμων"
@@ -157,8 +255,23 @@ msgstr "Επεξεργασία συνδέσμων"
 msgid "Edit page"
 msgstr "Επεξεργασία σελίδας"
 
+msgid "Edit page template"
+msgstr "Επεξεργασία προτύπου"
+
+msgid "Edit role"
+msgstr "Επεξεργασία ρόλου"
+
+msgid "Edit session"
+msgstr "Επεξεργασία συνόδου"
+
 msgid "Edit slider"
 msgstr "Επεξεργασία slider"
+
+msgid "Edit store data"
+msgstr "Επεξεργασία στοιχείων επιχείρησης"
+
+msgid "Edit user"
+msgstr "Επεξεργασία χρήστη"
 
 msgid "Edit your offer"
 msgstr "Επεξεργαστείτε την προσφορά σας"
@@ -178,6 +291,12 @@ msgstr "Διεύθυνση email"
 msgid "Email address unconfirmed"
 msgstr "Η διεύθυνση email δεν είναι επιβεβαιωμένη"
 
+msgid "Email from"
+msgstr "Email αποστολέα"
+
+msgid "Enable"
+msgstr "Ενεργοποίηση"
+
 msgid "Enter a url for your marketplace store"
 msgstr "Εισάγετε μια διεύθυνση για το κατάστημα"
 
@@ -191,8 +310,18 @@ msgid "Enter the price of the discounted item. This is a free text field."
 msgstr ""
 "Εισάγετε την τιμή της προσφοράς. Αυτό είναι ένα πεδίο ελεύθερου κειμένου."
 
+msgid "Enter the tableId of a public shared fusion table"
+msgstr "Εισάγετε το tableId ενός δημόσια κοινόχρηστου πίνακα fusion"
+
+msgid "Enter your Google analytics tracking code"
+msgstr ""
+"Εισάγετε τον κωδικό παρακολούθησης σας (tracking code) του Google analytics"
+
 msgid "Enter your PIN code"
 msgstr "Εισάγετε τον κωδικό PIN"
+
+msgid "Error"
+msgstr "Λάθος"
 
 msgid "Errors"
 msgstr "Λάθη"
@@ -200,11 +329,17 @@ msgstr "Λάθη"
 msgid "Expired"
 msgstr "Έληξε"
 
+msgid "Expires"
+msgstr "Λήγει"
+
 msgid "Facebook"
 msgstr "Facebook"
 
 msgid "Featured Listings"
 msgstr "Προτεινόμενα"
+
+msgid "File"
+msgstr "Αρχείο"
 
 msgid "Find offers"
 msgstr "Βρείτε προσφορές"
@@ -212,17 +347,32 @@ msgstr "Βρείτε προσφορές"
 msgid "First"
 msgstr "Πρώτο"
 
+msgid "First select a category"
+msgstr "Πρώτα επιλέξτε κατηγορία"
+
 msgid "Follow us"
 msgstr "Ακολουθήστε μας"
+
+msgid "For more information read the tutorial at"
+msgstr "Για περισσότερες πληροφορίες διαβάστε τον οδηγό στο"
 
 msgid "Found"
 msgstr "Βρέθηκαν"
 
+msgid "Generate"
+msgstr "Παραγωγή"
+
 msgid "Geolocate"
-msgstr "Η θέση μου"
+msgstr "Εντοπισμός"
 
 msgid "Geolocation failed"
 msgstr "Ο εντοπισμός απέτυχε"
+
+msgid "Get your key from"
+msgstr "Πάρτε το κλειδί σας από το"
+
+msgid "Get your keys from"
+msgstr "Πάρτε τα κλειδιά σας από το"
 
 msgid "Go"
 msgstr "Βρες"
@@ -236,8 +386,29 @@ msgstr "Πηγαίνετε στο κατάστημα"
 msgid "Google"
 msgstr "Google"
 
+msgid "Google Maps API key"
+msgstr "Google Maps API key"
+
+msgid "Google analytics"
+msgstr "Google analytics"
+
+msgid "Google fusion table layer"
+msgstr "Google fusion table layer"
+
+msgid "Google maps"
+msgstr "Χάρτες Google"
+
+msgid "HTML Pages"
+msgstr "Σελίδες HTML"
+
+msgid "Hint"
+msgstr "Συμβουλή"
+
 msgid "Home"
 msgstr "Αρχική"
+
+msgid "Html pages administration"
+msgstr "Διαχείριση σελίδων HTML"
 
 msgid "I agree with the"
 msgstr "Συμφωνώ με τους"
@@ -257,6 +428,9 @@ msgstr ""
 
 msgid "Image upload"
 msgstr "Μεταφόρτωση εικόνας"
+
+msgid "Index"
+msgstr "Ευρετήριο"
 
 msgid ""
 "Information in this email including any attachments may be privileged, "
@@ -282,11 +456,23 @@ msgstr "Λέξεις κλειδιά"
 msgid "Last"
 msgstr "Τελευταίο"
 
+msgid "Last access"
+msgstr "Τελευταία πρόσβαση"
+
+msgid "Latest additions"
+msgstr "Τελευταίες προσθήκες"
+
+msgid "Latitude"
+msgstr "Γεωγραφικό πλάτος"
+
 msgid "Learn more"
 msgstr "Μάθετε περισσότερα"
 
 msgid "Leave the field blank, if you do not want to change your password."
 msgstr "Αφήστε το πεδίο κενό, αν δεν θέλετε να αλλάξετε τον κωδικό σας."
+
+msgid "Leave the password blank if you do not wish to change it"
+msgstr "Αφήστε τον κωδικό κενό αν δεν θέλετε να τον αλλάξετε"
 
 msgid ""
 "Load this offer on your mobile and show it at the store to get the discount"
@@ -305,6 +491,15 @@ msgstr ""
 "Επαγγελματιών Εμπόρων Δήμου Θέρμης για να έχουν πρόσβαση στις πληροφορίες "
 "τους."
 
+msgid "Location"
+msgstr "Τοποθεσία"
+
+msgid "Location not found."
+msgstr "Η τοποθεσία δεν βρέθηκε."
+
+msgid "Log"
+msgstr "Αρχείο καταγραφής"
+
 msgid "Log In"
 msgstr "Σύνδεση"
 
@@ -317,6 +512,12 @@ msgstr "Λεπτομέρειες σύνδεσης"
 msgid "Login incorrect."
 msgstr "Λανθασμένος κωδικός."
 
+msgid "Longitude"
+msgstr "Γεωγραφικό μήκος"
+
+msgid "Mail settings"
+msgstr "Ρυθμίσεις ταχυδρομείου"
+
 msgid "Manage page"
 msgstr "Διαχείριση σελίδας"
 
@@ -326,8 +527,17 @@ msgstr "Διαχειριστείτε τις προσφορές σας"
 msgid "Marketplace"
 msgstr "Αγορά"
 
+msgid "Marketplace administration"
+msgstr "Διαχείριση αγοράς"
+
+msgid "Marketplace url"
+msgstr "Διεύθυνση στην αγορά"
+
 msgid "Me"
 msgstr "Εγώ"
+
+msgid "Message"
+msgstr "Μήνυμα"
 
 msgid "More info"
 msgstr "Περισσότερες πληροφορίες"
@@ -338,14 +548,29 @@ msgstr "Περισσότερες προσφορές"
 msgid "Name"
 msgstr "Όνομα"
 
+msgid "Name from"
+msgstr "Όνομα αποστολέα"
+
 msgid "Near me"
 msgstr "Κοντά μου"
+
+msgid "New directory"
+msgstr "Νέα εγγραφή"
 
 msgid "New offer"
 msgstr "Νέα προσφορά"
 
 msgid "New page"
 msgstr "Νέα σελίδα"
+
+msgid "New page template"
+msgstr "Νέο πρότυπο"
+
+msgid "New role"
+msgstr "Νέος ρόλος"
+
+msgid "New user"
+msgstr "Νέος χρήστης"
 
 msgid "New user registration"
 msgstr "Εγγραφή νέου χρήστη"
@@ -362,17 +587,26 @@ msgstr "Δεν βρέθηκαν αποτελέσματα"
 msgid "Not implemented"
 msgstr "Μη διαθέσιμο"
 
+msgid "Note: you cannot edit your current session."
+msgstr "Σημείωση: δεν μπορείτε να επεξεργαστείτε την τρέχουσα σύνοδό σας."
+
 msgid "OK"
 msgstr "OK"
 
 msgid "ORGANIZATION"
 msgstr "ΟΡΓΑΝΙΣΜΟΣ"
 
+msgid "Offer title"
+msgstr "Τίτλος προσφοράς"
+
 msgid "Offer valid"
 msgstr "Η προσφορά ισχύει"
 
 msgid "Offers"
 msgstr "Προσφορές"
+
+msgid "Offers administration"
+msgstr "Διαχείριση προσφορών"
 
 msgid "Offers and Coupons"
 msgstr "Προσφορές και Κουπόνια"
@@ -392,8 +626,23 @@ msgstr "Οργανισμός"
 msgid "Our offers"
 msgstr "Οι προσφορές μας"
 
+msgid "Outgoing email"
+msgstr "Εξερχόμενα μηνύματα"
+
+msgid "Owner name"
+msgstr "Όνομα ιδιοκτήτη"
+
 msgid "PIN Code"
 msgstr "Κωδικός PIN"
+
+msgid "PIN code"
+msgstr "Κωδικός PIN"
+
+msgid "Page title"
+msgstr "Τίτλος σελίδας"
+
+msgid "Pages"
+msgstr "Σελίδες"
 
 msgid "Password"
 msgstr "Κωδικός"
@@ -475,6 +724,9 @@ msgstr ""
 "Παρακαλώ χρησιμοποιήστε την ακόλουθη φόρμα για να δημιουργήσετε ένα νέο "
 "λογαριασμό. Όλα τα πεδία είναι απαραίτητα."
 
+msgid "Preview"
+msgstr "Προεπισκόπηση"
+
 msgid "Previous"
 msgstr "Προηγούμενο"
 
@@ -498,11 +750,17 @@ msgstr "Ανάκτηση λογαριασμού"
 msgid "Register"
 msgstr "Εγγραφή"
 
+msgid "Related data will not be deleted."
+msgstr "Τα σχετικά δεδομένα δεν θα διαγραφούν."
+
 msgid "Remember me"
 msgstr "Να με θυμάσαι"
 
 msgid "Repeat password"
 msgstr "Επανάληψη κωδικού"
+
+msgid "Required fields"
+msgstr "Υποχρεωτικά πεδία"
 
 msgid "Reset your password at"
 msgstr "Δημιουργήστε νέο κωδικό στο"
@@ -510,14 +768,41 @@ msgstr "Δημιουργήστε νέο κωδικό στο"
 msgid "Resources"
 msgstr "Πόροι"
 
+msgid "Review"
+msgstr "Αξιολόγηση"
+
 msgid "Reviews"
 msgstr "Αξιολογήσεις"
+
+msgid "Reviews administration"
+msgstr "Διαχείριση αξιολογήσεων"
+
+msgid "Role"
+msgstr "Ρόλος"
+
+msgid "Roles"
+msgstr "Ρόλοι"
 
 msgid "SMART CITY SERVICES"
 msgstr "ΥΠΗΡΕΣΙΕΣ ΕΞΥΠΝΗΣ ΠΟΛΗΣ"
 
+msgid "SMTP host"
+msgstr "Εξυπηρετητής SMTP"
+
+msgid "SMTP password"
+msgstr "Κωδικός SMTP"
+
+msgid "SMTP user"
+msgstr "Χρήστης SMTP"
+
 msgid "SQL Queries"
 msgstr "Ερωτήματα SQL"
+
+msgid "SSL/TLS encryption"
+msgstr "Κρυπτογράφηση SSL/TLS"
+
+msgid "Save record"
+msgstr "Αποθήκευση"
 
 msgid "Save successful"
 msgstr "Αποθήκευση επιτυχής"
@@ -534,6 +819,15 @@ msgstr "Επιλογή"
 msgid "Send me the confirmation message again."
 msgstr "Στείλτε μου το μήνυμα επιβεβαίωσης ξανά."
 
+msgid "Server timezone"
+msgstr "Ζώνη ώρας του διακομιστή"
+
+msgid "Session ID"
+msgstr "ID συνόδου"
+
+msgid "Sessions"
+msgstr "Σύνοδοι"
+
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
@@ -546,8 +840,20 @@ msgstr "Σύνδεση"
 msgid "Site visitor"
 msgstr "Επισκέπτης"
 
+msgid "Social media"
+msgstr "Κοινωνικά δίκτυα"
+
 msgid "Social networks"
 msgstr "Κοινωνικά δίκτυα"
+
+msgid "Store home"
+msgstr "Αρχική καταστήματος"
+
+msgid "Store pages"
+msgstr "Σελίδες"
+
+msgid "Subcategories"
+msgstr "Υποκατηγορίες"
 
 msgid "Subcategory"
 msgstr "Υποκατηγορία"
@@ -561,14 +867,32 @@ msgstr "Αποστολή PIN"
 msgid "Subtitle"
 msgstr "Υπότιτλος"
 
+msgid "Suggested fields"
+msgstr "Προτεινόμενα πεδία"
+
+msgid "Support email address"
+msgstr "Διεύθυνση email υποστήριξης"
+
 msgid "Surname"
 msgstr "Επίθετο"
+
+msgid "Table ID"
+msgstr "Κωδικός πίνακα"
+
+msgid "Template ID"
+msgstr "ID προτύπου"
+
+msgid "Templates"
+msgstr "Πρότυπα"
 
 msgid "Terms"
 msgstr "Όροι χρήσης"
 
 msgid "Terms of use"
 msgstr "Όρους χρήσης"
+
+msgid "Text"
+msgstr "Κείμενο"
 
 msgid "The Administration Team"
 msgstr "Η Ομάδα Διαχείρισης"
@@ -611,6 +935,9 @@ msgstr "Το reCAPTCHA δεν ήταν σωστό. Παρακαλώ δοκιμά
 
 msgid "The requested action is not implemented"
 msgstr "Η ενέργεια που ζητήσατε δεν έχει υλοποιηθεί ακόμα"
+
+msgid "The resulting url will be"
+msgstr "Η προκύπτουσα διεύθυνση θα είναι"
 
 msgid "The title is required."
 msgstr "Ο τίτλος είναι απαραίτητος."
@@ -658,11 +985,26 @@ msgstr "Η σελίδα στο κινητό σας"
 msgid "This page requires authentication."
 msgstr "Αυτή η σελίδα χρειάζεται πιστοποίηση."
 
+msgid "Timestamp"
+msgstr "Χρονική σήμανση"
+
+msgid "Timezone"
+msgstr "Ζώνη ώρας"
+
 msgid "Title"
 msgstr "Τίτλος"
 
+msgid "Tracking code"
+msgstr "Κωδικός παρακολούθησης"
+
+msgid "Try to reposition the map above"
+msgstr "Προσπαθήστε να επανατοποθετήσετε τον χάρτη στο πάνω μέρος της σελίδας"
+
 msgid "Twitter"
 msgstr "Twitter"
+
+msgid "Type"
+msgstr "Τύπος"
 
 msgid "Unconfirmed"
 msgstr "Μη επιβεβαιωμένη"
@@ -680,11 +1022,20 @@ msgstr "Ενημέρωση λογαριασμού"
 msgid "Update offer"
 msgstr "Ενημέρωση προσφοράς"
 
+msgid "Update settings"
+msgstr "Ενημέρωση ρυθμίσεων"
+
 msgid "Update store"
 msgstr "Ενημέρωση επιχείρησης"
 
+msgid "Updated"
+msgstr "Τελευταία ενημέρωση"
+
 msgid "Url"
 msgstr "Url"
+
+msgid "User"
+msgstr "Χρήστης"
 
 msgid "User Reviews"
 msgstr "Αξιολογήσεις Χρηστών"
@@ -701,6 +1052,9 @@ msgstr "Αποστολή μηνύματος ενεργοποίησης"
 msgid "User activation mail failed"
 msgstr "Η αποστολή μηνύματος ενεργοποίησης απέτυχε"
 
+msgid "User active"
+msgstr "Ενεργός χρήστης"
+
 msgid "User details"
 msgstr "Λεπτομέρειες χρήστη"
 
@@ -709,6 +1063,9 @@ msgstr "Σύνδεση χρήστη"
 
 msgid "User log out"
 msgstr "Αποσύνδεση χρήστη"
+
+msgid "User name"
+msgstr "Όνομα χρήστη"
 
 msgid "User password change"
 msgstr "Αλλαγή κωδικού χρήστη"
@@ -734,6 +1091,12 @@ msgstr "Αξιολογήσεις χρηστών"
 msgid "User type"
 msgstr "Τύπος χρήστη"
 
+msgid "Users"
+msgstr "Χρήστες"
+
+msgid "Users administration"
+msgstr "Διαχείριση χρηστών"
+
 msgid "Valid from"
 msgstr "Ισχύει από"
 
@@ -742,6 +1105,9 @@ msgstr "Ισχύει έως"
 
 msgid "Variables"
 msgstr "Μεταβλητές"
+
+msgid "View all"
+msgstr "Προβολή όλων"
 
 msgid "Virtual City Market"
 msgstr "Ψηφιακό Εμπορικό Κέντρο"
@@ -786,6 +1152,9 @@ msgstr "Γράψτε μια αξιολόγηση"
 msgid "Yes"
 msgstr "Ναι"
 
+msgid "Yes, delete it!"
+msgstr "Ναι, διέγραψέ την!"
+
 msgid "You can enter the PIN code later, in your account settings."
 msgstr ""
 "Μπορείτε να εισάγετε τον κωδικό PIN αργότερα, στις ρυθμίσεις του λογαριασμού "
@@ -797,6 +1166,13 @@ msgstr ""
 
 msgid "You have something to say?"
 msgstr "Έχετε κάτι να πείτε;"
+
+msgid "You may consider to disable the directory record instead."
+msgstr ""
+"Αντί να διαγράψετε ίσως θα έπρεπε να απενεργοποιήσετε την εγγραφή καταλόγου."
+
+msgid "You may consider to disable the user instead."
+msgstr "Αντί να διαγράψετε ίσως θα έπρεπε να απενεργοποιήσετε τον χρήστη."
 
 msgid "You may select up to three subcategories."
 msgstr "Μπορείτε να επιλέξετε μέχρι τρεις υποκατηγορίες"
@@ -826,6 +1202,9 @@ msgid ""
 msgstr ""
 "Λάβατε αυτό το μήνυμα επειδή ζητήσατε οδηγίες για τη δημιουργία νέου κωδικού "
 "στο"
+
+msgid "You should not delete the default roles of the application!"
+msgstr "Δεν πρέπει να διαγράψετε τους βασικούς ρόλους της εφαρμογής!"
 
 msgid "You will have to confirm your new email address before you can use it."
 msgstr ""
@@ -952,6 +1331,9 @@ msgstr "ημέρα"
 msgid "days"
 msgstr "ημέρες"
 
+msgid "directory records"
+msgstr "εγγραφές καταλόγου"
+
 msgid "forgot your password?"
 msgstr "ξεχάσατε τον κωδικό;"
 
@@ -963,6 +1345,15 @@ msgstr "ώρα"
 
 msgid "hours"
 msgstr "ώρες"
+
+msgid "is not readable"
+msgstr "δεν είναι αναγνώσιμο"
+
+msgid "is not writable"
+msgstr "δεν είναι εγγράψιμο"
+
+msgid "marketplace stores"
+msgstr "καταστήματα στην αγορά"
 
 msgid "minute"
 msgstr "λεπτό"
@@ -1000,6 +1391,18 @@ msgstr "ή"
 msgid "people"
 msgstr "άτομα"
 
+msgid "reCAPTCHA private key"
+msgstr "Ιδιωτικό κλειδί reCAPTCHA"
+
+msgid "reCAPTCHA public key"
+msgstr "Δημόσιο κλειδί reCAPTCHA"
+
+msgid "reCAPTCHA settings"
+msgstr "Ρυθμίσεις reCAPTCHA"
+
+msgid "review"
+msgstr "αξιολόγηση"
+
 msgid "reviews"
 msgstr "αξιολογήσεις"
 
@@ -1014,6 +1417,9 @@ msgstr "τηλ"
 
 msgid "to attach an image to your email."
 msgstr "για να προσαρτήσετε μια εικόνα στην διεύθυνση email σας."
+
+msgid "to download a list of location points in your directory"
+msgstr "για να κατεβάσετε μια λίστα με τις τοποθεσίες του καταλόγου σας"
 
 msgid "until"
 msgstr "έως"
@@ -1030,8 +1436,35 @@ msgstr "χρόνο"
 msgid "years"
 msgstr "χρόνια"
 
-#~ msgid "Click here for more"
-#~ msgstr "Κάνετε κλικ για περισσότερα"
+#~ msgid "Adminstration"
+#~ msgstr "Διαχείριση"
+
+#~ msgid "Blank to leave unchanged"
+#~ msgstr "Αφήστε τον κωδικό κενό εαν δεν θέλετε να τον αλλάξετε"
+
+#~ msgid "Create session"
+#~ msgstr "Δημιουργία συνόδου"
+
+#~ msgid "User role"
+#~ msgstr "Ρόλος χρήστη"
+
+#~ msgid "New"
+#~ msgstr "Νέο"
+
+#~ msgid "Create marketplace"
+#~ msgstr "Δημιουργία αγοράς"
+
+#~ msgid "Create review"
+#~ msgstr "Δημιουργία αξιολόγησης"
+
+#~ msgid "Edit marketplace"
+#~ msgstr "Επεξεργασία αγοράς"
+
+#~ msgid "Edit review"
+#~ msgstr "Επεξεργασία αξιολόγησης"
+
+#~ msgid "PIN"
+#~ msgstr "PIN"
 
 #~ msgid "Prices"
 #~ msgstr "Τιμές"
@@ -1074,9 +1507,6 @@ msgstr "χρόνια"
 #~ msgid "Your account was updated successfully."
 #~ msgstr "Ο λογαριασμός σας ενημερώθηκε επιτυχώς."
 
-#~ msgid "First select a category"
-#~ msgstr "Πρώτα επιλέξτε κατηγορία"
-
 #~ msgid "Keep typing..."
 #~ msgstr "Συνεχίστε την πληκτρολόγηση..."
 
@@ -1101,9 +1531,6 @@ msgstr "χρόνια"
 #~ msgstr ""
 #~ "Πηγαίνετε στο <a class=\"blue\" href=\"http://www.gravatar.com\">gravatar."
 #~ "com</a> για να προσαρτήσετε μια εικόνα στην διεύθυνση email σας."
-
-#~ msgid "Store name"
-#~ msgstr "Όνομα επιχείρησης"
 
 #~ msgid "The email address \"%s\" is already registered."
 #~ msgstr "Η διεύθυνση email \"%s\" είναι ήδη εγγεγραμμένη"
@@ -1142,9 +1569,6 @@ msgstr "χρόνια"
 #~ "λάβουν έναν κωδικό PIN από την Ένωση Επαγγελματιών Εμπόρων Δήμου Θέρμης "
 #~ "για να έχουν πρόσβαση στις πληροφορίες τους. Μπορείτε να εισάγετε τον "
 #~ "κωδικό PIN αργότερα, στις ρυθμίσεις του λογαριασμού σας."
-
-#~ msgid "Activate"
-#~ msgstr "Ενεργοποίηση"
 
 #~ msgid "An error occured. Please try again later."
 #~ msgstr "Συνέβη λάθος. Παρακαλώ δοκιμάστε αργότερα."

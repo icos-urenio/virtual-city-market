@@ -9,7 +9,10 @@
 		
 		$SELECT = "*, IF (business_name = '', name, business_name) AS title";
 		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps";
-		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory_ml.lang='" . MARKET_LANG . "' AND directory_ps.publish='1'";
+		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory_ml.lang='" . MARKET_LANG . "'";
+		if (!($_SESSION['User']['market_role_id'] == 1 && $_GET['action'] == 'preview')) {
+			$WHERE .= " AND directory_ps.publish='1'";
+		}
 		
 		if ($_GET['id'] && preg_match('@^\d+$@', $_GET['id'])) {
 			$this->disableTemplate('store');
@@ -26,9 +29,26 @@
 		$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE";
 		if (sqlQuery($sql, $res)) {
 			$row = sqlFetchAssoc($res);
+			
+			if (!($_SESSION['User']['market_role_id'] == 1 && $_GET['action'] == 'preview')) {
+				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND lang='" . MARKET_LANG . "' AND name='index' AND type='text'";
+				if (!sqlQuery($sql, $res1)) {
+					// Store disabled
+					$row['path'] = '';
+					if (!$_GET['id']) {
+						$req->httpError(404);
+					}				
+				}
+			}
+			
 			if ($_GET['id'] && $row['path']) {
 				// Redirect
-				$req->redirectTo(MARKET_WEB_DIR . '/' . MARKET_LANG . '/marketplace/' . $row['path'] . '/index.html');
+				if ($_GET['action'] == 'preview') {
+					$req->redirectTo(MARKET_WEB_DIR . '/' . MARKET_LANG . '/marketplace/' . $row['path'] . '/index.html?action=preview');
+				}
+				else {
+					$req->redirectTo(MARKET_WEB_DIR . '/' . MARKET_LANG . '/marketplace/' . $row['path'] . '/index.html');
+				}
 			}
 			$row['address'] = ($row['address']) ? $row['address'] . ', ' . $row['city'] : $row['city'];
 			if ($row['prof1']) {
@@ -66,13 +86,22 @@
 				$this->assignGlobal('EDIT.url', $edit_url);
 			}
 			
-			if (!$req->params[2] || $req->params[2] == 'index') {
-				// Main page
-				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='index' AND type<>'page' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY ord";
+			if ($row['path']) {
+				if (!$req->params[2] || $req->params[2] == 'index') {
+					// Main page
+					$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='index' AND type<>'page' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "')";
+				}
+				else {
+					// A page
+					$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='" . sqlEscape($req->params[2]) . "' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "')";
+				}
+				if (!($_SESSION['User']['market_role_id'] == 1 && $_GET['action'] == 'preview')) {
+					$sql .= " AND store_data_ps.publish='1'";
+				}
+				$sql .= " ORDER BY ord";
 			}
 			else {
-				// A page
-				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND (lang='' OR lang='" . MARKET_LANG . "') AND name='" . sqlEscape($req->params[2]) . "' AND (date_from = '0000-00-00' OR date_from < '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to > '" . date('Y-m-d') . "') ORDER BY ord";
+				$sql = "";
 			}
 			
 			if (sqlQuery($sql, $res1)) {

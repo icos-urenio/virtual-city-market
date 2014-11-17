@@ -50,7 +50,7 @@
 									' . htmlspecialchars($row['address']) . '<br />
 									' . $lng->strs['tel'] . '. ' . htmlspecialchars($row['phone']) . '
 								</address>';
-				if ($row['lat'] > 0 && $row['lng'] > 0) {
+				if ($row['lat'] && $row['lng']) {
 					$markers[0] = array(
 						'id' => $row['id'],
 						'title' => $row['title'],
@@ -68,8 +68,8 @@
 						$markers[] = array(
 							'id' => $row['id'],
 							'title' => $row['title'],
-							'lat' => '40.546868',
-							'lng' => '23.020292',
+							'lat' => GMAP_CENTER_LAT,
+							'lng' => GMAP_CENTER_LNG,
 							'infoWindow' => array('content' => $row['html']),
 							'draggable' => true
 						);

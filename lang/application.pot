@@ -10,6 +10,9 @@ msgstr ""
 msgid "Activate your account"
 msgstr ""
 
+msgid "Active"
+msgstr ""
+
 msgid "Add image"
 msgstr ""
 
@@ -37,10 +40,19 @@ msgstr ""
 msgid "Are you sure you want to delete this page?"
 msgstr ""
 
+msgid "Are you sure you want to delete this record?"
+msgstr ""
+
+msgid "Attention! You may be altering multiple directory records."
+msgstr ""
+
 msgid "Authentication"
 msgstr ""
 
 msgid "Back to top"
+msgstr ""
+
+msgid "Be warned that deleting the Store home page is the same as deleting the corresponding marketplace record."
 msgstr ""
 
 msgid "Best regards"
@@ -53,6 +65,9 @@ msgid "Business Directory"
 msgstr ""
 
 msgid "Business details"
+msgstr ""
+
+msgid "Business name"
 msgstr ""
 
 msgid "Byline"
@@ -82,6 +97,9 @@ msgstr ""
 msgid "City Marketplace"
 msgstr ""
 
+msgid "Click here"
+msgstr ""
+
 msgid "Click this link to request the confirmation email again."
 msgstr ""
 
@@ -91,7 +109,13 @@ msgstr ""
 msgid "Close editor"
 msgstr ""
 
+msgid "Comment"
+msgstr ""
+
 msgid "Company name"
+msgstr ""
+
+msgid "Configuration file"
 msgstr ""
 
 msgid "Confirm your new email address at"
@@ -100,7 +124,16 @@ msgstr ""
 msgid "Confirm your registration at"
 msgstr ""
 
+msgid "Connection settings"
+msgstr ""
+
+msgid "Could not generate PIN. Please try again."
+msgstr ""
+
 msgid "Create account"
+msgstr ""
+
+msgid "Create directory"
 msgstr ""
 
 msgid "Create marketplace store"
@@ -109,13 +142,58 @@ msgstr ""
 msgid "Create offer"
 msgstr ""
 
+msgid "Create page"
+msgstr ""
+
+msgid "Create page template"
+msgstr ""
+
+msgid "Create role"
+msgstr ""
+
+msgid "Create store data"
+msgstr ""
+
+msgid "Create user"
+msgstr ""
+
+msgid "Data"
+msgstr ""
+
+msgid "Date from"
+msgstr ""
+
+msgid "Date to"
+msgstr ""
+
 msgid "Dear"
 msgstr ""
 
 msgid "Debug"
 msgstr ""
 
+msgid "Default map center"
+msgstr ""
+
+msgid "Default zoom level"
+msgstr ""
+
 msgid "Delete"
+msgstr ""
+
+msgid "Delete record"
+msgstr ""
+
+msgid "Deleting a category will affect the corresponding directory records."
+msgstr ""
+
+msgid "Deleting a city will affect the corresponding directory records."
+msgstr ""
+
+msgid "Deleting a session will logout the corresponding user!"
+msgstr ""
+
+msgid "Deleting a subcategory will affect the corresponding directory records."
 msgstr ""
 
 msgid "Description"
@@ -130,10 +208,22 @@ msgstr ""
 msgid "Directory"
 msgstr ""
 
+msgid "Directory ID"
+msgstr ""
+
+msgid "Directory administration"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
 msgid "Discount"
 msgstr ""
 
 msgid "Edit"
+msgstr ""
+
+msgid "Edit directory"
 msgstr ""
 
 msgid "Edit links"
@@ -142,7 +232,22 @@ msgstr ""
 msgid "Edit page"
 msgstr ""
 
+msgid "Edit page template"
+msgstr ""
+
+msgid "Edit role"
+msgstr ""
+
+msgid "Edit session"
+msgstr ""
+
 msgid "Edit slider"
+msgstr ""
+
+msgid "Edit store data"
+msgstr ""
+
+msgid "Edit user"
 msgstr ""
 
 msgid "Edit your offer"
@@ -163,6 +268,12 @@ msgstr ""
 msgid "Email address unconfirmed"
 msgstr ""
 
+msgid "Email from"
+msgstr ""
+
+msgid "Enable"
+msgstr ""
+
 msgid "Enter a url for your marketplace store"
 msgstr ""
 
@@ -175,7 +286,16 @@ msgstr ""
 msgid "Enter the price of the discounted item. This is a free text field."
 msgstr ""
 
+msgid "Enter the tableId of a public shared fusion table"
+msgstr ""
+
+msgid "Enter your Google analytics tracking code"
+msgstr ""
+
 msgid "Enter your PIN code"
+msgstr ""
+
+msgid "Error"
 msgstr ""
 
 msgid "Errors"
@@ -184,10 +304,16 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
+msgid "Expires"
+msgstr ""
+
 msgid "Facebook"
 msgstr ""
 
 msgid "Featured Listings"
+msgstr ""
+
+msgid "File"
 msgstr ""
 
 msgid "Find offers"
@@ -196,16 +322,31 @@ msgstr ""
 msgid "First"
 msgstr ""
 
+msgid "First select a category"
+msgstr ""
+
 msgid "Follow us"
 msgstr ""
 
+msgid "For more information read the tutorial at"
+msgstr ""
+
 msgid "Found"
+msgstr ""
+
+msgid "Generate"
 msgstr ""
 
 msgid "Geolocate"
 msgstr ""
 
 msgid "Geolocation failed"
+msgstr ""
+
+msgid "Get your key from"
+msgstr ""
+
+msgid "Get your keys from"
 msgstr ""
 
 msgid "Go"
@@ -220,7 +361,28 @@ msgstr ""
 msgid "Google"
 msgstr ""
 
+msgid "Google Maps API key"
+msgstr ""
+
+msgid "Google analytics"
+msgstr ""
+
+msgid "Google fusion table layer"
+msgstr ""
+
+msgid "Google maps"
+msgstr ""
+
+msgid "HTML Pages"
+msgstr ""
+
+msgid "Hint"
+msgstr ""
+
 msgid "Home"
+msgstr ""
+
+msgid "Html pages administration"
 msgstr ""
 
 msgid "I agree with the"
@@ -235,6 +397,9 @@ msgstr ""
 msgid "Image upload"
 msgstr ""
 
+msgid "Index"
+msgstr ""
+
 msgid "Information in this email including any attachments may be privileged, confidential and is intended exclusively for the addressee. If you are not the intended recipient please notify the sender by return email and delete all copies from your system. You should not reproduce, distribute, store, retransmit, use or disclose its contents to anyone."
 msgstr ""
 
@@ -247,10 +412,22 @@ msgstr ""
 msgid "Last"
 msgstr ""
 
+msgid "Last access"
+msgstr ""
+
+msgid "Latest additions"
+msgstr ""
+
+msgid "Latitude"
+msgstr ""
+
 msgid "Learn more"
 msgstr ""
 
 msgid "Leave the field blank, if you do not want to change your password."
+msgstr ""
+
+msgid "Leave the password blank if you do not wish to change it"
 msgstr ""
 
 msgid "Load this offer on your mobile and show it at the store to get the discount"
@@ -260,6 +437,15 @@ msgid "Local business"
 msgstr ""
 
 msgid "Local businesses should acquire a PIN code from their professional association to access their business information."
+msgstr ""
+
+msgid "Location"
+msgstr ""
+
+msgid "Location not found."
+msgstr ""
+
+msgid "Log"
 msgstr ""
 
 msgid "Log In"
@@ -274,6 +460,12 @@ msgstr ""
 msgid "Login incorrect."
 msgstr ""
 
+msgid "Longitude"
+msgstr ""
+
+msgid "Mail settings"
+msgstr ""
+
 msgid "Manage page"
 msgstr ""
 
@@ -283,7 +475,16 @@ msgstr ""
 msgid "Marketplace"
 msgstr ""
 
+msgid "Marketplace administration"
+msgstr ""
+
+msgid "Marketplace url"
+msgstr ""
+
 msgid "Me"
+msgstr ""
+
+msgid "Message"
 msgstr ""
 
 msgid "More info"
@@ -295,13 +496,28 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+msgid "Name from"
+msgstr ""
+
 msgid "Near me"
+msgstr ""
+
+msgid "New directory"
 msgstr ""
 
 msgid "New offer"
 msgstr ""
 
 msgid "New page"
+msgstr ""
+
+msgid "New page template"
+msgstr ""
+
+msgid "New role"
+msgstr ""
+
+msgid "New user"
 msgstr ""
 
 msgid "New user registration"
@@ -319,16 +535,25 @@ msgstr ""
 msgid "Not implemented"
 msgstr ""
 
+msgid "Note: you cannot edit your current session."
+msgstr ""
+
 msgid "OK"
 msgstr ""
 
 msgid "ORGANIZATION"
 msgstr ""
 
+msgid "Offer title"
+msgstr ""
+
 msgid "Offer valid"
 msgstr ""
 
 msgid "Offers"
+msgstr ""
+
+msgid "Offers administration"
 msgstr ""
 
 msgid "Offers and Coupons"
@@ -349,7 +574,22 @@ msgstr ""
 msgid "Our offers"
 msgstr ""
 
+msgid "Outgoing email"
+msgstr ""
+
+msgid "Owner name"
+msgstr ""
+
 msgid "PIN Code"
+msgstr ""
+
+msgid "PIN code"
+msgstr ""
+
+msgid "Page title"
+msgstr ""
+
+msgid "Pages"
 msgstr ""
 
 msgid "Password"
@@ -406,6 +646,9 @@ msgstr ""
 msgid "Please use the following form to create your user account. All fields are required."
 msgstr ""
 
+msgid "Preview"
+msgstr ""
+
 msgid "Previous"
 msgstr ""
 
@@ -427,10 +670,16 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
+msgid "Related data will not be deleted."
+msgstr ""
+
 msgid "Remember me"
 msgstr ""
 
 msgid "Repeat password"
+msgstr ""
+
+msgid "Required fields"
 msgstr ""
 
 msgid "Reset your password at"
@@ -439,13 +688,40 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
+msgid "Review"
+msgstr ""
+
 msgid "Reviews"
+msgstr ""
+
+msgid "Reviews administration"
+msgstr ""
+
+msgid "Role"
+msgstr ""
+
+msgid "Roles"
 msgstr ""
 
 msgid "SMART CITY SERVICES"
 msgstr ""
 
+msgid "SMTP host"
+msgstr ""
+
+msgid "SMTP password"
+msgstr ""
+
+msgid "SMTP user"
+msgstr ""
+
 msgid "SQL Queries"
+msgstr ""
+
+msgid "SSL/TLS encryption"
+msgstr ""
+
+msgid "Save record"
 msgstr ""
 
 msgid "Save successful"
@@ -463,6 +739,15 @@ msgstr ""
 msgid "Send me the confirmation message again."
 msgstr ""
 
+msgid "Server timezone"
+msgstr ""
+
+msgid "Session ID"
+msgstr ""
+
+msgid "Sessions"
+msgstr ""
+
 msgid "Settings"
 msgstr ""
 
@@ -475,7 +760,19 @@ msgstr ""
 msgid "Site visitor"
 msgstr ""
 
+msgid "Social media"
+msgstr ""
+
 msgid "Social networks"
+msgstr ""
+
+msgid "Store home"
+msgstr ""
+
+msgid "Store pages"
+msgstr ""
+
+msgid "Subcategories"
 msgstr ""
 
 msgid "Subcategory"
@@ -490,13 +787,31 @@ msgstr ""
 msgid "Subtitle"
 msgstr ""
 
+msgid "Suggested fields"
+msgstr ""
+
+msgid "Support email address"
+msgstr ""
+
 msgid "Surname"
+msgstr ""
+
+msgid "Table ID"
+msgstr ""
+
+msgid "Template ID"
+msgstr ""
+
+msgid "Templates"
 msgstr ""
 
 msgid "Terms"
 msgstr ""
 
 msgid "Terms of use"
+msgstr ""
+
+msgid "Text"
 msgstr ""
 
 msgid "The Administration Team"
@@ -541,6 +856,9 @@ msgstr ""
 msgid "The requested action is not implemented"
 msgstr ""
 
+msgid "The resulting url will be"
+msgstr ""
+
 msgid "The title is required."
 msgstr ""
 
@@ -574,10 +892,25 @@ msgstr ""
 msgid "This page requires authentication."
 msgstr ""
 
+msgid "Timestamp"
+msgstr ""
+
+msgid "Timezone"
+msgstr ""
+
 msgid "Title"
 msgstr ""
 
+msgid "Tracking code"
+msgstr ""
+
+msgid "Try to reposition the map above"
+msgstr ""
+
 msgid "Twitter"
+msgstr ""
+
+msgid "Type"
 msgstr ""
 
 msgid "Unconfirmed"
@@ -592,10 +925,19 @@ msgstr ""
 msgid "Update offer"
 msgstr ""
 
+msgid "Update settings"
+msgstr ""
+
 msgid "Update store"
 msgstr ""
 
+msgid "Updated"
+msgstr ""
+
 msgid "Url"
+msgstr ""
+
+msgid "User"
 msgstr ""
 
 msgid "User Reviews"
@@ -613,6 +955,9 @@ msgstr ""
 msgid "User activation mail failed"
 msgstr ""
 
+msgid "User active"
+msgstr ""
+
 msgid "User details"
 msgstr ""
 
@@ -620,6 +965,9 @@ msgid "User log in"
 msgstr ""
 
 msgid "User log out"
+msgstr ""
+
+msgid "User name"
 msgstr ""
 
 msgid "User password change"
@@ -646,6 +994,12 @@ msgstr ""
 msgid "User type"
 msgstr ""
 
+msgid "Users"
+msgstr ""
+
+msgid "Users administration"
+msgstr ""
+
 msgid "Valid from"
 msgstr ""
 
@@ -653,6 +1007,9 @@ msgid "Valid to"
 msgstr ""
 
 msgid "Variables"
+msgstr ""
+
+msgid "View all"
 msgstr ""
 
 msgid "Virtual City Market"
@@ -682,6 +1039,9 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+msgid "Yes, delete it!"
+msgstr ""
+
 msgid "You can enter the PIN code later, in your account settings."
 msgstr ""
 
@@ -689,6 +1049,12 @@ msgid "You can now use your email and password to"
 msgstr ""
 
 msgid "You have something to say?"
+msgstr ""
+
+msgid "You may consider to disable the directory record instead."
+msgstr ""
+
+msgid "You may consider to disable the user instead."
 msgstr ""
 
 msgid "You may select up to three subcategories."
@@ -707,6 +1073,9 @@ msgid "You received this message because you requested instructions to activate 
 msgstr ""
 
 msgid "You received this message because you requested instructions to reset your password at"
+msgstr ""
+
+msgid "You should not delete the default roles of the application!"
 msgstr ""
 
 msgid "You will have to confirm your new email address before you can use it."
@@ -811,6 +1180,9 @@ msgstr ""
 msgid "days"
 msgstr ""
 
+msgid "directory records"
+msgstr ""
+
 msgid "forgot your password?"
 msgstr ""
 
@@ -821,6 +1193,15 @@ msgid "hour"
 msgstr ""
 
 msgid "hours"
+msgstr ""
+
+msgid "is not readable"
+msgstr ""
+
+msgid "is not writable"
+msgstr ""
+
+msgid "marketplace stores"
 msgstr ""
 
 msgid "minute"
@@ -859,6 +1240,18 @@ msgstr ""
 msgid "people"
 msgstr ""
 
+msgid "reCAPTCHA private key"
+msgstr ""
+
+msgid "reCAPTCHA public key"
+msgstr ""
+
+msgid "reCAPTCHA settings"
+msgstr ""
+
+msgid "review"
+msgstr ""
+
 msgid "reviews"
 msgstr ""
 
@@ -872,6 +1265,9 @@ msgid "tel"
 msgstr ""
 
 msgid "to attach an image to your email."
+msgstr ""
+
+msgid "to download a list of location points in your directory"
 msgstr ""
 
 msgid "until"

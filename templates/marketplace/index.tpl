@@ -15,7 +15,7 @@
 			$i = 1;
 			while ($row = sqlFetchAssoc($res)) {
 				$str = '';
-				$sql = "SELECT prof1, prof2, prof3 FROM directory_ml WHERE category='" . sqlEscape($row['category']) . "'";
+				$sql = "SELECT prof1, prof2, prof3 FROM directory_ml WHERE lang='" . MARKET_LANG . "' AND category='" . sqlEscape($row['category']) . "'";
 				if (sqlQuery($sql, $res1)) {
 					$tags = array();
 					while ($row1 = sqlFetchAssoc($res1)) {
@@ -48,7 +48,7 @@
 		}
 		
 		// Cities
-		$sql = "SELECT city FROM directory_ml GROUP BY city";
+		$sql = "SELECT city FROM directory_ml WHERE lang='" . MARKET_LANG . "' GROUP BY city ORDER BY city";
 		if (sqlQuery($sql, $res)) {
 			$cities = array();
 			while ($row = sqlFetchAssoc($res)) {
@@ -63,8 +63,8 @@
 		}
 		
 		$SELECT = "directory.*, directory_ml.*, IF (business_name = '', directory_ml.name, business_name) AS business_title";
-		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps STRAIGHT_JOIN store_data";
-		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory.id=store_data.directory_id AND store_data.type='text' AND directory_ml.lang='" . MARKET_LANG . "' AND directory_ps.publish='1' ORDER BY business_title";
+		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps STRAIGHT_JOIN store_data STRAIGHT_JOIN store_data_ps";
+		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory.id=store_data.directory_id AND store_data.id = store_data_ps.id AND store_data.type='text' AND directory_ml.lang='" . MARKET_LANG . "' AND store_data.lang='" . MARKET_LANG . "' AND directory_ps.publish='1' AND store_data_ps.publish='1' ORDER BY business_title";
 		
 		if ($_GET['q']) {
 			$this->assignGlobal('GET.q', htmlspecialchars($_GET['q']));
@@ -113,7 +113,7 @@
 				}
 				
 				// Rating
-				$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data WHERE name='index' AND type='comment' AND lang='" . MARKET_LANG . "' AND directory_id='" . $row['id'] . "'";
+				$sql = "SELECT COUNT(*) AS count, AVG(rating) AS rating FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND store_data.lang='" . MARKET_LANG . "' AND name='index' AND type='comment' AND rating <> '' AND directory_id='" . $row['id'] . "'";
 				if (sqlQuery($sql, $res1)) {
 					$row1 = sqlFetchAssoc($res1);
 					if ($row1['count']) {

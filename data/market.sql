@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Σύστημα: localhost
--- Χρόνος δημιουργίας: 11 Ιαν 2014, στις 10:46 AM
+-- Χρόνος δημιουργίας: 17 Νοε 2014, στις 01:22 PM
 -- Έκδοση Διακομιστή: 5.5.27
 -- Έκδοση PHP: 5.4.3
 
@@ -84,11 +84,11 @@ INSERT INTO `directory_ml` (`id`, `lang`, `name`, `business_name`, `category`, `
 (3, 'en', '', 'Store #3', 'Food Services', 'This is the byline', 'tag2', '', '', 'Address 03', 'City 02', '1234 567892', 'store3@marketplace', '', '', '', '', ''),
 (4, 'en', '', 'Store #4', 'Food', 'This is the byline', 'tag3', '', '', 'Address 04', 'City 02', '1234 567893', 'store4@marketplace', '', 'facebook', 'twitter', 'google', 'youtube'),
 (5, 'en', '', 'Store #5', 'Food', 'This is the byline', 'tag3', '', '', 'Address 05', 'City 02', '1234 567894', 'store5@marketplace', '', '', '', '', ''),
-(1, 'el', '', 'Store #1', 'Trade', 'This is the byline', 'tag1', '', '', 'Address 01', 'City 01', '1234 567890', 'store1@marketplace', 'http://store1.marketplace', 'facebook ', 'twitter ', 'google ', 'youtube '),
-(2, 'el', '', 'Store #2', 'Trade', 'This is the byline', 'tag1', '', '', 'Address 02', 'City 01', '1234 567891', 'store2@marketplace', '', '', '', '', ''),
-(3, 'el', '', 'Store #3', 'Food Services', 'This is the byline', 'tag2', '', '', 'Address 03', 'City 02', '1234 567892', 'store3@marketplace', '', '', '', '', ''),
-(4, 'el', '', 'Store #4', 'Food', 'This is the byline', 'tag3', '', '', 'Address 04', 'City 02', '1234 567893', 'store4@marketplace', '', '', '', '', ''),
-(5, 'el', '', 'Store #5', 'Food', 'This is the byline', 'tag3', '', '', 'Address 05', 'City 02', '1234 567894', 'store5@marketplace', '', '', '', '', '');
+(1, 'el', '', 'Κατάστημα #1', 'Εμπόριο', 'Αυτός είναι ο υπότιτλος', 'ετικέτα1', '', '', 'Διεύθυνση 01', 'Πόλη 01', '1234 567890', 'store1@marketplace', 'http://store1.marketplace', 'facebook ', 'twitter ', 'google ', 'youtube '),
+(2, 'el', '', 'Κατάστημα #2', 'Εμπόριο', 'Αυτός είναι ο υπότιτλος', 'ετικέτα1', '', '', 'Διεύθυνση 02', 'Πόλη 01', '1234 567891', 'store2@marketplace', '', '', '', '', ''),
+(3, 'el', '', 'Κατάστημα #3', 'Υπηρεσίες φαγητού', 'Αυτός είναι ο υπότιτλος', 'ετικέτα2', '', '', 'Διεύθυνση 03', 'Πόλη 02', '1234 567892', 'store3@marketplace', '', '', '', '', ''),
+(4, 'el', '', 'Κατάστημα #4', 'Φαγητό', 'Αυτός είναι ο υπότιτλος', 'ετικέτα3', '', '', 'Διεύθυνση 04', 'Πόλη 02', '1234 567893', 'store4@marketplace', '', '', '', '', ''),
+(5, 'el', '', 'Κατάστημα #5', 'Φαγητό', 'Αυτός είναι ο υπότιτλος', 'ετικέτα3', '', '', 'Διεύθυνση 05', 'Πόλη 02', '1234 567894', 'store5@marketplace', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -118,11 +118,11 @@ CREATE TABLE IF NOT EXISTS `directory_ps` (
 --
 
 INSERT INTO `directory_ps` (`id`, `creator`, `created`, `owner`, `role`, `updated`, `ups`, `gps`, `wps`, `forward_ids`, `publish`) VALUES
-(1, 1, '2012-10-26 19:56:43', 1, 1, '2012-10-27 11:12:44', 7, 2, 2, '', '1'),
-(2, 1, '2012-10-26 19:56:50', 1, 1, '2012-10-26 19:56:50', 7, 2, 2, '', '1'),
-(3, 1, '2012-10-26 19:56:57', 1, 1, '2012-10-26 19:56:57', 7, 2, 2, '', '1'),
-(4, 1, '2012-10-26 19:57:03', 1, 1, '2012-10-26 19:57:03', 7, 2, 2, '', '1'),
-(5, 1, '2012-10-26 19:57:03', 1, 1, '2012-10-26 19:57:03', 7, 2, 2, '', '1');
+(1, 1, '2012-10-26 19:56:43', 1, 1, '2014-11-17 10:03:09', 7, 2, 2, '', '1'),
+(2, 1, '2012-10-26 19:56:50', 1, 1, '2014-11-17 10:03:18', 7, 2, 2, '', '1'),
+(3, 1, '2012-10-26 19:56:57', 1, 1, '2014-11-17 10:03:23', 7, 2, 2, '', '1'),
+(4, 1, '2012-10-26 19:57:03', 1, 1, '2014-11-17 10:03:29', 7, 2, 2, '', '1'),
+(5, 1, '2012-10-26 19:57:03', 1, 1, '2014-11-17 10:03:36', 7, 2, 2, '', '1');
 
 -- --------------------------------------------------------
 
@@ -137,12 +137,14 @@ CREATE TABLE IF NOT EXISTS `log` (
   `text` text NOT NULL,
   `tstamp` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 'Αδειασμα δεδομένων του πίνακα `log`
 --
 
+INSERT INTO `log` (`id`, `user_id`, `type`, `text`, `tstamp`) VALUES
+(1, 1, 'info', 'User log in', '2014-11-17 09:04:31');
 
 -- --------------------------------------------------------
 
@@ -244,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `page` (
 --
 
 INSERT INTO `page` (`id`, `page_template_id`, `url`, `ord`) VALUES
-(1, 0, 'terms.html', 0);
+(1, 2, 'terms.html', 0);
 
 -- --------------------------------------------------------
 
@@ -268,8 +270,8 @@ CREATE TABLE IF NOT EXISTS `page_ml` (
 --
 
 INSERT INTO `page_ml` (`id`, `lang`, `stitle`, `summary`, `title`, `text`, `is_type`) VALUES
-(1, 'el', '', '', 'Όροι χρήσης', '', 'passthrough'),
-(1, 'en', '', '', 'Terms of use', '', 'passthrough');
+(1, 'el', '', '', 'Όροι χρήσης', '', 'template'),
+(1, 'en', '', '', 'Terms of use', '', 'template');
 
 -- --------------------------------------------------------
 
@@ -299,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `page_ps` (
 --
 
 INSERT INTO `page_ps` (`id`, `creator`, `created`, `owner`, `role`, `updated`, `ups`, `gps`, `wps`, `forward_ids`, `publish`) VALUES
-(1, 1, '2012-11-14 23:12:30', 1, 1, '2012-11-14 23:12:30', 7, 2, 2, '', '1');
+(1, 1, '2012-11-14 23:12:30', 1, 1, '2014-11-17 12:04:03', 7, 2, 2, '', '1');
 
 -- --------------------------------------------------------
 
@@ -312,12 +314,15 @@ CREATE TABLE IF NOT EXISTS `page_template` (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 'Αδειασμα δεδομένων του πίνακα `page_template`
 --
 
+INSERT INTO `page_template` (`id`, `name`) VALUES
+(1, 'layouts/1-column'),
+(2, 'layouts/terms');
 
 -- --------------------------------------------------------
 
@@ -341,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `store_data` (
   `data` longtext NOT NULL,
   `ord` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- 'Αδειασμα δεδομένων του πίνακα `store_data`
@@ -364,7 +369,10 @@ INSERT INTO `store_data` (`id`, `directory_id`, `lang`, `date_from`, `date_to`, 
 (14, 2, 'en', '0000-00-00', '0000-00-00', 'text', 'index', '', '0', 0, 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac lacus sed est eleifend egestas non sed nulla. Sed bibendum rhoncus tincidunt. Phasellus non purus vitae nisl fringilla ultrices. Nam aliquet vehicula eleifend. Curabitur mollis turpis eu orci commodo et varius lacus suscipit. Nunc dapibus erat a leo ultrices dictum. Aenean porttitor mi nec elit dignissim sollicitudin. Duis elit neque, vehicula vel suscipit ac, sagittis non odio. Praesent a lorem sed nibh ornare faucibus et vitae turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lacus lorem, hendrerit et congue vitae, porta vitae ipsum. Donec eu posuere leo. Donec ut neque ut quam tincidunt blandit vitae vitae sem. Mauris pretium ultricies egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;', 0),
 (15, 2, '', '0000-00-00', '0000-00-00', 'image', 'index', '', '0', 0, 0, '', 'uploads/2/placeholder.jpg', 1),
 (16, 1, 'en', '0000-00-00', '0000-00-00', 'comment', 'index', '', '0', 0, 18, '8|2', 'Duis suscipit massa sed lorem lobortis fermentum. Sed dui odio, consectetur eu bibendum ultricies, feugiat sit amet dui. Nunc aliquam tempor turpis eu venenatis. Phasellus adipiscing, velit a vulputate lacinia, mauris est rhoncus quam, eget pretium tortor erat sit amet ante. Nam sollicitudin, quam vel porttitor faucibus, nibh lacus aliquam orci, quis commodo orci libero consequat felis. Integer odio diam, tempor nec tristique sed, dictum in libero. Suspendisse eu sem dolor. Nunc tempus rutrum fermentum. Pellentesque sapien ligula, viverra pretium eleifend nec, dictum in sem. Ut accumsan sollicitudin suscipit. Nullam eu magna non massa tincidunt rhoncus at et nisl. Ut tristique posuere hendrerit. Praesent sit amet odio ac nulla malesuada pharetra quis sed eros. ', 0),
-(17, 1, 'en', '0000-00-00', '0000-00-00', 'comment', 'index', '', '0', 0, 16, '', 'Curabitur lorem justo, eleifend ac dapibus mollis, venenatis quis lorem. Fusce varius scelerisque nulla quis mollis.', 0);
+(17, 1, 'en', '0000-00-00', '0000-00-00', 'comment', 'index', '', '0', 0, 16, '', 'Curabitur lorem justo, eleifend ac dapibus mollis, venenatis quis lorem. Fusce varius scelerisque nulla quis mollis.', 0),
+(18, 1, 'el', '0000-00-00', '0000-00-00', 'text', 'index', '', '0', 0, 0, '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac lacus sed est eleifend egestas non sed nulla. Sed bibendum rhoncus tincidunt. Phasellus non purus vitae nisl fringilla ultrices. Nam aliquet vehicula eleifend. Curabitur mollis turpis eu orci commodo et varius lacus suscipit. Nunc dapibus erat a leo ultrices dictum. Aenean porttitor mi nec elit dignissim sollicitudin. Duis elit neque, vehicula vel suscipit ac, sagittis non odio. Praesent a lorem sed nibh ornare faucibus et vitae turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lacus lorem, hendrerit et congue vitae, porta vitae ipsum. Donec eu posuere leo. Donec ut neque ut quam tincidunt blandit vitae vitae sem. Mauris pretium ultricies egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;', 0),
+(19, 1, 'el', '0000-00-00', '2015-01-31', 'coupon', 'coupon-001', 'Offer #01', '50€', 40, 0, '', 'Curabitur lorem justo, eleifend ac dapibus mollis, venenatis quis lorem. Fusce varius scelerisque nulla quis mollis. Cras ultrices dapibus massa, vel imperdiet tellus faucibus nec. Proin ac tristique enim. Suspendisse nisi risus, commodo sed ultricies in, venenatis id est. Proin id sagittis mauris. Etiam aliquam lorem ac neque lobortis tempor elementum mi porta.', 1),
+(20, 1, 'el', '0000-00-00', '0000-00-00', 'comment', 'index', '', '0', 0, 18, '8|2', 'Duis suscipit massa sed lorem lobortis fermentum. Sed dui odio, consectetur eu bibendum ultricies, feugiat sit amet dui. Nunc aliquam tempor turpis eu venenatis. Phasellus adipiscing, velit a vulputate lacinia, mauris est rhoncus quam, eget pretium tortor erat sit amet ante. Nam sollicitudin, quam vel porttitor faucibus, nibh lacus aliquam orci, quis commodo orci libero consequat felis. Integer odio diam, tempor nec tristique sed, dictum in libero. Suspendisse eu sem dolor. Nunc tempus rutrum fermentum. Pellentesque sapien ligula, viverra pretium eleifend nec, dictum in sem. Ut accumsan sollicitudin suscipit. Nullam eu magna non massa tincidunt rhoncus at et nisl. Ut tristique posuere hendrerit. Praesent sit amet odio ac nulla malesuada pharetra quis sed eros. ', 0);
 
 -- --------------------------------------------------------
 
@@ -394,20 +402,23 @@ CREATE TABLE IF NOT EXISTS `store_data_ps` (
 --
 
 INSERT INTO `store_data_ps` (`id`, `creator`, `created`, `owner`, `role`, `updated`, `ups`, `gps`, `wps`, `forward_ids`, `publish`) VALUES
-(1, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-27 11:10:14', 7, 2, 2, '', '1'),
-(2, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(3, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(4, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(5, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(6, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(7, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(8, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(9, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(10, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(11, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(12, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(13, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(1, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-27 11:10:14', 7, 2, 2, '', '1'),
+(2, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(3, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(4, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(5, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(6, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(7, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(8, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(9, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(10, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(11, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(12, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(13, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
 (14, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
 (15, 1, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(16, 2, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
-(17, 3, '2012-10-26 20:02:50', 1, 1, '2012-10-26 20:02:55', 7, 2, 2, '', '1');
+(16, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(17, 3, '2012-10-26 20:02:50', 3, 3, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(18, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(19, 2, '2012-10-26 20:02:50', 2, 2, '2012-10-26 20:02:55', 7, 2, 2, '', '1'),
+(20, 3, '2012-10-26 20:02:50', 3, 3, '2012-10-26 20:02:55', 7, 2, 2, '', '1');

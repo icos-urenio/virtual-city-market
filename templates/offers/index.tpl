@@ -15,7 +15,7 @@
 			$i = 1;
 			while ($row = sqlFetchAssoc($res)) {
 				$str = '';
-				$sql = "SELECT prof1, prof2, prof3 FROM directory_ml WHERE category='" . sqlEscape($row['category']) . "'";
+				$sql = "SELECT prof1, prof2, prof3 FROM directory_ml WHERE lang='" . MARKET_LANG . "' AND category='" . sqlEscape($row['category']) . "'";
 				if (sqlQuery($sql, $res1)) {
 					$tags = array();
 					while ($row1 = sqlFetchAssoc($res1)) {
@@ -48,7 +48,7 @@
 		}
 		
 		// Cities
-		$sql = "SELECT city FROM directory_ml GROUP BY city";
+		$sql = "SELECT city FROM directory_ml WHERE lang='" . MARKET_LANG . "' GROUP BY city ORDER BY city";
 		if (sqlQuery($sql, $res)) {
 			$cities = array();
 			while ($row = sqlFetchAssoc($res)) {
@@ -63,8 +63,8 @@
 		}
 		
 		$SELECT = "store_data.*, directory.path";
-		$FROM = "store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml";
-		$WHERE = "store_data.id=store_data_ps.id AND store_data.directory_id=directory.id AND store_data.directory_id=directory_ml.id AND store_data_ps.publish='1' AND (store_data.lang='' OR store_data.lang='" . MARKET_LANG . "') AND directory_ml.lang='" . MARKET_LANG . "' AND type='coupon' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "') ORDER BY created DESC";
+		$FROM = "store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps";
+		$WHERE = "store_data.id=store_data_ps.id AND store_data.directory_id=directory.id AND store_data.directory_id=directory_ml.id AND store_data.directory_id=directory_ps.id AND directory_ps.publish='1' AND store_data_ps.publish='1' AND (store_data.lang='' OR store_data.lang='" . MARKET_LANG . "') AND directory_ml.lang='" . MARKET_LANG . "' AND type='coupon' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "') ORDER BY store_data_ps.created DESC";
 		
 		if ($_GET['q']) {
 			$this->assignGlobal('GET.q', htmlspecialchars($_GET['q']));
