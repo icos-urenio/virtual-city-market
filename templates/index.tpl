@@ -4,13 +4,17 @@
 		
 		// Featured
 		$SELECT = "directory.*, directory_ml.*, IF (business_name = '', directory_ml.name, business_name) AS business_title, store_data.data AS image";
-		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps STRAIGHT_JOIN store_data";
-		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory.id=store_data.directory_id AND store_data.name='index' AND store_data.type='image' AND directory_ml.lang='" . MARKET_LANG . "' AND directory_ps.publish='1'";
+		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps STRAIGHT_JOIN store_data STRAIGHT_JOIN store_data_ps";
+		$WHERE = "directory.id=directory_ml.id AND directory.id=directory_ps.id AND directory.id=store_data.directory_id AND store_data.id=store_data_ps.id AND store_data.name='index' AND store_data.type='text' AND directory_ml.lang='" . MARKET_LANG . "' AND store_data.lang='" . MARKET_LANG . "' AND directory_ps.publish='1' AND store_data_ps.publish='1'";
 		$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE GROUP BY directory.id ORDER BY RAND() LIMIT 0,4";
 		if (sqlQuery($sql, $res)) {
 			while ($row = sqlFetchAssoc($res)) {
 				$row['address'] = ($row['address']) ? $row['address'] . ', ' . $row['city'] : $row['city'];
-				$row['image'] = MARKET_Filter::createThumbnail($row['image'], '270x230', true, 'class="photo"');
+				$sql = "SELECT data AS image FROM store_data WHERE name='index' AND type='image' AND directory_id='" . sqlEscape($row['id']) . "'";
+				if (sqlQuery($sql, $res1)) {
+					$row1 = sqlFetchAssoc($res1);
+					$row['image'] = MARKET_Filter::createThumbnail($row1['image'], '270x230', true, 'class="photo"');
+				}
 				$this->assignLocal('featured', 'ROW', $row);
 				$this->lightParseTemplate('FEATURED', 'featured');
 			}
@@ -21,8 +25,8 @@
 		
 		// Coupons
 		$SELECT = "store_data.*, directory.path";
-		$FROM = "store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml";
-		$WHERE = "store_data.id=store_data_ps.id AND store_data.directory_id=directory.id AND store_data.directory_id=directory_ml.id AND store_data_ps.publish='1' AND (store_data.lang='' OR store_data.lang='" . MARKET_LANG . "') AND directory_ml.lang='" . MARKET_LANG . "' AND type='coupon' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "')";
+		$FROM = "store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps";
+		$WHERE = "store_data.id=store_data_ps.id AND store_data.directory_id=directory.id AND store_data.directory_id=directory_ml.id AND store_data.directory_id=directory_ps.id AND store_data_ps.publish='1' AND directory_ps.publish='1' AND (store_data.lang='' OR store_data.lang='" . MARKET_LANG . "') AND directory_ml.lang='" . MARKET_LANG . "' AND type='coupon' AND (date_from = '0000-00-00' OR date_from <= '" . date('Y-m-d') . "') AND (date_to = '0000-00-00' OR date_to >= '" . date('Y-m-d') . "')";
 		$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE GROUP BY directory.id ORDER BY RAND() LIMIT 0,4";
 		if (sqlQuery($sql, $res)) {
 			while ($row = sqlFetchAssoc($res)) {
@@ -203,7 +207,7 @@
 		<div class="clearfix"></div>
 		
 		<template name="coupon_cnt">
-			<!--div class="row">
+			<div class="row">
 				<section id="featured-listings">
 					<h3 class="border-bottom span12" style="margin-top: 30px;"><span>{LANG.Offers}</span></h3>
 					<template name="coupon">
@@ -221,7 +225,7 @@
 						</article>
 					</template>
 				</section>
-			</div-->
+			</div>
 		</template>
 		
 		<div class="clearfix"></div>
