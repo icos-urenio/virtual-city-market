@@ -20,8 +20,11 @@ VirtualCityMarket's source code is licensed under the [GNU Affero General Public
     RewriteRule . /virtual-city-market/index.php [L]
 
 ## Default passwords
+
 root - login: root, password: root
+
 business - login: business, password: business
+
 user - login: user, password: user
 
 ## Changelog
