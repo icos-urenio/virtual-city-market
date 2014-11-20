@@ -350,3 +350,5 @@ body { background:#efefef; font-size: 15px; font-family: Calibri, "Helvetica Neu
 		background-repeat:no-repeat;
 		background-position:center;
 	}
+	
+	.gm-style-iw > div { width: 100% !important; }

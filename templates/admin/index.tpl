@@ -4,8 +4,6 @@
 		
 		if (defined('IN_MARKET')) {
 			
-			// LANG.Cancel
-			
 			$req =& $this->getRef('Request');
 			
 			if ($req->params[1] == 'preview' && $_GET['url']) {
@@ -22,7 +20,7 @@
 					case 'download_list':
 						$sql = "SELECT lat, lng FROM directory WHERE lat <> 0 AND lng <> 0";
 						if (sqlQuery($sql, $res)) {
-							$str = '';
+							$str = 'Location' . "\n";
 							while ($row = sqlFetchAssoc($res)) {
 								$str .= $row['lat'] . ',' . $row['lng'] . "\n";
 							}
@@ -61,7 +59,7 @@
 			$valid_tabs = array(
 				'index' 		=> array('', 'settings', 'log'),
 				'users' 		=> array('index', 'roles', 'sessions'),
-				'directory' 	=> array('index', 'cities', 'categories', 'subcategories'),
+				'directory' 	=> array('index', 'cities', 'categories', 'subcategories', 'tools' => array('import', 'export', 'generate_pins', 'geocode')),
 				'marketplace'	=> array('index', 'store_pages'),
 				'offers' 		=> array('index'),
 				'reviews' 		=> array('index'),
@@ -69,17 +67,38 @@
 			);
 			
 			$count_params = count($req->params) - 1;
-			if ($count_params > 1) {
-				if (in_array($req->params[$count_params], $valid_actions)) {
-					if ($count_params > 2) {
-						if (!in_array($req->params[2], $valid_tabs[$req->params[1]])) {
-							$req->httpError(404); // Not found
+			switch ($count_params) {
+				case 1:
+					if ($req->params[1] != 'index') $req->httpError(404);
+				break;
+				case 2:
+					if (in_array($req->params[$count_params], $valid_actions)) {
+						if (!is_array($valid_tabs[$req->params[1]])) $req->httpError(404);
+					}
+					else {
+						$req->httpError(404);
+					}
+				break;
+				case 3:
+					if (in_array($req->params[$count_params], $valid_actions)) {
+						if (is_array($valid_tabs[$req->params[1]])) {
+							if (!in_array($req->params[2], $valid_tabs[$req->params[1]])) $req->httpError(404);
+						}
+						else {
+							$req->httpError(404);
 						}
 					}
-				}
-				else {
-					$req->httpError(404); // Not found
-				}
+					else {
+						if (is_array($valid_tabs[$req->params[1]][$req->params[2]])) {
+							if (!in_array($req->params[3], $valid_tabs[$req->params[1]][$req->params[2]])) $req->httpError(404);
+						}
+						else {
+							$req->httpError(404);
+						}
+					}
+				break;
+				default:
+					$req->httpError(404);
 			}
 			
 			$tables = array (
@@ -91,6 +110,7 @@
 				'cities' 		=> array('directory', 'directory_ml', 'directory_ps'),
 				'categories'	=> array('directory', 'directory_ml', 'directory_ps'),
 				'subcategories'	=> array('directory', 'directory_ml', 'directory_ps'),
+				'tools'		 	=> array('directory', 'directory_ml', 'directory_ps'),
 				'marketplace' 	=> array('store_data', 'store_data_ps'),
 				'store_pages' 	=> array('store_data', 'store_data_ps'),
 				'store_files' 	=> array('store_data', 'store_data_ps'),
@@ -242,7 +262,7 @@
 									'id',
 									'session_id' => array('Label' => __('Session ID')),
 									'expires' => array('Label' => __('Expires')),
-									'data' => array('Label' => __('Data'), 'Help' => __('Note: you cannot edit your current session.'))
+									'data' => array('Label' => __('Data'), 'Help' => __('Note') . ': ' . __('You cannot edit your current session.'))
 								),
 								'directory' => array(
 									'id',
@@ -323,9 +343,9 @@
 								unset($fields['user_password']['Help']);
 							}
 							
+							// Load values
 							$values = array();
 							if ($_GET['id']) {
-								// Load values
 								switch (count($tables)) {
 									case 1:
 										if ($tables[0] == 'market_user') {
@@ -452,6 +472,7 @@
 											foreach ($sqls as $sql) {
 												sqlQuery($sql, $res);
 											}
+											unset($_SESSION['NAV.Vars']);
 										}
 										$req->redirectTo(MARKET_WEB_DIR . '/' . dirname($req->url) . '/index.html');
 									}
@@ -521,7 +542,7 @@
 											foreach ($sqls as $sql) {
 												sqlQuery($sql, $res);
 											}
-											
+											unset($_SESSION['NAV.Vars']);
 										}
 										$req->redirectTo(MARKET_WEB_DIR . '/' . dirname($req->url) . '/index.html');
 									}
@@ -720,6 +741,7 @@
 								foreach ($sqls as $sql) {
 									sqlQuery($sql, $res);
 								}
+								unset($_SESSION['NAV.Vars']);
 								$req->redirectTo(MARKET_WEB_DIR . '/' . dirname($req->url) . '/index.html');
 							}
 							else {
@@ -737,9 +759,8 @@
 						// Needed for map position
 						$this->assignGlobal('PAGE.Class', 'home');
 						
-						// Enable templates
+						// Enable template
 						$this->enableTemplate('settings');
-						$this->enableTemplate('settings_js');
 						
 						// Load config
 						$config = MARKET_ROOT_DIR . '/config.inc.php';
@@ -749,7 +770,7 @@
 							if (@is_writable($config)) {
 								if ($_POST && count($_POST)) {
 									
-									$valid_vars = array('MARKET_TIMEZONE', 'MARKET_SMTP_HOST', 'MARKET_SMTP_USER', 'MARKET_SMTP_PASS', 'MARKET_SMTP_FROM', 'MARKET_SMTP_FROM_NAME', 'SUPPORT_EMAIL', 'ANALYTICS_TRACKING_CODE', 'GMAP_API_KEY', 'GMAP_CENTER_LAT', 'GMAP_CENTER_LNG', 'FUSION_TABLE_LAYER', 'RECAPTCHA_PRIVATE_KEY', 'RECAPTCHA_PUBLIC_KEY');
+									$valid_vars = array('MARKET_TIMEZONE', 'MARKET_SMTP_HOST', 'MARKET_SMTP_USER', 'MARKET_SMTP_PASS', 'MARKET_SMTP_FROM', 'MARKET_SMTP_FROM_NAME', 'SUPPORT_EMAIL', 'ANALYTICS_TRACKING_CODE', 'GMAP_API_KEY', 'GMAP_CENTER_LAT', 'GMAP_CENTER_LNG', 'GMAP_CENTER_ZOOM', 'FUSION_TABLE_LAYER', 'RECAPTCHA_PRIVATE_KEY', 'RECAPTCHA_PUBLIC_KEY');
 									
 									$str = '';
 									$counti = count($lines);
@@ -829,11 +850,10 @@
 					default:
 						// Index
 						$this->enableTemplate('index');
-						$this->enableTemplate('index_js');
 						
 						// Statistics
 						$stats = array();
-						$sql = "SELECT COUNT(*) FROM directory";
+						$sql = "SELECT COUNT(*) FROM directory_ml WHERE lang='" . MARKET_LANG . "'";
 						if (sqlQuery($sql, $res)) {
 							$stats['directory'] = sqlResult($res, 0);
 						}
@@ -852,12 +872,14 @@
 						$this->assignGlobal('STATS', $stats);
 						
 						// Latest
+						$found = false;
 						$sqls['directory'] = "SELECT IF(business_name <> '', business_name, name) AS business_name, '', '' FROM directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps WHERE directory.id = directory_ml.id AND directory.id = directory_ps.id AND lang='" . MARKET_LANG . "' ORDER BY created DESC LIMIT 0,3";
 						$sqls['marketplace'] = "SELECT IF(directory_ml.business_name <> '', directory_ml.business_name, directory_ml.name) AS business_name, '', CONCAT('marketplace/' , path, '/index.html') AS preview FROM store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps WHERE store_data.id = store_data_ps.id AND store_data.directory_id = directory.id AND directory.id = directory_ml.id AND directory.id = directory_ps.id AND store_data.lang='" . MARKET_LANG . "' AND  directory_ml.lang='" . MARKET_LANG . "' AND store_data.name='index' AND store_data.type='text' ORDER BY store_data_ps.created DESC LIMIT 0,3";
 						$sqls['offers'] = "SELECT IF(directory_ml.business_name <> '', directory_ml.business_name, directory_ml.name) AS business_name, store_data.title, CONCAT('offers/' , path, '/', store_data.name, '.html') AS preview FROM store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps WHERE store_data.id = store_data_ps.id AND store_data.directory_id = directory.id AND directory.id = directory_ml.id AND directory.id = directory_ps.id AND store_data.lang='" . MARKET_LANG . "' AND  directory_ml.lang='" . MARKET_LANG . "' AND store_data.type='coupon' ORDER BY store_data_ps.created DESC LIMIT 0,3";
 						$sqls['reviews'] = "SELECT IF(directory_ml.business_name <> '', directory_ml.business_name, directory_ml.name) AS business_name, data, CONCAT('reviews/' , path, '/show.html#comment', store_data.id) AS preview FROM store_data STRAIGHT_JOIN store_data_ps STRAIGHT_JOIN directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps WHERE store_data.id = store_data_ps.id AND store_data.directory_id = directory.id AND directory.id = directory_ml.id AND directory.id = directory_ps.id AND store_data.lang='" . MARKET_LANG . "' AND  directory_ml.lang='" . MARKET_LANG . "' AND store_data.type='comment' ORDER BY store_data_ps.created DESC LIMIT 0,3";
 						foreach ($sqls as $name => $sql) {
 							if (sqlQuery($sql, $res)) {
+								$found = true;
 								$str = '<table class="latest table table-striped" style="margin: 0;">';
 								while ($row = sqlFetchAssoc($res)) {
 									$str .= '<tr>';
@@ -876,6 +898,503 @@
 								$this->parseTemplate('LATEST', 'latest');
 							}
 						}
+						if (!$found) {
+							$this->disableTemplate('latest');
+							$this->assignGlobal('LATEST', __('Nothing found'));
+						}
+				}
+			}
+			else if ($req->params[1] == 'directory' && $req->params[2] == 'tools') {
+				// Tools
+				// {LANG.Tools}
+				// {LANG.Import}
+				// {LANG.Export}
+				// {LANG.Generate pins}
+				// {LANG.Geocode}
+				
+				$this->disableTemplate('search-results');
+				$this->enableTemplate($req->params[3]);
+				
+				switch ($req->params[3]) {
+					case 'import':
+						// Import
+						
+						// Copied from above and mildly modified
+						$fields = array(
+							'id' => array('Label' => 'ID'),
+							'category' => array('Suggested' => true, 'Type' => 'varchar', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.category"'),
+							'prof1' => array('Group' => __('Subcategories'), 'Label' => __('Subcategory') . ' 1', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.prof"'),
+							'prof2' => array('Group' => __('Subcategories'), 'Label' => __('Subcategory') . ' 2', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.prof"'),
+							'prof3' => array('Group' => __('Subcategories'), 'Label' => __('Subcategory') . ' 3', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.prof"', 'Help' => '<b>' . __('Hint') . ':</b> ' . __('First select a category')),
+							'name' => array('Type' => 'varchar', 'Label' => __('Owner name')),
+							'business_name' => array('Suggested' => true, 'Type' => 'varchar'),
+							'byline' => array('Type' => 'varchar'),
+							'address' => array('Suggested' => true),
+							'city' => array('Suggested' => true, 'Type' => 'varchar', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.city"'),
+							'phone' => array('Suggested' => true, 'Type' => 'varchar'),
+							'email' => array('Type' => 'varchar'),
+							'url' => array('Type' => 'varchar'),
+							'facebook' => array('Group' => __('Social media')),
+							'twitter' => array('Group' => __('Social media')),
+							'google' => array('Group' => __('Social media'), 'Label' => 'Google plus'),
+							'youtube' => array('Group' => __('Social media'), 'Label' => 'YouTube')
+						);
+						
+						foreach ($fields as $key => $field) {
+							if (is_array($field)) {
+								$fields[$key] = array_merge($all_fields[$key], $field);
+							}
+							else {
+								$fields[$key] = $all_fields[$field];
+							}
+						}
+						foreach ($fields as $key => $field) {
+							if (!isset($field['Label'])) $fields[$key]['Label'] = __(ucfirst(preg_replace('@\bid\b@', 'ID', preg_replace('@_@', ' ', $field['Field']))));
+						}
+						
+						$dir = MARKET_ROOT_DIR . '/uploads/import';
+						$file = $dir . '/' . session_id() . 'catalog.xls';
+						
+						if (($_POST && count($_POST)) || $_FILES) {
+							// Something posted
+							
+							if ($_POST['response'] == 'ok') {
+								$this->disableTemplate('upload-preview');
+								
+								// Actual import
+								if ($_POST['columns'] && preg_match('@[^,]@', $_POST['columns'])) {
+									
+									// Save configuration
+									$auth =& $this->getRef('Auth');
+									$auth->saveUserData('import_columns', $_POST['columns']);
+									
+									$columns = explode(',', $_POST['columns']);
+									
+									require_once(MARKET_ROOT_DIR . '/redist/php-excel-reader/excel_reader2.php');
+									$wbk = new Spreadsheet_Excel_Reader($file);
+									
+									// Select first sheet
+									$wst = $wbk->sheets[0];
+									
+									$start_at = 0;
+									if ($_POST['has_headers']) { $start_at = 1; }
+									
+									$i = 0; $k = 0;
+									while ($i < $wst['numRows']) {
+										$i++;
+										$found = false;
+										for ($j = 1; $j <= $wst['numCols']; $j++) {
+											if (trim($wst['cells'][$i][$j])) {
+												$found = true;
+												break;
+											}
+										}
+										if ($found) {
+											if ($k >= $start_at) {
+												$found = false;
+												$sql_fields = array();
+												for ($j = 1; $j <= $wst['numCols']; $j++) {
+													if ($columns[$j - 1]) {
+														$field = $fields[$columns[$j - 1]];
+														if ($field['Field'] == 'id') $found = trim($wst['cells'][$i][$j]);
+														$sql_fields[$field['Table']][0] .= "`" . sqlEscape($field['Field']) . "`, ";
+														$sql_fields[$field['Table']][1] .= "'" . sqlEscape(preg_replace('@\n@', '\n', getCorrectString($wst['cells'][$i][$j]))) . "', ";
+													}
+												}
+												if ($found) {
+													$id = $found;
+													if ($sql_fields[$tables[1]][0] = substr($sql_fields[$tables[1]][0], 0, -2)) {
+														$sql = "REPLACE INTO `" . sqlEscape($tables[1]) . "` (id, lang, " . $sql_fields[$tables[1]][0] . ") VALUES ('" . sqlEscape($id) . "', '" . MARKET_LANG . "', " . substr($sql_fields[$tables[1]][1], 0, -2) . ")";
+													}
+													sqlQuery($sql, $res);
+													$sql = "UPDATE `" . sqlEscape($tables[2]) . "` SET updated=NOW() WHERE id='" . sqlEscape($id) . "'";
+													if (!sqlQuery($sql, $res)) {
+														$sql = "INSERT INTO `" . sqlEscape($tables[2]) . "` (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . sqlEscape($id) . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '1')";
+														sqlQuery($sql, $res);
+													}
+												}
+												else {
+													$sql_fields[$tables[0]][0] = "`id`, " . $sql_fields[$tables[0]][0];
+													$sql_fields[$tables[0]][1] = "'', " . $sql_fields[$tables[0]][1];
+													$sql = "INSERT INTO `" . sqlEscape($tables[0]) . "` (" . substr($sql_fields[$tables[0]][0], 0, -2) . ") VALUES (" . substr($sql_fields[$tables[0]][1], 0, -2) . ")";
+													if ($id = sqlQuery($sql, $res)) {
+														if ($sql_fields[$tables[1]][0] = substr($sql_fields[$tables[1]][0], 0, -2)) {
+															$sql = "INSERT INTO `" . sqlEscape($tables[1]) . "` (id, lang, " . $sql_fields[$tables[1]][0] . ") VALUES ('" . sqlEscape($id) . "', '" . MARKET_LANG . "', " . substr($sql_fields[$tables[1]][1], 0, -2) . ")";
+														}
+														else {
+															$sql = "INSERT INTO `" . sqlEscape($tables[1]) . "` (id, lang) VALUES ('" . sqlEscape($id) . "', '" . MARKET_LANG . "')";
+														}
+														sqlQuery($sql, $res);
+														
+														$lng =& $this->getRef('Lang');
+														$langs = $lng->getAvailable();
+														foreach ($langs as $lang) {
+															if ($lang != MARKET_LANG) {
+																$sql = "INSERT INTO `" . sqlEscape($tables[1]) . "` (id, lang) VALUES ('" . sqlEscape($id) . "', '" . sqlEscape($lang) . "')";
+																sqlQuery($sql, $res);
+															}
+														}
+														
+														$sql = "INSERT INTO `" . sqlEscape($tables[2]) . "` (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . sqlEscape($id) . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '1')";
+														sqlQuery($sql, $res);
+													}
+												}
+												if ($_POST['auto_generate'] && $id) {
+													// Auto generated PIN
+													$sql = "SELECT pin FROM directory WHERE id='" . sqlEscape($id) . "'";
+													if (sqlQuery($sql, $res)) {
+														if (!sqlResult($res, 0)) {
+															// Generate PIN
+															$l = 0;
+															$pin = 0;
+															while ($l < 10) { // Try at most 10 times to create a unique code
+																$pin = rand(1, 9999);
+																$sql = "SELECT * FROM directory WHERE pin='" . sqlEscape($pin) . "'";
+																if (!sqlQuery($sql, $res)) {
+																	break; // Pin OK
+																}
+																$l++;
+															}
+															if ($pin) {
+																$sql = "UPDATE directory SET pin = '" . sqlEscape(sprintf('%04d', $pin)) . "' WHERE id='" . sqlEscape($id) . "'";
+																sqlQuery($sql, $res);
+															}
+															else {
+																// Fail silently
+															}
+														}
+													}
+												}
+												if ($_POST['auto_geocode'] && $id) {
+													$sql = "SELECT address, city FROM directory_ml WHERE lang='" . MARKET_LANG . "' AND id='" . sqlEscape($id) . "'";
+													if (sqlQuery($sql, $res)) {
+														$row = sqlFetchAssoc($res);
+														$base_url = "https://maps.googleapis.com/maps/api/geocode/xml?key=" . GMAP_API_KEY;
+														$address = $row['address'] . ', ' . $row['city'];
+														$request_url = $base_url . "&address=" . urlencode($address);
+														$xml = simplexml_load_file($request_url);
+														if ($xml->status == 'OK') {
+															// Successful geocode
+															$lat = $xml->result->geometry->location->lat;
+															$lng = $xml->result->geometry->location->lng;
+															$sql = "UPDATE directory SET lat = '" . sqlEscape($lat) . "', lng = '" . sqlEscape($lng) . "' WHERE id = '" . sqlEscape($id) . "' LIMIT 1";
+															sqlQuery($sql, $res);
+														}
+													}
+												}
+											}
+											$k++;
+										}
+									}
+									$str = '<div class="alert alert-info alert-block">';
+										$str .= '<p>' . __('Import successful') . '. ' . __('Number of imported records') . ': ' . $k . '.</p>';
+									$str .= '</div>';
+									unset($_SESSION['NAV.Vars']);
+								}
+								else {
+									$str = '<div class="alert alert-error alert-block">';
+										$str .= '<p>' . __('No columns selected') . '. ' . __('Nothing imported') . '.</p>';
+									$str .= '</div>';
+								}
+								$this->assignGlobal('UPLOAD_MESSAGE', $str);
+								unlink($file);
+							}
+							else if ($_POST['response'] == 'cancel') {
+								// Cancel
+								$this->disableTemplate('upload-preview');
+								$str = '<div class="alert alert-warning alert-block">';
+									$str .= '<p>' . __('Import canceled') . '.</p>';
+								$str .= '</div>';
+								@unlink($file);
+								$this->assignGlobal('UPLOAD_MESSAGE', $str);
+							}
+							else if ($_FILES) {
+								if ($this->makeDir($dir)) {
+									if (preg_match('@\.xls@', $_FILES['file']['name'])) {
+										// Move file to temporary location
+										if (@move_uploaded_file($_FILES['file']['tmp_name'], $file)) {
+											// Redirect
+											$req->redirectTo(MARKET_WEB_DIR . '/' . $req->url);
+										}
+										else {
+											$this->disableTemplate('upload-preview');
+											$str = '<div class="alert alert-error alert-block">';
+												$str .= '<p>' . __('Cannot copy the file to the temporary directory') . ' "' . htmlspecialchars($dir) . '". ' . __('Import canceled') . '.</p>';
+											$str .= '</div>';
+										}
+									}
+									else {
+										$this->disableTemplate('upload-preview');
+										$str = '<div class="alert alert-error alert-block">';
+											$str .= '<p>' . __('The file should be an "Excel 97-2003 Workbook (*.xls)"') . '. ' . __('Import canceled') . '.</p>';
+										$str .= '</div>';
+									}
+								}
+								else {
+									$this->disableTemplate('upload-preview');
+									$str = '<div class="alert alert-error alert-block">';
+										$str .= '<p>' . __('Cannot create the temporary directory') . ' "' . htmlspecialchars($dir) . '". ' . __('Import canceled') . '.</p>';
+									$str .= '</div>';
+								}
+								$this->assignGlobal('UPLOAD_MESSAGE', $str);
+							}
+							else {
+								$this->disableTemplate('upload-preview');
+								$str = '<div class="alert alert-error alert-block">';
+									$str .= '<p>' . __('Select a file to import') . '.</p>';
+								$str .= '</div>';
+								$this->assignGlobal('UPLOAD_MESSAGE', $str);
+							}
+						}
+						else if (@is_file($file) && is_readable($file)) {
+							// File already uploaded
+							
+							$this->disableTemplate('upload');
+							
+							// Load configuration
+							$columns = array();
+							if ($_GET['last']) {
+								$columns = explode(',', $_SESSION['User']['data']['import_columns']);
+							}
+							
+							// Fields
+							$i = 0;
+							foreach ($fields as $field) {
+								if (!$columns[$i]) {
+									$str .= '<span><a id="' . $field['Field'] . '">' . htmlspecialchars($field['Label']) . '</a></span>';
+								}
+								$i++;
+							}
+							$this->assignGlobal('TAGS', $str);
+							
+							require_once(MARKET_ROOT_DIR . '/redist/php-excel-reader/excel_reader2.php');
+							$wbk = new Spreadsheet_Excel_Reader($file);
+							
+							// Select first sheet
+							$wst = $wbk->sheets[0];
+							
+							// Print table
+							$str = '<div class="upload-preview-overlay"></div>';
+							$str .= '<div class="upload-preview">';
+								$str .= '<table class="table table-striped table-condensed" style="margin: 0; font-size: 12px;">';
+									$str .= '<tr class="tags">';
+									for ($j = 1; $j <= $wst['numCols']; $j++) {
+										if ($columns[$j - 1]) {
+											$field = $fields[$columns[$j - 1]];
+											$str .= '<td><div class="target"><span><a id="' . $field['Field'] . '">' . htmlspecialchars($field['Label']) . '</a></span></div></td>';
+										}
+										else {
+											$str .= '<td><div class="target"></div></td>';
+										}
+									}
+									$str .= '</tr>';
+									
+									$i = 0; $k = 0;
+									while ($k <= 13 && $i < $wst['numRows']) {
+										$i++;
+										$found = false;
+										for ($j = 1; $j <= $wst['numCols']; $j++) {
+											if (trim($wst['cells'][$i][$j])) {
+												$found = true;
+												break;
+											}
+										}
+										if ($found) {
+											$str .= '<tr>';
+											for ($j = 1; $j <= $wst['numCols']; $j++) {
+												$str .= '<td><div>';
+													$str .= htmlspecialchars($wst['cells'][$i][$j]);
+												$str .= '</div></td>';
+											}
+											$str .= '</tr>';
+											$k++;
+										}
+									}
+								$str .= '</table>';
+							$str .= '</div>';
+							
+							$this->assignGlobal('RESULTS', $str);
+						}
+						else {
+							$this->disableTemplate('upload-preview');
+						}
+					break;
+					case 'export':
+						// Export
+						
+						// Copied from above and mildly modified
+						$fields = array(
+							'id' => array('Label' => 'ID'),
+							'pin' => array('Unique' => true, 'Label' => __('PIN code')),
+							'category' => array('Suggested' => true, 'Type' => 'varchar', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.category"'),
+							'prof1' => array('Group' => __('Subcategories'), 'Label' => __('Subcategory') . ' 1', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.prof"'),
+							'prof2' => array('Group' => __('Subcategories'), 'Label' => __('Subcategory') . ' 2', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.prof"'),
+							'prof3' => array('Group' => __('Subcategories'), 'Label' => __('Subcategory') . ' 3', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.prof"', 'Help' => '<b>' . __('Hint') . ':</b> ' . __('First select a category')),
+							'name' => array('Type' => 'varchar', 'Label' => __('Owner name')),
+							'business_name' => array('Suggested' => true, 'Type' => 'varchar'),
+							'byline' => array('Type' => 'varchar'),
+							'address' => array('Suggested' => true),
+							'city' => array('Suggested' => true, 'Type' => 'varchar', 'Class' => 'typeahead span3', 'Properties' => ' data-path="directory_ml.city"'),
+							'phone' => array('Suggested' => true, 'Type' => 'varchar'),
+							'email' => array('Type' => 'varchar'),
+							'url' => array('Type' => 'varchar'),
+							'lat' => array('Suggested' => true, 'Group' => __('Location'), 'Label' => __('Latitude')),
+							'lng' => array('Suggested' => true, 'Group' => __('Location'), 'Label' => __('Longitude')),
+							'facebook' => array('Group' => __('Social media')),
+							'twitter' => array('Group' => __('Social media')),
+							'google' => array('Group' => __('Social media'), 'Label' => 'Google plus'),
+							'youtube' => array('Group' => __('Social media'), 'Label' => 'YouTube')
+						);
+						
+						foreach ($fields as $key => $field) {
+							if (is_array($field)) {
+								$fields[$key] = array_merge($all_fields[$key], $field);
+							}
+							else {
+								$fields[$key] = $all_fields[$field];
+							}
+						}
+						foreach ($fields as $key => $field) {
+							if (!isset($field['Label'])) $fields[$key]['Label'] = __(ucfirst(preg_replace('@\bid\b@', 'ID', preg_replace('@_@', ' ', $field['Field']))));
+						}
+						
+						if ($_GET['export']) {
+							$str = '<html>';
+							$str .= '<body>';
+							// Print table
+							$select_fields = '';
+							foreach ($fields as $field) {
+								$select_fields .= "`" . $field['Table'] . "`.`" . $field['Field'] . "`, ";
+							}
+							$sql = "SELECT " . substr($select_fields, 0, -2) . " FROM directory STRAIGHT_JOIN directory_ml WHERE directory.id = directory_ml.id AND lang = '" . MARKET_LANG . "'";
+							if (sqlQuery($sql, $res)) {
+								$str .= '<table border="1" style="font-size: 12px;">';
+									$i = 0;
+									while ($row = sqlFetchAssoc($res)) {
+										if ($i == 0) {
+											$str .= '<tr>';
+											foreach ($row as $key => $val) {
+												$str .= '<th>' . htmlspecialchars($fields[$key]['Label']) . '</th>';
+											}
+											$str .= '</tr>';
+										}
+										$str .= '<tr>';
+										foreach ($row as $key => $val) {
+											$str .= '<td>';
+												$str .= htmlspecialchars($val);
+											$str .= '</div>';
+										}
+										$str .= '</tr>';
+										$i++;
+									}
+								$str .= '</table>';
+							}
+							$str .= '</body>';
+							$str .= '</html>';
+							$this->contentType('application/vnd.ms-excel', 'catalog_'. date('Y-m-d') . '.xls', strlen($str));
+							print $str;
+							exit;
+						}
+					break;
+					case 'generate_pins':
+						// Generate PINs
+						if ($_GET['generate']) {
+							$sql = "SELECT id FROM directory WHERE pin=''";
+							if (sqlQuery($sql, $res)) {
+								while ($row = sqlFetchAssoc($res)) {
+									// Generate PIN
+									$l = 0;
+									$pin = 0;
+									while ($l < 10) { // Try at most 10 times to create a unique code
+										$pin = rand(1, 9999);
+										$sql = "SELECT * FROM directory WHERE pin='" . sqlEscape($pin) . "'";
+										if (!sqlQuery($sql, $res)) {
+											break; // Pin OK
+										}
+										$l++;
+									}
+									if ($pin) {
+										$sql = "UPDATE directory SET pin = '" . sqlEscape(sprintf('%04d', $pin)) . "' WHERE id='" . sqlEscape($row['id']) . "'";
+										sqlQuery($sql, $res);
+									}
+									else {
+										// Fail silently
+									}
+								}
+							}
+							$str = '<div class="alert alert-info alert-block">';
+								$str .= '<p>' . __('PIN generation complete') . '.</p>';
+							$str .= '</div>';
+							$this->assignGlobal('GENERATE_MESSAGE', $str);
+						}
+					break;
+					case 'geocode':
+						// Geocode
+						if ($_GET['geocode']) {
+							if (defined('GMAP_API_KEY') && GMAP_API_KEY) {
+								$sql = "SELECT directory.id, address, city FROM directory STRAIGHT_JOIN directory_ml WHERE directory.id=directory_ml.id AND lang='" . MARKET_LANG . "' AND lat='0' AND lng='0'";
+								if (sqlQuery($sql, $res)) {
+									$delay = 0;
+									$base_url = "https://maps.googleapis.com/maps/api/geocode/xml?key=" . GMAP_API_KEY;
+									while ($row = sqlFetchAssoc($res)) {
+										$address = $row['address'] . ', ' . $row['city'];
+										$geocode_pending = true;
+										while ($geocode_pending) {
+											$request_url = $base_url . "&address=" . urlencode($address);
+											$xml = simplexml_load_file($request_url);
+											switch ($xml->status) {
+												case 'OK':
+													// Successful geocode
+													$lat = $xml->result->geometry->location->lat;
+													$lng = $xml->result->geometry->location->lng;
+													$sql = "UPDATE directory SET lat = '" . sqlEscape($lat) . "', lng = '" . sqlEscape($lng) . "' WHERE id = '" . sqlEscape($row['id']) . "' LIMIT 1";
+													sqlQuery($sql, $res1);
+													$geocode_pending = false;
+												break;
+												case 'REQUEST_DENIED':
+													// Request denied
+													$str = '<div class="alert alert-error alert-block">';
+														$str .= '<p>' . __('The request was denied') . '. ' . __('Make sure you have enabled the Geocoding API for your Google Maps API key in the Google APIs console') . ': <a class="blue" href="https://code.google.com/apis/console/?noredirect">https://code.google.com/apis/console/</a>.</p>';
+													$str .= '</div>';
+												break 3;
+												case 'OVER_QUERY_LIMIT':
+													if ($delay) {
+														// Over query limit
+														$str = '<div class="alert alert-error alert-block">';
+															$str .= '<p>' . __('Over quota') . '. ' . __('The Google Geocoding API allows 2,500 requests per 24 hour period') . '.</p>';
+														$str .= '</div>';
+														break 3;
+													}
+													// Sending geocodes too fast?
+													$delay = 200000; // Safe limit
+												break;
+												default:
+													// Failed
+													$geocode_pending = false;
+											}
+											usleep($delay);
+										}
+									}
+								}
+								else {
+									$str = '<div class="alert alert-error alert-block">';
+										$str .= '<p>' . __('Nothing to geocode') . '.</p>';
+									$str .= '</div>';
+								}
+							}
+							else {
+								$str = '<div class="alert alert-error alert-block">';
+									$str .= '<p>' . __('No Google Maps API key') . '. ' . __('Go to settings and enter your Google Maps API key') . '.</p>';
+								$str .= '</div>';
+							}
+							if (!$str) {
+								$str = '<div class="alert alert-info alert-block">';
+									$str .= '<p>' . __('Geocoding complete') . '.</p>';
+								$str .= '</div>';
+							}
+							$this->assignGlobal('GEOCODE_MESSAGE', $str);
+						}
+					break;
 				}
 			}
 			else {
@@ -1220,18 +1739,40 @@
 			// Tabs
 			if ($valid_tabs[$req->params[1]]) {
 				$this->enableTemplate('submenu');
-				foreach ($valid_tabs[$req->params[1]] as $tab) {
+				foreach ($valid_tabs[$req->params[1]] as $key => $tab) {
 					$row = array();
 					if ($tab) {
-						if ($tab == 'index') {
-							$row['url'] = $req->params[1] . '/index.html';
+						if (is_array($tab)) {
+							foreach ($tab as $dropdown) {
+								$row = array();
+								$row['title'] = __(ucfirst(preg_replace('@_@', ' ', $dropdown)));
+								$row['url'] = $req->params[1] . '/' . $key . '/' . $dropdown . '.html';
+								if ($dropdown == $req->params[3]) {
+									$row['current'] = 'active';
+								}
+								$this->assignLocal('submenu-dropdown-item', 'TAB', $row);
+								$this->lightParseTemplate('SUBMENU-DROPDOWN-ITEM', 'submenu-dropdown-item');
+							}
+							$row['title'] = __(ucfirst(preg_replace('@_@', ' ', $key)));
+							if ($key == $req->params[2]) {
+								$row['current'] = 'active';
+							}
+							$this->assignLocal('submenu-dropdown', 'TAB', $row);
+							$this->parseTemplate('SUBMENU-ITEM', 'submenu-dropdown');
 						}
 						else {
-							$row['url'] = $req->params[1] . '/' . $tab . '/index.html';
-						}
-						$row['title'] = __(ucfirst(preg_replace('@_@', ' ', $tab)));
-						if ($tab == $req->params[2]) {
-							$row['current'] = 'active';
+							if ($tab == 'index') {
+								$row['url'] = $req->params[1] . '/index.html';
+							}
+							else {
+								$row['url'] = $req->params[1] . '/' . $tab . '/index.html';
+							}
+							$row['title'] = __(ucfirst(preg_replace('@_@', ' ', $tab)));
+							if ($tab == $req->params[2]) {
+								$row['current'] = 'active';
+							}
+							$this->assignLocal('submenu-item', 'TAB', $row);
+							$this->lightParseTemplate('SUBMENU-ITEM', 'submenu-item');
 						}
 					}
 					else {
@@ -1240,9 +1781,9 @@
 						if (!$req->params[2]) {
 							$row['current'] = 'active';
 						}
+						$this->assignLocal('submenu-item', 'TAB', $row);
+						$this->lightParseTemplate('SUBMENU-ITEM', 'submenu-item');
 					}
-					$this->assignLocal('submenu-item', 'TAB', $row);
-					$this->lightParseTemplate('SUBMENU-ITEM', 'submenu-item');
 				}
 			}
 			
@@ -1254,6 +1795,23 @@
 				'center_zoom' => GMAP_CENTER_ZOOM,
 				'fusion_table' => FUSION_TABLE_LAYER
 			));
+		}
+		
+		function getCorrectString($str) {
+			$foo = iconv('UTF-8', 'UTF-8', $str);
+			if ($foo != $str) {
+				$str = iconv('ISO-8859-1', 'UTF-8', $str);
+			}
+			return $str;
+		}
+		
+		function unQuote($str) {
+			$str = trim($str);
+			if (preg_match('@^".*"$@', $str)) {
+				$str = substr($str, 1, -1);
+			}
+			$str = preg_replace('@""@', '"', $str);
+			return $str;
 		}
 		
 		function fix_toolbar($str) {
@@ -1302,6 +1860,9 @@
 			.results td > div, .latest td > div { max-height: 100px; overflow: hidden; }
 			.stats { color: #999; font-size: 12px; }
 			.stats span { color: #333; float: left; margin-right: 5px; font-weight: bold; font-size: 32px; }
+			.admin_language { margin-top: 15px;}
+			.admin_language .langdrop { margin: 0;}
+			h2.header { margin-bottom: 20px; border-bottom: 1px solid #ddd; }
 		</style>
 	</template>
 	
@@ -1447,89 +2008,11 @@
 						}
 						e.preventDefault();
 					});
-
+					
 			});
 		</script>
 	</template>
 	
-	<template name="index_js" assign="PAGE.Javascript" disabled="true">
-		<script>
-		
-			jQuery(document).ready(function() {
-			});
-
-		</script>
-	</template>
-	
-	<template name="settings_js" assign="PAGE.Javascript" disabled="true">
-		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={GMAPS.api_key}&sensor=true"></script>
-		<script type="text/javascript" src="{MARKET.WebDir}/redist/gmaps.js"></script>
-		<script>
-		
-			var map;
-			
-			jQuery(document).ready(function() {
-				
-				map = new GMaps({
-					div: '#map',
-					lat: {GMAPS.center_lat},
-					lng: {GMAPS.center_lng},
-					zoom: {GMAPS.center_zoom},
-					panControl: true,
-					zoomControl: true,
-					mapTypeControl: false,
-					scaleControl: false,
-					streetViewControl: false,
-					overviewMapControl: false,
-				});
-				
-				if ('{GMAPS.fusion_table}') {
-					map.loadFromFusionTables({
-						query: {
-							select: '\'location\'',
-							from: '{GMAPS.fusion_table}'
-						},
-						clickable: false
-					});
-				}
-				
-				GMaps.on('center_changed', map, function() {
-					var location = map.getCenter();
-					$('#GMAP_CENTER_LAT').val(location.lat());
-					$('#GMAP_CENTER_LNG').val(location.lng());
-				});
-				
-				GMaps.on('zoom_changed', map, function() {
-					zoomLevel = map.getZoom();
-					$('#GMAP_CENTER_ZOOM').val(zoomLevel);
-				});
-				
-				$('#MARKET_SMTP_TLS').on('click', function(e) {
-					var $target = $('#MARKET_SMTP_HOST');
-					if ($target.val()) {
-						if ($(this).is(":checked")) {
-							if (!$target.val().match(/^(ssl|tls):\/\/.+:\d+$/)) {
-								$target.val('ssl://' + $target.val() + ':465')
-							}
-						}
-						else {
-							if (res = $target.val().match(/^(ssl|tls):\/\/(.+):\d+$/)) {
-								$target.val(res[2]);
-							}
-						}
-					}
-				});
-				
-				var $target = $('#MARKET_SMTP_HOST');
-				if ($target.val()) {
-					if ($target.val().match(/^(ssl|tls):\/\/(.+):\d+$/)) {
-						$('#MARKET_SMTP_TLS').prop('checked', true);
-					}
-				}
-			});
-
-		</script>
-	</template>
 	<template name="map">
 		<if expr="'{MARKET.Params.1}' == 'index' && '{MARKET.Params.2}' == 'settings'">
 			<div id="map"></div>
@@ -1550,16 +2033,43 @@
 			<div class="span9">
 				
 				<template name="submenu" disabled="true">
+				<div class="pull-right">
+					<template name="admin_language_cnt">
+						<div id="lang-select" class="admin_language pull-left">
+							<form action="{MARKET.Request}">
+								<select id="lang" name="lang" class="span2">
+									<template name="language">
+										<option {ROW.selected} title="{MARKET.WebDir}/{ROW.lang}/{MARKET.Request}" value="{ROW.lang}">{ROW.language}</option>
+									</template>
+								</select><input value="{LANG.Select}" type="submit" />
+							</form>
+						</div>
+					</template>
+				</div>
 					<div id="submenu" style="background: url({MARKET.WebDir}/img/inner-shadow.png) repeat-x; padding: 10px 0;">
 						<ul class="nav nav-pills" style="margin: 0;">
 							<template name="submenu-item">
 								<li class="{TAB.current}"><a href="{MARKET.LWebDir}/admin/{TAB.url}">{TAB.title}</a></li>
+							</template>
+							<template name="submenu-dropdown-disabled" disabled="true">
+								<template name="submenu-dropdown">
+									<li class="{TAB.current} dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{TAB.title} <b class="caret"></b></a>
+										<ul class="dropdown-menu">
+											<template name="submenu-dropdown-item">
+												<li class="{TAB.current}"><a href="{MARKET.LWebDir}/admin/{TAB.url}">{TAB.title}</a></li>
+											</template>
+										</ul>
+									</li>
+								</template>
 							</template>
 						</ul>
 					</div>
 				</template>
 				
 				<template name="index" disabled="true">
+					
+					<!-- INDEX -->
+					
 					<div class="row stats">
 						<div class="span2">
 							<div class="well well-small">
@@ -1582,7 +2092,7 @@
 							</div>
 						</div>
 					</div>
-					<h2 style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">{LANG.Latest additions}</h2>
+					<h2 class="header">{LANG.Latest additions}</h2>
 					<template name="latest">
 						<div class="well well-small white">
 							<div class="pull-right" style="margin-top: 5px;"><a class="blue" href="{MARKET.LWebDir}/admin/{LATEST.name}/index.html">{LANG.View all} <i class="icon-arrow-right"></i></a></div>
@@ -1595,16 +2105,73 @@
 							{LATEST.results}
 						</div>
 					</template>
+					
 				</template>
 				
 				<template name="settings" disabled="true">
-					<!-- Settings -->
+					
+					<!-- SEETINGS -->
+					
+					<template name="settings_js" assign="PAGE.Javascript">
+						<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key={GMAPS.api_key}&sensor=true"></script>
+						<script type="text/javascript" src="{MARKET.WebDir}/redist/gmaps.js"></script>
+						<script>
+						
+							var map;
+							
+							jQuery(document).ready(function() {
+								
+								map = new GMaps({
+									div: '#map',
+									lat: {GMAPS.center_lat},
+									lng: {GMAPS.center_lng},
+									zoom: {GMAPS.center_zoom},
+									panControl: true,
+									zoomControl: true,
+									mapTypeControl: false,
+									scaleControl: false,
+									streetViewControl: false,
+									overviewMapControl: false,
+								});
+								
+								if ('{GMAPS.fusion_table}') {
+									map.loadFromFusionTables({
+										query: {
+											select: '\'location\'',
+											from: '{GMAPS.fusion_table}'
+										},
+										clickable: false
+									});
+								}
+								
+								GMaps.on('center_changed', map, function() {
+									var location = map.getCenter();
+									$('#GMAP_CENTER_LAT').val(location.lat());
+									$('#GMAP_CENTER_LNG').val(location.lng());
+								});
+								
+								GMaps.on('zoom_changed', map, function() {
+									zoomLevel = map.getZoom();
+									$('#GMAP_CENTER_ZOOM').val(zoomLevel);
+								});
+								
+								var $target = $('#MARKET_SMTP_HOST');
+								if ($target.val()) {
+									if ($target.val().match(/^(ssl|tls):\/\/(.+):\d+$/)) {
+										$('#MARKET_SMTP_TLS').prop('checked', true);
+									}
+								}
+							});
+
+						</script>
+					</template>
+					
 					{SETTINGS_MESSAGE}
 					
 					<template name="settings_form">
 						<form method="POST" action="" class="form-horizontal" style="padding: 10px;">
 							
-							<h2 style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">{LANG.Server timezone}</h2>
+							<h2 class="header">{LANG.Server timezone}</h2>
 							<fieldset>
 								<div class="control-group">
 									<label for="MARKET_TIMEZONE" class="control-label"><b>{LANG.Timezone}:</b></label>
@@ -1614,7 +2181,7 @@
 								</div>
 							</fieldset>
 							
-							<h2 style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">{LANG.Mail settings}</h2>
+							<h2 class="header">{LANG.Mail settings}</h2>
 							<fieldset>
 								<div class="control-group">
 									<label class="control-label"><b>{LANG.Connection settings}:</b></label>
@@ -1639,7 +2206,7 @@
 								</div>
 							</fieldset>
 							
-							<h2 style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">{LANG.Google analytics}</h2>
+							<h2 class="header">{LANG.Google analytics}</h2>
 							<fieldset>
 								<div class="control-group">
 									<label for="ANALYTICS_TRACKING_CODE" class="control-label"><b>{LANG.Tracking code}:</b></label>
@@ -1650,7 +2217,7 @@
 								</div>
 							</fieldset>
 							
-							<h2 style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">{LANG.Google maps}</h2>
+							<h2 class="header">{LANG.Google maps}</h2>
 							<fieldset>
 								<div class="control-group">
 									<label for="GMAP_API_KEY" class="control-label"><b>{LANG.Google Maps API key}:</b></label>
@@ -1675,7 +2242,7 @@
 								</div>
 							</fieldset>
 							
-							<h2 style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">{LANG.Google fusion table layer}</h2>
+							<h2 class="header">{LANG.Google fusion table layer}</h2>
 							<fieldset>
 								<div class="control-group">
 									<label for="FUSION_TABLE_LAYER" class="control-label"><b>{LANG.Table ID}:</b></label>
@@ -1686,7 +2253,7 @@
 								</div>
 							</fieldset>
 							
-							<h2 style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">{LANG.reCAPTCHA settings}</h2>
+							<h2 class="header">{LANG.reCAPTCHA settings}</h2>
 							<fieldset>
 								<div class="control-group">
 									<label for="RECAPTCHA_PRIVATE_KEY" class="control-label"><b>{LANG.reCAPTCHA private key}:</b></label>
@@ -1709,11 +2276,225 @@
 							
 						</form>
 					</template>
+					
+				</template>
+				
+				
+				<template name="import" disabled="true">
+					
+					<!-- IMPORT -->
+					<link href="{MARKET.WebDir}/redist/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+					<style>
+						.upload-preview { height: 410px; overflow: hidden; overflow-x: scroll; }
+						.upload-preview-overlay { position: absolute; margin-top: 35px; width: 830px; height: 355px; background: url("{MARKET.WebDir}/img/upload-preview-overlay.png"); pointer-events: none; }
+						.target { margin-bottom: 4px; font-weight: bold; text-align: center; height: 20px; border: 2px dotted #ccc; background: #f9f9f9; transition: all 0.5s; }
+						.target a:hover { text-decoration: none; }
+						.target.ui-state-active { border-color: #cc4400; background: #fff; }
+						.target a { margin-left: 13px; }
+						.tags span { display: inline-block; white-space: nowrap; }
+						.tags a { cursor: default; }
+						.upload-preview tr:nth-child(1) td { background-color: #eee !important; }
+						.upload-preview td > div { max-height: 50px; min-width: 40px; overflow: hidden; }
+					</style>
+					
+					<template name="import/js" assign="PAGE.Javascript">
+						<script type="text/javascript" src="{MARKET.WebDir}/redist/jquery-ui.min.js"></script>
+						<script>
+							jQuery(document).ready(function() {
+								// File input
+								$('input[type=file]').change(function() {
+									$('#appended').val($(this).val());
+								});
+								
+								// Has headers
+								$('#has_headers').on('click', function(e) {
+									var $target = $('.upload-preview').find('tr:eq(1)');
+									if ($(this).is(":checked")) {
+										$target.hide();
+									}
+									else {
+										$target.show();
+									}
+								});
+								
+								// Drag and drop
+								$('.tags span').draggable({
+									revert: 'invalid',
+									stack: ".tags span",
+									start: function(event, ui) {
+										if ($(this).css('position') == 'static') {
+											$(this).css({position:'absolute'});
+										}
+									}
+								});
+								$('div > .tags').droppable({
+									accept: '.tags span',
+									drop: function(event, ui) {
+										$(this).append($(ui.draggable));
+										$(ui.draggable).css({position:'static'});
+										checkOptions();
+									}
+								});
+								$('.target').droppable({
+									hoverClass: "ui-state-active",
+									accept: '.tags span',
+									drop: function(event, ui) { 
+										$(this).droppable('option', 'accept', ui.draggable);
+										$(this).append($(ui.draggable));
+										$(ui.draggable).css({position:'static'});
+										checkOptions();
+									},
+									out: function(event, ui){
+										$(this).droppable('option', 'accept', '.tags span');
+									}   
+								});
+								
+								setTimeout(function() { $('.alert').fadeOut() }, 5000);
+								
+								checkOptions();
+								
+							});
+							
+							function checkOptions() {
+								if ($('tr.tags a[id="pin"]').length) {
+									disableOption('auto_generate');
+								}
+								if ($('tr.tags a[id="address"]').length && $('tr.tags a[id="city"]').length) {
+									enableOption('auto_geocode');
+								}
+								if ($('tr.tags a[id="lat"]').length || $('tr.tags a[id="lng"]').length) {
+									disableOption('auto_geocode');
+								}
+							}
+							
+							function disableOption(option) {
+								var $that = $('#' + option);
+								$that.prop('checked', false);
+								$that.prop('disabled', true);
+								$('label[for="' + option + '"]').addClass('muted');
+							}
+							
+							function enableOption(option) {
+								var $that = $('#' + option);
+								$that.prop('disabled', false);
+								$('label[for="' + option + '"]').removeClass('muted');
+							}
+							
+							function addColumns() {
+								var columns = [];
+								$('.target').each(function(i) { columns[i] = $(this).find('a').attr('id') });
+								$('#columns').val(columns.join());
+							}
+							
+						</script>
+					</template>
+					<template name="upload">
+						<div class="well white">
+							<h2 class="header">{LANG.File import}</h2>
+							{UPLOAD_MESSAGE}
+							<form class="well" action="" method="post" enctype="multipart/form-data">
+								<label>{LANG.Select file}:</label>
+								<input id="lefile" name="file" type="file" accept="application/vnd.ms-excel" style="visibility:hidden; position:absolute;">
+								<div class="input-append">
+									<input id="appended" class="input-large" type="text" readonly="readonly" onclick="$('input[id=lefile]').click();" style="cursor:auto; background-color:#fff">
+									<a class="btn" onclick="$('input[id=lefile]').click();">{LANG.Select}</a>
+								</div>
+								<button type="submit" class="btn btn-primary">{LANG.Import}</button>
+							</form>
+						</div>
+					</template>
+					<template name="upload-preview">
+						<form class="well white" action="" method="POST" onsubmit="addColumns()">
+							<h2 class="header">{LANG.File import}</h2>
+							
+							<p>{LANG.Drag and drop the field names to the corresponding columns of the file}.</p>
+							
+							<div class="well well-small">
+								<div class="tags" style="min-height: 50px;">
+									{TAGS}
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							
+							<div class="pull-right">
+								<a class="btn" href="?last=true"><i class="icon-repeat"></i> {LANG.Last configuration}</a> &nbsp
+								<a class="btn" href=""><i class="icon-refresh"></i> {LANG.Reset}</a>
+							</div>
+							
+							<div style="margin: 25px 0 5px;">
+								<input style="margin: 0;" type="checkbox" value="1" name="has_headers" id="has_headers"> <label for="has_headers" style="display: inline-block; font-size: 13px;">{LANG.My data has headers}</label>
+								<input style="margin: 0 0 0 20px;" type="checkbox" value="1" name="auto_generate" id="auto_generate"> <label for="auto_generate" style="display: inline-block; font-size: 13px;">{LANG.Auto generate PIN}</label>
+								<input style="margin: 0 0 0 20px;" type="checkbox" value="1" name="auto_geocode" id="auto_geocode" disabled="disabled"> <label for="auto_geocode" class="muted" style="display: inline-block; font-size: 13px;">{LANG.Auto geocode}</label>
+							</div>
+							
+							<div class="clearfix"></div>
+							
+							{RESULTS}
+							
+							<p style="border-top:1px solid #ccc; padding-top: 10px;">
+								<button type="cancel" class="btn" onclick="$('input[name=response]').val('cancel');">{LANG.Cancel}</button> &nbsp;
+								<button type="submit" class="btn btn-primary" onclick="$('input[name=response]').val('ok');">{LANG.Import}</button>
+							</p>
+							
+							<input name="response" type="hidden">
+							<input id="columns" name="columns" type="hidden">
+						</form>
+					</template>
+					
+				</template>
+				
+				<template name="export" disabled="true">
+					
+					<!-- EXPORT -->
+					
+					<div class="well white">
+						<h2 class="header">{LANG.File export}</h2>
+						<div class="well">
+							<p>{LANG.Click the button to export the catalog in "HTML for MS Excel" format}.</p>
+							<p><small><b>{LANG.Note}:</b> {LANG.Excel may complain about format / extension mismatch, but it is safe to load the file anyway}.</small></p>
+							<a href="?export=true" class="btn btn-primary">{LANG.Export}</a>
+						</div>
+					</div>
+					
+				</template>
+				
+				<template name="generate_pins" disabled="true">
+					
+					<!-- GENERATE PINS -->
+					
+					<div class="well white">
+						<h2 class="header">{LANG.Generate Pins}</h2>
+						{GENERATE_MESSAGE}
+						<div class="well">
+							<p>{LANG.Click the button to generate missing pins in your catalog}.</p>
+							<a href="?generate=true" class="btn btn-primary">{LANG.Generate}</a>
+						</div>
+					</div>
+					
+				</template>
+				
+				<template name="geocode" disabled="true">
+					
+					<!-- GEOCODE -->
+					
+					<div class="well white">
+						<h2 class="header">{LANG.Geocode}</h2>
+						{GEOCODE_MESSAGE}
+						<div class="well">
+							<p>{LANG.Click the button to geocode missing locations in your catalog}.</p>
+							<p><small><b>{LANG.Note}:</b> {LANG.You should have enabled the Geocoding API for your Google Maps API key}.</small></p>
+							<a href="?geocode=true" class="btn btn-primary">{LANG.Geocode}</a>
+						</div>
+					</div>
+					
 				</template>
 				
 				<template name="edit-form" disabled="true">
+					
+					<!-- EDIT FORM -->
+					
 					<form method="POST" action="" class="form-horizontal" style="padding: 10px;">
-						<h2 style="margin-bottom: 20px; border-bottom: 1px solid #ddd;">{FORM_ACTION}</h2>
+						<h2 class="header">{FORM_ACTION}</h2>
 						{EDIT_MESSAGE}
 						{EDIT_FORM}
 						<div class="form-actions" style="border-top: none;">
@@ -1726,6 +2507,9 @@
 				</template>
 				
 				<template name="form-items" disabled="true">
+				
+					<!-- FORM ITEMS -->
+					
 					<template name="form/text">
 						<div class="control-group">
 							<label for="{FIELD.Field}" class="control-label"><b>{FIELD.Label}:</b></label>
@@ -1888,9 +2672,13 @@
 							<div id="map"></div>
 						</div>
 					</template>
+					
 				</template>
 				
 				<template name="search-results" disabled="true">
+					
+					<!-- RESULTS -->
+					
 					<form class="well well-small form-inline" action="search.html">
 						<label><b>{LANG.Search}:</b></label>
 						&nbsp;
@@ -1925,6 +2713,7 @@
 							<p><small><span>{NAV.Pages}</span></small></p>
 						</div>
 					</template>
+					
 				</template>
 				
 			</div>

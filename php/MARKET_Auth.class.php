@@ -48,12 +48,11 @@
 		{
 			if (sqlQuery($sql, $res, EXT_DEBUG)) {
 				$_SESSION['User'] = sqlFetchAssoc($res);
+				$_SESSION['User']['data'] = unserialize($_SESSION['User']['data']);
 				$_SESSION['User']['is_loggedin'] = true;
 				return true;
 			}
-			else {
-				return false;
-			}
+			return false;
 		}
 		
 		
@@ -62,6 +61,22 @@
 			unset($_SESSION['User']);
 		}
 		
+		
+		function saveUserData($var, $val)
+		{
+			if ($_SESSION['User']['is_loggedin']) {
+				if ($val) {
+					$_SESSION['User']['data'][$var] = $val;
+				}
+				else {
+					unset($_SESSION['User']['data'][$var]);
+				}
+				$sql = "UPDATE market_user SET data='" . sqlEscape(serialize($_SESSION['User']['data'])) . "' WHERE user_id='" . $_SESSION['User']['user_id'] . "'";
+				sqlQuery($sql, $res, EXT_DEBUG);
+				return true;
+			}
+			return false;
+		}
 	}
 
 ?>

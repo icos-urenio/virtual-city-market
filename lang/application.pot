@@ -49,6 +49,12 @@ msgstr ""
 msgid "Authentication"
 msgstr ""
 
+msgid "Auto generate PIN"
+msgstr ""
+
+msgid "Auto geocode"
+msgstr ""
+
 msgid "Back to top"
 msgstr ""
 
@@ -76,6 +82,12 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+msgid "Cannot copy the file to the temporary directory"
+msgstr ""
+
+msgid "Cannot create the temporary directory"
+msgstr ""
+
 msgid "Catalog of local businesses and professionals."
 msgstr ""
 
@@ -98,6 +110,15 @@ msgid "City Marketplace"
 msgstr ""
 
 msgid "Click here"
+msgstr ""
+
+msgid "Click the button to export the catalog in \"HTML for MS Excel\" format"
+msgstr ""
+
+msgid "Click the button to generate missing pins in your catalog"
+msgstr ""
+
+msgid "Click the button to geocode missing locations in your catalog"
 msgstr ""
 
 msgid "Click this link to request the confirmation email again."
@@ -220,6 +241,9 @@ msgstr ""
 msgid "Discount"
 msgstr ""
 
+msgid "Drag and drop the field names to the corresponding columns of the file"
+msgstr ""
+
 msgid "Edit"
 msgstr ""
 
@@ -301,10 +325,16 @@ msgstr ""
 msgid "Errors"
 msgstr ""
 
+msgid "Excel may complain about format / extension mismatch, but it is safe to load the file anyway"
+msgstr ""
+
 msgid "Expired"
 msgstr ""
 
 msgid "Expires"
+msgstr ""
+
+msgid "Export"
 msgstr ""
 
 msgid "Facebook"
@@ -314,6 +344,12 @@ msgid "Featured Listings"
 msgstr ""
 
 msgid "File"
+msgstr ""
+
+msgid "File export"
+msgstr ""
+
+msgid "File import"
 msgstr ""
 
 msgid "Find offers"
@@ -337,6 +373,18 @@ msgstr ""
 msgid "Generate"
 msgstr ""
 
+msgid "Generate Pins"
+msgstr ""
+
+msgid "Generate pins"
+msgstr ""
+
+msgid "Geocode"
+msgstr ""
+
+msgid "Geocoding complete"
+msgstr ""
+
 msgid "Geolocate"
 msgstr ""
 
@@ -353,6 +401,9 @@ msgid "Go"
 msgstr ""
 
 msgid "Go to"
+msgstr ""
+
+msgid "Go to settings and enter your Google Maps API key"
 msgstr ""
 
 msgid "Go to the store"
@@ -397,6 +448,15 @@ msgstr ""
 msgid "Image upload"
 msgstr ""
 
+msgid "Import"
+msgstr ""
+
+msgid "Import canceled"
+msgstr ""
+
+msgid "Import successful"
+msgstr ""
+
 msgid "Index"
 msgstr ""
 
@@ -413,6 +473,9 @@ msgid "Last"
 msgstr ""
 
 msgid "Last access"
+msgstr ""
+
+msgid "Last configuration"
 msgstr ""
 
 msgid "Latest additions"
@@ -466,6 +529,9 @@ msgstr ""
 msgid "Mail settings"
 msgstr ""
 
+msgid "Make sure you have enabled the Geocoding API for your Google Maps API key in the Google APIs console"
+msgstr ""
+
 msgid "Manage page"
 msgstr ""
 
@@ -491,6 +557,9 @@ msgid "More info"
 msgstr ""
 
 msgid "More offers"
+msgstr ""
+
+msgid "My data has headers"
 msgstr ""
 
 msgid "Name"
@@ -529,13 +598,31 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+msgid "No Google Maps API key"
+msgstr ""
+
+msgid "No columns selected"
+msgstr ""
+
 msgid "No results"
 msgstr ""
 
 msgid "Not implemented"
 msgstr ""
 
-msgid "Note: you cannot edit your current session."
+msgid "Note"
+msgstr ""
+
+msgid "Nothing found"
+msgstr ""
+
+msgid "Nothing imported"
+msgstr ""
+
+msgid "Nothing to geocode"
+msgstr ""
+
+msgid "Number of imported records"
 msgstr ""
 
 msgid "OK"
@@ -577,6 +664,9 @@ msgstr ""
 msgid "Outgoing email"
 msgstr ""
 
+msgid "Over quota"
+msgstr ""
+
 msgid "Owner name"
 msgstr ""
 
@@ -584,6 +674,9 @@ msgid "PIN Code"
 msgstr ""
 
 msgid "PIN code"
+msgstr ""
+
+msgid "PIN generation complete"
 msgstr ""
 
 msgid "Page title"
@@ -682,6 +775,9 @@ msgstr ""
 msgid "Required fields"
 msgstr ""
 
+msgid "Reset"
+msgstr ""
+
 msgid "Reset your password at"
 msgstr ""
 
@@ -734,6 +830,12 @@ msgid "Search the directory"
 msgstr ""
 
 msgid "Select"
+msgstr ""
+
+msgid "Select a file to import"
+msgstr ""
+
+msgid "Select file"
 msgstr ""
 
 msgid "Send me the confirmation message again."
@@ -817,6 +919,9 @@ msgstr ""
 msgid "The Administration Team"
 msgstr ""
 
+msgid "The Google Geocoding API allows 2,500 requests per 24 hour period"
+msgstr ""
+
 msgid "The PIN code is incorrect."
 msgstr ""
 
@@ -844,6 +949,9 @@ msgstr ""
 msgid "The expiration date is required."
 msgstr ""
 
+msgid "The file should be an \"Excel 97-2003 Workbook (*.xls)\""
+msgstr ""
+
 msgid "The link is valid for two hours and one time use only."
 msgstr ""
 
@@ -851,6 +959,9 @@ msgid "The password is required."
 msgstr ""
 
 msgid "The reCAPTCHA was not correct. Please try again..."
+msgstr ""
+
+msgid "The request was denied"
 msgstr ""
 
 msgid "The requested action is not implemented"
@@ -899,6 +1010,9 @@ msgid "Timezone"
 msgstr ""
 
 msgid "Title"
+msgstr ""
+
+msgid "Tools"
 msgstr ""
 
 msgid "Tracking code"
@@ -1048,6 +1162,9 @@ msgstr ""
 msgid "You can now use your email and password to"
 msgstr ""
 
+msgid "You cannot edit your current session."
+msgstr ""
+
 msgid "You have something to say?"
 msgstr ""
 
@@ -1073,6 +1190,9 @@ msgid "You received this message because you requested instructions to activate 
 msgstr ""
 
 msgid "You received this message because you requested instructions to reset your password at"
+msgstr ""
+
+msgid "You should have enabled the Geocoding API for your Google Maps API key"
 msgstr ""
 
 msgid "You should not delete the default roles of the application!"
