@@ -484,8 +484,21 @@
 														$sql = "INSERT INTO store_data(directory_id, lang, type, name, title) VALUES('" . sqlEscape($_POST['id']) . "', '" . sqlEscape(MARKET_LANG) . "', 'text', 'index', '" . sqlEscape(__('New page')) . "')";
 														if ($page_id = sqlQuery($sql, $res)) {
 															// Insert permissions
-															$sql = "INSERT INTO store_data_ps (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . $page_id . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '1')";
+															$sql = "INSERT INTO store_data_ps (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . $page_id . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '0')";
 															sqlQuery($sql, $res);
+															
+															$lng =& $this->getRef('Lang');
+															$langs = $lng->getAvailable();
+															foreach ($langs as $lang) {
+																if ($lang != MARKET_LANG) {
+																	$sql = "INSERT INTO store_data(directory_id, lang, type, name, title) VALUES('" . sqlEscape($_POST['id']) . "', '" . sqlEscape($lang) . "', 'text', 'index', '" . sqlEscape(__('New page')) . "')";
+																	if ($page_id = sqlQuery($sql, $res)) {
+																		// Insert permissions
+																		$sql = "INSERT INTO store_data_ps (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . $page_id . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '0')";
+																		sqlQuery($sql, $res);
+																	}
+																}
+															}
 														}
 													}
 												}
@@ -567,8 +580,20 @@
 																	$sql = "INSERT INTO store_data(directory_id, lang, type, name, title) VALUES('" . sqlEscape($id) . "', '" . sqlEscape(MARKET_LANG) . "', 'text', 'index', '" . sqlEscape(__('New page')) . "')";
 																	if ($page_id = sqlQuery($sql, $res)) {
 																		// Insert permissions
-																		$sql = "INSERT INTO store_data_ps (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . $page_id . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '1')";
+																		$sql = "INSERT INTO store_data_ps (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . $page_id . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '0')";
 																		sqlQuery($sql, $res);
+																		$lng =& $this->getRef('Lang');
+																		$langs = $lng->getAvailable();
+																		foreach ($langs as $lang) {
+																			if ($lang != MARKET_LANG) {
+																				$sql = "INSERT INTO store_data(directory_id, lang, type, name, title) VALUES('" . sqlEscape($_POST['id']) . "', '" . sqlEscape($lang) . "', 'text', 'index', '" . sqlEscape(__('New page')) . "')";
+																				if ($page_id = sqlQuery($sql, $res)) {
+																					// Insert permissions
+																					$sql = "INSERT INTO store_data_ps (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . $page_id . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '0')";
+																					sqlQuery($sql, $res);
+																				}
+																			}
+																		}
 																	}
 																}
 															}

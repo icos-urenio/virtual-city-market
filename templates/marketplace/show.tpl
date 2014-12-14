@@ -27,10 +27,11 @@
 		}
 		
 		$sql = "SELECT $SELECT FROM $FROM WHERE $WHERE";
+		
 		if (sqlQuery($sql, $res)) {
 			$row = sqlFetchAssoc($res);
 			
-			if (!($_SESSION['User']['market_role_id'] == 1 && $_GET['action'] == 'preview')) {
+			if (!($_SESSION['User']['market_role_id'] == 1 && $_GET['action'] == 'preview') && !($_SESSION['User']['market_role_id'] == 1 && $GLOBALS['MARKET_mode'] == 'edit')) {
 				$sql = "SELECT * FROM store_data STRAIGHT_JOIN store_data_ps WHERE store_data.id=store_data_ps.id AND store_data_ps.publish='1' AND directory_id='" . $row['id'] . "' AND lang='" . MARKET_LANG . "' AND name='index' AND type='text'";
 				if (!sqlQuery($sql, $res1)) {
 					// Store disabled
