@@ -150,7 +150,7 @@
 						$this->assignGlobal('RECAPTCHA', recaptcha_get_html(RECAPTCHA_PUBLIC_KEY));
 					}
 					else {
-						$this->disableTemplate('recaptcha');
+						$this->disableTemplate('recaptcha-cnt');
 					}
 				}
 				else {
@@ -229,7 +229,7 @@
 					$this->assignGlobal('RECAPTCHA', recaptcha_get_html(RECAPTCHA_PUBLIC_KEY));
 				}
 				else {
-					$this->disableTemplate('recaptcha');
+					$this->disableTemplate('recaptcha-cnt');
 				}
 				$this->assignGlobal('PIN.show', ' display: none;');
 				$this->assignGlobal('REGISTER.Message', '<div class="alert alert-info">' . __('Please use the following form to create your user account. All fields are required.') . '</div>');
@@ -344,7 +344,7 @@
 									</div>
 								</div>
 							</fieldset>
-							<template name="recaptcha">
+							<template name="recaptcha-cnt">
 								<fieldset>
 									<legend>{LANG.Visual confirmation}</legend>
 									<div class="control-group{ERROR.Crecaptcha}" style="min-height: 129px; text-align: center;">

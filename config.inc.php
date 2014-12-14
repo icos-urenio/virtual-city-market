@@ -50,5 +50,8 @@
 	// Settings with defaults
 	//define('MARKET_TIMEZONE', 'Europe/Athens');
 	//define('MARKET_SESSION_NAME', 'market_sid');
-
+	
+	// More settings
+	define('MARKET_CITIES_MENU', true);
+	
 ?>

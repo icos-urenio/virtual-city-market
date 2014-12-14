@@ -35,7 +35,7 @@
 					}
 				break;
 				case 'POST':
-					if ($_SESSION['User']['market_role_id'] == 2 && $_SESSION['User']['store']) {
+					if ($_SESSION['User']['market_role_id'] == 1 || ($_SESSION['User']['market_role_id'] == 2 && $_SESSION['User']['store'])) {
 						if (isset($_POST['filename']) || isset($_POST['remove_filename'])) {
 							// Slider
 							if ($_POST['source'] == 'slider') {

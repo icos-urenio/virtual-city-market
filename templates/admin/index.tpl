@@ -472,6 +472,24 @@
 											foreach ($sqls as $sql) {
 												sqlQuery($sql, $res);
 											}
+											if ($tables[0] == 'directory' && $_POST['path']) {
+												// Create store
+												if (preg_match('@^[a-z0-9_]+$@', $_POST['path'])) {
+													// Add page
+													$sql = "SELECT * FROM store_data WHERE type='text' AND name='index' AND directory_id='" . sqlEscape($_POST['id']) . "'";
+													if (sqlQuery($sql, $res)) {
+														// Page already exists
+													}
+													else {
+														$sql = "INSERT INTO store_data(directory_id, lang, type, name, title) VALUES('" . sqlEscape($_POST['id']) . "', '" . sqlEscape(MARKET_LANG) . "', 'text', 'index', '" . sqlEscape(__('New page')) . "')";
+														if ($page_id = sqlQuery($sql, $res)) {
+															// Insert permissions
+															$sql = "INSERT INTO store_data_ps (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . $page_id . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '1')";
+															sqlQuery($sql, $res);
+														}
+													}
+												}
+											}
 											unset($_SESSION['NAV.Vars']);
 										}
 										$req->redirectTo(MARKET_WEB_DIR . '/' . dirname($req->url) . '/index.html');
@@ -536,6 +554,25 @@
 														
 														$sql = "INSERT INTO `" . sqlEscape($tables[2]) . "` (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . sqlEscape($id) . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '1')";
 														sqlQuery($sql, $res);
+														
+														if ($tables[0] == 'directory' && isset($_POST['path'])) {
+															// Create store
+															if (preg_match('@^[a-z0-9_]+$@', $_POST['path'])) {
+																// Add page
+																$sql = "SELECT * FROM store_data WHERE type='text' AND name='index' AND directory_id='" . sqlEscape($id) . "'";
+																if (sqlQuery($sql, $res)) {
+																	// Page already exists
+																}
+																else {
+																	$sql = "INSERT INTO store_data(directory_id, lang, type, name, title) VALUES('" . sqlEscape($id) . "', '" . sqlEscape(MARKET_LANG) . "', 'text', 'index', '" . sqlEscape(__('New page')) . "')";
+																	if ($page_id = sqlQuery($sql, $res)) {
+																		// Insert permissions
+																		$sql = "INSERT INTO store_data_ps (id, creator, created, owner, role, updated, ups, gps, wps, publish) VALUES('" . $page_id . "', '" . $_SESSION['User']['user_id'] . "', NOW(), '" . $_SESSION['User']['user_id'] . "', '" . $_SESSION['User']['market_role_id'] . "', NOW(), '7', '2', '2', '1')";
+																		sqlQuery($sql, $res);
+																	}
+																}
+															}
+														}
 													}
 												break;
 											}

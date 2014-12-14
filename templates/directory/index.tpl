@@ -10,57 +10,7 @@
 		// Force SQL class load
 		sqlQuery('SELECT foo', $res);
 		
-		$sql = "SELECT category FROM directory_ml WHERE lang='" . MARKET_LANG . "' GROUP BY category ORDER BY category";
-		if (sqlQuery($sql, $res)) {
-			$i = 1;
-			while ($row = sqlFetchAssoc($res)) {
-				$str = '';
-				$sql = "SELECT prof1, prof2, prof3 FROM directory_ml WHERE lang='" . MARKET_LANG . "' AND category='" . sqlEscape($row['category']) . "'";
-				if (sqlQuery($sql, $res1)) {
-					$tags = array();
-					while ($row1 = sqlFetchAssoc($res1)) {
-						for ($j = 1; $j <= 3; $j++) {
-							if ($row1['prof' . $j] && !in_array($row1['prof' . $j], $tags)) {
-								$tags[] = $row1['prof' . $j];
-							}
-						}
-					}
-					asort($tags);
-					if ($_COOKIE['mplace_menu'] & pow(2, $i - 1)) {
-						$str = '<ul id="ul' . $i . '" class="tags in collapse">';
-					}
-					else {
-						$str = '<ul id="ul' . $i . '" class="tags collapse">';
-					}
-					foreach ($tags as $tag) {
-						$str .= '<li><a href="{MARKET.LWebDir}/directory/index.html?content=tag&q='.urlencode($tag).'">' . htmlspecialchars($tag) . '</a></li>';
-					}
-					$str .= '</ul>';
-				}
-				$this->assignLocal('category', 'ROW', array(
-					'ndx' => $i,
-					'title' => $row['category'],
-					'tags' => $str
-				));
-				$this->lightParseTemplate('CATEGORY', 'category');
-				$i++;
-			}
-		}
-		
-		// Cities
-		$sql = "SELECT city FROM directory_ml WHERE lang='" . MARKET_LANG . "' GROUP BY city ORDER BY city";
-		if (sqlQuery($sql, $res)) {
-			$cities = array();
-			while ($row = sqlFetchAssoc($res)) {
-				$cities[] = $row['city'];
-			}
-			asort($cities);
-			$str = '';
-			foreach ($cities as $city) {
-				$str .= '<li><a href="{MARKET.LWebDir}/directory/index.html?content=city&q='.urlencode($city).'">' . htmlspecialchars($city) . '</a></li>';
-			}
-			$this->assignGlobal('CATEGORIES.Cities', $str);
-		}
+		include(MARKET_TEMPLATE_DIR . '/categories.php');
 		
 		$SELECT = "*, IF (business_name = '', name, business_name) AS title";
 		$FROM = "directory STRAIGHT_JOIN directory_ml STRAIGHT_JOIN directory_ps";
@@ -291,19 +241,23 @@
 			
 			<div class="mplace_menu menu span4">
 				
-				<ul id="ul0" class="well nav nav-list">
-					<li><h3 style="border-bottom: 1px solid #ccc;">{LANG.Categories}</h3></li>
-					<template name="category">
-						<li><a class="collapse-toggle" href="#ul{ROW.ndx}" data-toggle="collapse" data-parent="#ul0">{ROW.title}<span class="caret pull-right"></span></a>
-							{ROW.tags}
-						</li>
-					</template>
-				</ul>
+				<template name="categories">
+					<ul id="ul0" class="well nav nav-list">
+						<li><h3 style="border-bottom: 1px solid #ccc;">{LANG.Categories}</h3></li>
+						<template name="category">
+							<li><a class="collapse-toggle" href="#ul{ROW.ndx}" data-toggle="collapse" data-parent="#ul0">{ROW.title}<span class="caret pull-right"></span></a>
+								{ROW.tags}
+							</li>
+						</template>
+					</ul>
+				</template>
 				
-				<ul class="well nav nav-list" style="margin-top: 20px;">
-					<li><h3 style="border-bottom: 1px solid #ccc;">{LANG.Cities}</h3></li>
-					{CATEGORIES.Cities}
-				</ul>
+				<template name="cities">
+					<ul class="well nav nav-list" style="margin-top: 20px;">
+						<li><h3 style="border-bottom: 1px solid #ccc;">{LANG.Cities}</h3></li>
+						{CATEGORIES.Cities}
+					</ul>
+				</template>
 				
 			</div>
 			

@@ -1013,7 +1013,8 @@ msgstr "Κείμενο"
 msgid "The Administration Team"
 msgstr "Η Ομάδα Διαχείρισης"
 
-msgid "The Google Geocoding API allows 2,500 requests per 24 hour period."
+#, fuzzy
+msgid "The Google Geocoding API allows 2,500 requests per 24 hour period"
 msgstr ""
 "Το Google Geocoding API επιτρέπει 2.500 αιτήσεις για κάθε περίοδο 24 ωρών"
 

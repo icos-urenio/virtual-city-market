@@ -15,6 +15,10 @@
 					$row1 = sqlFetchAssoc($res1);
 					$row['image'] = MARKET_Filter::createThumbnail($row1['image'], '270x230', true, 'class="photo"');
 				}
+				else {
+					// Placeholder
+					$row['image'] = MARKET_Filter::createThumbnail('img/placeholder.jpg', '270x230', true, 'class="photo"');
+				}
 				$this->assignLocal('featured', 'ROW', $row);
 				$this->lightParseTemplate('FEATURED', 'featured');
 			}

@@ -37,7 +37,7 @@
 					$row['path'] = '';
 					if (!$_GET['id']) {
 						$req->httpError(404);
-					}				
+					}
 				}
 			}
 			
@@ -50,6 +50,12 @@
 					$req->redirectTo(MARKET_WEB_DIR . '/' . MARKET_LANG . '/marketplace/' . $row['path'] . '/index.html');
 				}
 			}
+			
+			// Enable editing for admin
+			if ($row['path'] && $_SESSION['User']['market_role_id'] == 1) {
+				$_SESSION['User']['store'] = $row['id'];
+			}
+			
 			$row['address'] = ($row['address']) ? $row['address'] . ', ' . $row['city'] : $row['city'];
 			if ($row['prof1']) {
 				$tags = array();
@@ -319,7 +325,10 @@
 						$this->enableTemplate('addpage-link');
 						
 						$this->enableTemplate('social_cnt');
-						$this->enableTemplate('editsocial-link');
+						// Admin should edit links from the administration panel
+						if ($_SESSION['User']['market_role_id'] == 2) {
+							$this->enableTemplate('editsocial-link');
+						}
 						
 						$this->enableTemplate('closeedit-link');
 						
