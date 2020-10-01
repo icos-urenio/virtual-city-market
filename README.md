@@ -1,4 +1,4 @@
-# VirtualCityMarket
+# VirtualCityMarket - Bringing the world one step closer
 ===================
 
 The application enables the creation of a smart marketplace managed by the local shopping community. It empowers the city local market by bringing together customers and merchants.
